@@ -1,3 +1,5 @@
 # Blog
 
-https://blog.g15e.com
+![ci](https://github.com/gongbughim/blog/actions/workflows/ci.yml/badge.svg)
+
+https://gongbughim.netlify.com
