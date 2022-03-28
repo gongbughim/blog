@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-css-modules",
+    "stylelint-config-idiomatic-order",
+    "stylelint-config-prettier",
+    "stylelint-config-html/svelte"
+  ],
+  "plugins": ["stylelint-order"],
+  "rules": {
+    "indentation": 2,
+    "selector-type-no-unknown": null,
+    "value-keyword-case": null
+  },
+  "ignoreFiles": [
+    "/.svelte-kit/",
+    "/.vscode/",
+    "/build/",
+    "/node_modules/",
+    "/static/css/pico.classless.css",
+    "src/app.html"
+  ]
+}

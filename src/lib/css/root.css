@@ -1,0 +1,127 @@
+@import 'prism-themes/themes/prism-one-dark.css';
+
+:root {
+  --c-accent: #8a2a1c;
+  --c-accent-bg: #c9aba7;
+  --c-fg: #1c2837;
+  --c-bg: #d5d9d4;
+
+  max-width: 40em;
+  padding: 1em;
+  margin: 8em auto;
+  accent-color: var(--c-accent);
+  background-color: var(--c-bg);
+  color: var(--c-fg);
+  font-family: sans-serif;
+  font-size: 16px;
+  line-height: 1.8;
+  word-break: keep-all;
+}
+
+a {
+  border-bottom: 1px solid var(--c-accent);
+  color: var(--c-accent);
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--c-accent);
+  color: var(--c-bg);
+}
+
+@media (min-width: 60em) {
+  :root {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 40em) {
+  h1 {
+    font-size: 2.5em;
+  }
+}
+
+article.post {
+  h1, h2, h3, h4, h5, h6 {
+    margin: 2em 0 1em;
+    font-weight: normal;
+    letter-spacing: -0.025em;
+    line-height: 1.4;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 3em;
+  }
+
+  h2 {
+    font-size: 1.8em;
+  }
+
+  p, ul, ol, blockquote {
+    margin: 1em 0;
+  }
+
+  ol, ul, blockquote {
+    padding-left: 0;
+  }
+
+  hr {
+    margin: 2em 0;
+  }
+
+  blockquote {
+    padding: 1.2rem 1.1rem;
+    margin: 1.5rem 0;
+    background-color: #00000012;
+    border-radius: 0.25rem;
+  }
+
+  pre[class*="language-"] {
+    padding: 1.2rem 1.1rem;
+    margin: 1.5rem 0;
+    border-radius: 0.25rem;
+    font-size: 0.8em;
+
+    /* 기본값은 배경과의 차이가 지나치게 적음 */
+    .token.comment {
+      color: #7B7;
+    }
+  }
+
+  blockquote > :first-child {
+    margin-top: 0;
+  }
+
+  blockquote > :last-child {
+    margin-bottom: 0;
+  }
+
+  ul {
+    position: relative;
+    padding-left: 1em;
+    list-style-type: none;
+  }
+
+  li::before {
+    position: absolute;
+    left: calc(-0.1em);
+    color: var(--c-accent);
+    content: "▶";
+  }
+
+  li {
+    margin: 0.5em 0;
+  }
+
+  strong {
+    box-shadow: inset 0 -0.4em 0 var(--c-accent-bg);
+  }
+
+  code {
+    padding: 0.1em 0.25em;
+    background-color: #00000016;
+    border-radius: 0.2em;
+    font-family: monospace;
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "addMissingImports": true
+  },
+  "eslint.validate": ["javascript", "typescript", "svelte"],
+  "prettier.enable": true,
+  "stylelint.enable": true,
+  "stylelint.validate": ["css", "postcss", "svelte"],
+  "editor.formatOnSave": true,
+  "[svelte]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
