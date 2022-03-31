@@ -1,4 +1,6 @@
 <script>
+  import 'katex/dist/katex.css'
+
   export let title = ''
   export let summary = ''
   export let publishedAt = ''

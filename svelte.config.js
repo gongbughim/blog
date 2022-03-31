@@ -2,8 +2,10 @@ import adapter from '@sveltejs/adapter-static'
 import { mdsvex } from 'mdsvex'
 import path from 'path'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehypeKatexSvelte from 'rehype-katex-svelte'
 import rehypeSlug from 'rehype-slug'
 import remarkAbbr from 'remark-abbr'
+import remarkMath from 'remark-math'
 import preprocess from 'svelte-preprocess'
 import { fileURLToPath } from 'url'
 
@@ -26,8 +28,12 @@ const config = {
       smartypants: {
         dashes: 'oldschool',
       },
-      remarkPlugins: [remarkAbbr],
-      rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, { behavior: 'wrap' }]],
+      remarkPlugins: [remarkMath, remarkAbbr],
+      rehypePlugins: [
+        rehypeKatexSvelte,
+        rehypeSlug,
+        [rehypeAutolinkHeadings, { behavior: 'wrap' }],
+      ],
       layout: {
         _: path.join(__dirname, './src/components/LayoutDefault.svelte'),
       },
