@@ -13,11 +13,11 @@
     "value-keyword-case": null
   },
   "ignoreFiles": [
+    "/.github/",
     "/.svelte-kit/",
     "/.vscode/",
-    "/build/",
     "/node_modules/",
-    "/static/css/pico.classless.css",
-    "src/app.html"
+    "/build/",
+    "/src/app.html"
   ]
 }
