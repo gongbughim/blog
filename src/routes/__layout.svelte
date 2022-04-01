@@ -21,8 +21,8 @@
 
 <nav class="gnb">
   <ul>
-    <li><a href="/">블로그 홈</a></li>
-    <li><a href="/posts/about">소개</a></li>
+    <li><a sveltekit:prefetch href="/">블로그 홈</a></li>
+    <li><a sveltekit:prefetch href="/posts/about">소개</a></li>
   </ul>
 </nav>
 
