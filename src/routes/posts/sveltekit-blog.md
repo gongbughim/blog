@@ -67,8 +67,8 @@ npm run dev -- --open
 "Welcome to SvelteKit"이라는 문서가 열리면 성공입니다.
 
 Visual Studio Code에서 이 디렉터리를 열고 `src/routes/index.svelte`를 열어보면 에러
-가 뜹니다. 타입스크립트 설정 파일인 `tsconfig.json`이 `.svelte-kit/tsconfig.json`을
-확장하고 있으나 아직 해당 파일이 존재하지 않기 때문입니다.
+가 뜹니다. 타입스크립트 설정 파일인 `tsconfig.json`을 열어보면 아래와 같이
+`.svelte-kit/tsconfig.json`을 확장하고 있으나, 해당 파일이 아직 존재하지 않기 때문입니다.
 
 ```json
 {
@@ -76,12 +76,13 @@ Visual Studio Code에서 이 디렉터리를 열고 `src/routes/index.svelte`를
 }
 ```
 
-다음 명령을 실행해서 이 파일을 생성한 다음에 VSCode를 재시작하거나
-"Developer: Reload Window"를 선택하면 에러가 사라집니다.
+다음 명령을 실행하면 이 파일이 만들어집니다.
 
 ```bash
 npm run build
 ```
+
+VSCode를 재시작하거나 "Developer: Reload Window"를 선택하면 에러가 사라집니다.
 
 ## 정적 사이트 생성하기
 
@@ -90,7 +91,8 @@ npm run build
 페이지를 사전 생성하고자 합니다. 이를 **정적 사이트 생성static site generation**이라고
 부릅니다.
 
-스벨트킷에서 기본으로 제공하는 어뎁터를 제거하고 정적 사이트 생성 어뎁터를 설치합니다.
+스벨트킷에서 기본으로 제공하는 어뎁터(`@sveltejs/adapter-auto`)를 제거하고 정적 사이트
+생성 어뎁터(`@sveltejs/adapter-static`)를 설치합니다.
 
 ```bash
 npm uninstall @sveltejs/adapter-auto
