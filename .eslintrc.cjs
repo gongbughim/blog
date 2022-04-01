@@ -4,6 +4,9 @@ module.exports = {
   extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
   plugins: ['svelte3', '@typescript-eslint', 'simple-import-sort'],
   ignorePatterns: ['*.cjs'],
+  globals: {
+    globalThis: false,
+  },
   rules: {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',

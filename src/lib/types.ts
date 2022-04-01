@@ -3,4 +3,5 @@ export type ArticleMeta = {
   title: string
   publishedAt: string
   summary: string
+  draft: boolean
 }

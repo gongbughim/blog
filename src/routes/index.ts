@@ -22,5 +22,6 @@ export async function getArticleMetas(dir: string): Promise<ArticleMeta[]> {
 export async function getArticleMeta(dir: string, id: string): Promise<ArticleMeta> {
   const content = (await fs.promises.readFile(`${dir}/${id}.md`)).toString()
   const frag = content.substring(4, content.indexOf('---\n', 4)).trim()
-  return { id, ...(yaml.load(frag) as Record<string, string>) } as ArticleMeta
+  const frontmatter = yaml.load(frag) as Record<string, any>
+  return { ...frontmatter, id, draft: !!frontmatter.draft } as ArticleMeta
 }

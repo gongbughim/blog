@@ -2,6 +2,8 @@
   import type { ArticleMeta } from '$lib/types'
 
   export let posts: ArticleMeta[] = []
+
+  $: publishedPosts = posts.filter(p => !p.draft)
 </script>
 
 <svelte:head>
@@ -14,7 +16,7 @@
 <p class="brief">공부한거 정리하는 블로그입니다. 주로 프로그래밍 이야기를 합니다.</p>
 
 <ul class="posts">
-  {#each posts as post}
+  {#each publishedPosts as post}
     <li>
       <article>
         <h2 class="title"><a href={`/posts/${post.id}`}>{post.title}</a></h2>
