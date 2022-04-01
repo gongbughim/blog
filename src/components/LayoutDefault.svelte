@@ -7,7 +7,7 @@
 </script>
 
 <svelte:head>
-  <title>{title}</title>
+  <title>{title} :: 공부왕 김공부 블로그</title>
   <meta name="description" content={summary} />
 </svelte:head>
 

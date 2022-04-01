@@ -7,11 +7,11 @@
 </script>
 
 <svelte:head>
-  <title>Blog</title>
+  <title>공부왕 김공부 블로그</title>
   <meta name="description" content="개발 이야기하는 블로그" />
 </svelte:head>
 
-<h1>각종 공부 블로그</h1>
+<h1>공부왕 김공부 블로그</h1>
 
 <p class="brief">공부한거 정리하는 블로그입니다. 주로 프로그래밍 이야기를 합니다.</p>
 
