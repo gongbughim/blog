@@ -30,6 +30,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "eslint-plugin-svelte3": "^3.4.1",
+    "feed": "^4.2.2",
     "js-yaml": "^4.1.0",
     "jsdom": "^19.0.0",
     "katex": "^0.15.3",

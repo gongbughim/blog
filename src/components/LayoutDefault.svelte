@@ -1,13 +1,15 @@
 <script>
   import 'katex/dist/katex.css'
 
+  import conf from '$lib/conf'
+
   export let title = ''
   export let summary = ''
   export let publishedAt = ''
 </script>
 
 <svelte:head>
-  <title>{title} :: 공부왕 김공부 블로그</title>
+  <title>{title} :: {conf.title}</title>
   <meta name="description" content={summary} />
 </svelte:head>
 

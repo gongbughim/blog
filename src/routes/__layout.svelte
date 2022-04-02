@@ -1,8 +1,11 @@
 <script lang="ts">
   import '$lib/css/root.css'
+
+  import conf from '$lib/conf'
 </script>
 
 <svelte:head>
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
   <!-- Google Tag Manager -->
   <script>
     ;(function (w, d, s, l, i) {
@@ -31,8 +34,8 @@
 </main>
 
 <footer>
-  Copyright &copy;{new Date().getFullYear()},
-  <a href="https://twitter.com/gongbughim">@gongbughim</a>
+  {conf.copyright}
+  <a href="https://twitter.com{conf.authroTwitter}">@{conf.authroTwitter}</a>
 </footer>
 
 <style lang="postcss">

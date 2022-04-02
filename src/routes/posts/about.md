@@ -15,5 +15,4 @@ summary: 블로그 소개
 
 TODO:
 
-- RSS
 - Observable embedding
