@@ -37,9 +37,19 @@ summary: 스벨트킷과 mdsvex 조합에서 프리페치(sveltekit:prefetch) �
 
 ## 플러그인 만들기
 
-mdsvex 설정의 rehypePlugins 변수에 아래와 같이 플러그인을 추가했습니다.
+플러그인 제작을 위해 필요한 라이브러리를 추가합니다.
+
+```bash
+npm i -D unist-util-visit
+```
+
+그 다음, mdsvex 설정의 rehypePlugins 변수에 아래와 같이 플러그인을 추가했습니다.
 
 ```js
+import { visit } from 'unist-util-visit'
+
+// ...
+
 () => {
   // Attach "sveltekit:prefetch" to internal links
   return tree => {
@@ -55,7 +65,8 @@ mdsvex 설정의 rehypePlugins 변수에 아래와 같이 플러그인을 추가
 
 마크다운에서 렌더링된 HTML의 모든 엘리먼트 노드를 방문(`visit()`)하며 태그 이름이 `a`이면서
 `href`에 적힌 주소가 블로그 내부 링크인 경우 `sveltekit:prefetch` 속성을 추가하도록
-했습니다.
+했습니다. 내부 링크인지 확인하는 패턴이 약간 어설프지만(주소가 `/`으로 시작하거나 `.`으로
+시작하는지만 검사), 당장 적용하기에는 큰 문제가 없어 보입니다.
 
 이제 마크다운 파일의 링크에도 프리페치가 적용되었습니다.
 
