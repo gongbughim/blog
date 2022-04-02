@@ -375,3 +375,7 @@ export type ArticleMeta = {
 
 이런 각종 설정들은 [이 블로그의 소스코드](https://github.com/gongbughim/blog)에서
 확인하시기 바랍니다.
+
+## 관련 글
+
+* [스벨트킷+mdsvex 프리페치 설정하기](/posts/mdsvex-prefetch)
