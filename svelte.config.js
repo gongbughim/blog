@@ -7,6 +7,7 @@ import rehypeSlug from 'rehype-slug'
 import remarkAbbr from 'remark-abbr'
 import remarkMath from 'remark-math'
 import preprocess from 'svelte-preprocess'
+import { visit } from 'unist-util-visit'
 import { fileURLToPath } from 'url'
 
 const __filename = fileURLToPath(import.meta.url)
@@ -33,6 +34,17 @@ const config = {
         rehypeKatexSvelte,
         rehypeSlug,
         [rehypeAutolinkHeadings, { behavior: 'wrap' }],
+        () => {
+          // Attach "sveltekit:prefetch" to internal links
+          return tree => {
+            const pInnerLink = /^(\/|\.)/
+            visit(tree, 'element', node => {
+              if (node.tagName !== 'a') return
+              if (!node.properties.href.match(pInnerLink)) return
+              node.properties['sveltekit:prefetch'] = 'sveltekit:prefetch'
+            })
+          }
+        },
       ],
       layout: {
         _: path.join(__dirname, './src/components/LayoutDefault.svelte'),
