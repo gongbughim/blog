@@ -110,29 +110,11 @@ article.post {
 
   ul,
   ol {
-    position: relative;
     padding-left: 1em;
   }
 
   li {
     margin: 0.5em 0;
-  }
-
-  ul > li {
-    list-style: none;
-  }
-
-  ul > li::before {
-    position: absolute;
-    left: calc(-0.1em);
-    color: var(--c-accent);
-    content: '▶';
-  }
-
-  ol > li::before {
-    position: absolute;
-    left: calc(-0.1em);
-    color: var(--c-accent);
   }
 
   strong {
