@@ -55,7 +55,7 @@
     list-style-type: none;
 
     li {
-      margin: 1em 0 3em;
+      margin: 1em 0 3.5em;
     }
 
     article {
