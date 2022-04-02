@@ -8,6 +8,11 @@ summary: 블로그 소개
 
 아직 만드는 중입니다.
 
+연락하기:
+
+- 트위터: <a href="https://twitter.com/gongbughim">@gongbughim</a>
+- 메일: gongbughim@gmail.com
+
 TODO:
 
 - RSS

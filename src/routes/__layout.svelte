@@ -31,7 +31,8 @@
 </main>
 
 <footer>
-  Copyright &copy;{new Date().getFullYear()}, gongbughim@gmail.com
+  Copyright &copy;{new Date().getFullYear()},
+  <a href="https://twitter.com/gongbughim">@gongbughim</a>
 </footer>
 
 <style lang="postcss">
