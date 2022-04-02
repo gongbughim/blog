@@ -15,4 +15,6 @@ summary: 블로그 소개
 
 TODO:
 
-- Observable embedding
+- 옵저버블 노트북 임베딩하기
+- 목차 보여주기
+- RSS에 본문도 담기

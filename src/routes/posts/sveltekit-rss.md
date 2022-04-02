@@ -63,11 +63,28 @@ export const get: RequestHandler = async () => {
 위 코드에서 임포트하고 있는 `getArticleMetas()` 함수에 대한 내용은
 [스벨트킷으로 블로그 만들기](/posts/sveltekit-blog) 글을 참고해주세요.
 
-응답 헤더에 `Content-Type: application/rss+xml; charset=utf-8`을 추가했지만, 어차피
-이 블로그는 **정적 사이트 생성static site generation**을 사용하기 때문에 응답 헤더를
-지정해도 별 소용이 없습니다. 정적 파일을 서빙할 때 웹 서버는 파일 확장자에 기반해서
-`Content-Type` 헤더를 추가해주기도 합니다. 이런 특성을 확용하기 위해 엔드포인트 주소를
-`/rss`가 아닌 `/rss.xml`로 지정했습니다.
+## 정적 사이트에 배포하기
+
+[표준에 의하면](https://www.rssboard.org/rss-mime-type-application.txt), RSS 문서의
+MIME 타입은 `application/rss+xml`입니다. 이에 따라 위 코드에서도 응답 헤더에
+`Content-Type: application/rss+xml; charset=utf-8`을 추가했습니다. 하지만 어차피 이
+블로그는 **정적 사이트 생성static site generation**을 사용하기 때문에 스벨트킷에서 응답
+헤더를 지정해도 별 소용이 없습니다.
+
+정적 파일을 서빙할 때 몇몇 웹 서버는 파일 확장자에 기반해서 `Content-Type` 헤더를
+추가해주기도 합니다. 이런 특성을 확용하기 위해 엔드포인트 주소를 `/rss`가 아닌 `/rss.xml`로
+지정했습니다.
+
+다만, 이 블로그를 배포하고 있는 CloudFlare Pages에서는 확장자가 `xml`인 파일도 그냥
+`text/html`로 서빙하고 있었습니다. 다행히도
+[검색을 해보니](https://developers.cloudflare.com/pages/platform/headers/)
+`_headers`라는 파일을 만들어주면 CloufFlare Pages에도 원하는 커스텀 헤더를 추가할 수
+있었습니다.
+
+```yaml
+/rss.xml
+  Content-Type: application/rss+xml; charset=utf-8
+```
 
 이 글에서 설명한 코드는 이 블로그에도 적용되어 있습니다.
 [소스 코드](https://github.com/gongbughim/blog)가 공개되어 있으니 참고해주세요.
