@@ -4,6 +4,10 @@ publishedAt: '2022-04-01'
 summary: 스벨트킷으로 블로그 만드는 과정을 기록했습니다.
 ---
 
+<script>
+  import Asciinema from '$components/Asciinema.svelte'
+</script>
+
 [스벨트킷](https://kit.svelte.dev)은 [스벨트](https://svelte.dev) 기반의 웹
 프레임워크입니다. 스벨트와 스벨트킷의 관계는 [리엑트](https://reactjs.org/)와
 [넥스트JS](https://nextjs.org/)의 관계와 같습니다.
@@ -65,7 +69,10 @@ npm i
 npm run dev -- --open
 ```
 
-"Welcome to SvelteKit"이라는 문서가 열리면 성공입니다.
+"Welcome to SvelteKit"이라는 문서가 열리면 성공입니다. 다음은 지금까지 설명한 내용을 녹화한
+화면입니다.
+
+<Asciinema id="YWBf6amaVVbWTeLgt7nwm7iFG" speed={1.5} />
 
 Visual Studio Code에서 이 디렉터리를 열고 `src/routes/index.svelte`를 열어보면 에러
 가 뜹니다. 타입스크립트 설정 파일인 `tsconfig.json`을 열어보면 아래와 같이
