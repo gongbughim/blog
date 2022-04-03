@@ -70,6 +70,8 @@ import { visit } from 'unist-util-visit'
 
 이제 마크다운 파일의 링크에도 프리페치가 적용되었습니다.
 
+## 마치며
+
 이 글에서 설명한 코드는 이 블로그에도 적용되어 있습니다.
 [소스 코드](https://github.com/gongbughim/blog)가 공개되어 있으니 참고해주세요.
 

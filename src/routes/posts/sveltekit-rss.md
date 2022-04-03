@@ -87,6 +87,8 @@ MIME 타입은 `application/rss+xml`입니다. 이에 따라 위 코드에서도
   Content-Type: application/rss+xml; charset=utf-8
 ```
 
+## 마치며
+
 이 글에서 설명한 코드는 이 블로그에도 적용되어 있습니다.
 [소스 코드](https://github.com/gongbughim/blog)가 공개되어 있으니 참고해주세요.
 
