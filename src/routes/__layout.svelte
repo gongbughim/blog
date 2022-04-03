@@ -35,7 +35,8 @@
 
 <footer>
   {conf.copyright},
-  <a href="https://twitter.com{conf.authroTwitter}" class="external">@{conf.authroTwitter}</a>
+  <a href="https://twitter.com/{conf.authorTwitter}" class="external">Twitter</a> |
+  <a href="https://github.com/{conf.authorGithub}" class="external">Github</a>
 </footer>
 
 <style lang="postcss">

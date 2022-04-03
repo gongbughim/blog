@@ -15,7 +15,7 @@ export const get: RequestHandler = async () => {
     author: {
       name: conf.authorName,
       email: conf.authorEmail,
-      link: conf.authroTwitter,
+      link: conf.authorTwitter,
     },
   })
   posts.forEach(p => {
