@@ -3,7 +3,7 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
   plugins: ['svelte3', '@typescript-eslint', 'simple-import-sort'],
-  ignorePatterns: ['*.cjs'],
+  ignorePatterns: ['*.cjs', 'src/lib/blogwasm/**/*'],
   globals: {
     globalThis: false,
   },
