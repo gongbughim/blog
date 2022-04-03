@@ -3,6 +3,7 @@ title: 스벨트킷+mdsvex 프리페치 설정하기
 publishedAt: '2022-04-02'
 summary: 스벨트킷과 mdsvex 조합에서 프리페치(sveltekit:prefetch) 설정하는 방법
 ---
+
 스벨트킷과 mdsvex 조합에서 프리페치(sveltekit:prefetch) 설정하는 방법을 설명합니다.
 
 ## 프리페치란
@@ -49,8 +50,7 @@ npm i -D unist-util-visit
 import { visit } from 'unist-util-visit'
 
 // ...
-
-() => {
+;() => {
   // Attach "sveltekit:prefetch" to internal links
   return tree => {
     const pInnerLink = /^(\/|\.)/
@@ -73,8 +73,8 @@ import { visit } from 'unist-util-visit'
 이 글에서 설명한 코드는 이 블로그에도 적용되어 있습니다.
 [소스 코드](https://github.com/gongbughim/blog)가 공개되어 있으니 참고해주세요.
 
-* [mdsvex.config.js](https://github.com/gongbughim/blog/blob/main/mdsvex.config.js)
+- [mdsvex.config.js](https://github.com/gongbughim/blog/blob/main/mdsvex.config.js)
 
 ## 관련 글
 
-* [스벨트킷으로 블로그 만들기](/posts/sveltekit-blog)
+- [스벨트킷으로 블로그 만들기](/posts/sveltekit-blog)

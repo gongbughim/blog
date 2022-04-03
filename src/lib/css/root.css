@@ -30,7 +30,7 @@ a {
   transition: all 0.2s ease-in-out;
 }
 
-a[rel="nofollow"]::after,
+a[rel='nofollow']::after,
 a.external::after {
   display: inline-block;
   width: 0.6em;
@@ -40,11 +40,11 @@ a.external::after {
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
-  content: "";
+  content: '';
 }
 
 a:hover {
-  border-bottom-color: var(--c-accent)
+  border-bottom-color: var(--c-accent);
 }
 
 a:focus {

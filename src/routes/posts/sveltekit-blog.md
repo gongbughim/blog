@@ -378,5 +378,5 @@ export type ArticleMeta = {
 
 ## 관련 글
 
-* [스벨트킷+mdsvex 프리페치 설정하기](/posts/mdsvex-prefetch)
-* [스벨트킷 블로그에 RSS 추가하기](/posts/sveltekit-rss)
+- [스벨트킷+mdsvex 프리페치 설정하기](/posts/mdsvex-prefetch)
+- [스벨트킷 블로그에 RSS 추가하기](/posts/sveltekit-rss)

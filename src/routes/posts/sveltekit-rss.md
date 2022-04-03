@@ -3,6 +3,7 @@ title: 스벨트킷 블로그에 RSS 추가하기
 publishedAt: '2022-04-02'
 summary: 스벨트킷 블로그에 RSS 기능을 추가하는 방법
 ---
+
 스벨트킷으로 만든 블로그에 RSS 기능을 추가하는 방법을 설명합니다.
 
 ## RSS란
@@ -91,4 +92,4 @@ MIME 타입은 `application/rss+xml`입니다. 이에 따라 위 코드에서도
 
 ## 관련 글
 
-* [스벨트킷으로 블로그 만들기](/posts/sveltekit-blog)
+- [스벨트킷으로 블로그 만들기](/posts/sveltekit-blog)
