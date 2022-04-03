@@ -1,5 +1,9 @@
 @import 'prism-themes/themes/prism-vsc-dark-plus.css';
 
+* {
+  box-sizing: border-box;
+}
+
 :root {
   --c-accent: #8a2a1c;
   --c-accent-bg: #c9aba7;
@@ -21,7 +25,13 @@
 a {
   border-bottom: 1px solid var(--c-accent);
   color: var(--c-accent);
+  outline: none;
   text-decoration: none;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+a:focus {
+  box-shadow: 0 2px 8px var(--c-accent);
 }
 
 ::selection {
