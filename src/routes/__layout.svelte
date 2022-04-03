@@ -34,8 +34,8 @@
 </main>
 
 <footer>
-  {conf.copyright}
-  <a href="https://twitter.com{conf.authroTwitter}">@{conf.authroTwitter}</a>
+  {conf.copyright},
+  <a href="https://twitter.com{conf.authroTwitter}" class="external">@{conf.authroTwitter}</a>
 </footer>
 
 <style lang="postcss">

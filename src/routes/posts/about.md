@@ -10,7 +10,7 @@ summary: 블로그 소개
 
 연락하기:
 
-- 트위터: <a href="https://twitter.com/gongbughim">@gongbughim</a>
+- 트위터: [@gongbughim](https://twitter.com/gongbughim)
 - 메일: gongbughim@gmail.com
 
 TODO:
