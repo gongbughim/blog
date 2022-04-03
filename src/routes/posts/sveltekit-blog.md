@@ -46,7 +46,8 @@ npm init svelte@next blog
   (저는 되도록 모든 프로젝트에서 포멧터를 사용하면 좋다고 생각합니다.)
 - Add Playwright for browser testing? **No**<br>
   (간단한 블로그니까 테스트를 만들지 않을 생각입니다. 만들더라도 브라우저 테스트보다는 가벼운
-  단위 테스트를 먼저 만들면 좋다고 생각합니다.)
+  단위 테스트를 먼저 만들면 좋다고 생각합니다. 관련글:
+  [스벨트킷 블로그 단위 테스트하기](/posts/mdsvex-unit-testing))
 
 ```
 ✔ Which Svelte app template? › Skeleton project
