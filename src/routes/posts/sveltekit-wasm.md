@@ -139,7 +139,8 @@ wasm-pack build --target web
 `blogwasm` 프로젝트의 빌드 결과물을 `blogwasm.tar.gz` 파일로 압축하여 인터넷에 올려두는
 작업을 자동화하면 문제가 해결됩니다.
 
-이런 상황에서 Github Actions와 Releases 기능을 활용하면 좋습니다.
+npm 레지스트리에 등록하는 방법도 있기는 하지만 개인이 쓰는 패키지를 올리기엔 적절치 않습니다.
+이런 상황에서 Github Releases 기능을 활용하면 좋습니다.
 
 `blogwasm` 프로젝트에 `.github/workflows/release.yml` 파일을 추가합니다.
 
