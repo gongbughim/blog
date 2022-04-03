@@ -75,8 +75,6 @@ import { visit } from 'unist-util-visit'
 이 글에서 설명한 코드는 이 블로그에도 적용되어 있습니다.
 [소스 코드](https://github.com/gongbughim/blog)가 공개되어 있으니 참고해주세요.
 
-- [mdsvex.config.js](https://github.com/gongbughim/blog/blob/main/mdsvex.config.js)
-
 ## 관련 글
 
 - [스벨트킷으로 블로그 만들기](/posts/sveltekit-blog)
