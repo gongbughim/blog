@@ -2,7 +2,7 @@ pre-commit:
   commands:
     lint-js:
       files: git diff --name-only --staged
-      glob: '*.{ts,js,svelte}'
+      glob: '*.{ts,js,svelte,md}'
       run: npm run lint:js-files -- {files}
     lint-css:
       files: git diff --name-only --staged
