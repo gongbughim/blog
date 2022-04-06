@@ -51,7 +51,7 @@
     "rehype-katex-svelte": "^1.0.3",
     "rehype-slug": "^5.0.1",
     "remark-abbr": "^1.4.1",
-    "remark-math": "^3.0.1",
+    "remark-math": "^5.1.1",
     "stylelint": "^14.6.0",
     "stylelint-config-css-modules": "^4.1.0",
     "stylelint-config-html": "^1.0.0",
