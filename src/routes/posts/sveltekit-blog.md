@@ -107,6 +107,9 @@ npm uninstall @sveltejs/adapter-auto
 npm i -D @sveltejs/adapter-static@next
 ```
 
+정적 사이트 생성 어뎁터를 설치한 다음, `svelte.config.js`파일의
+`import adapter from '@sveltejs/adapter-auto'`를 `import adapter from '@sveltejs/adapter-static'`으로 변경합니다.
+
 빌드를 해보면 실제로 정적 사이트 생성이 잘 작동하는지 확인해볼 수 있습니다.
 
 ```bash
@@ -143,7 +146,7 @@ CloudFlare Pages에는 여러 기능이 있지만 일단은 두 가지 용도로
 다음 절차대로 설정하세요.
 
 1. 우선 깃헙에 새 저장소를 만들고 코드를 올립니다.
-2. https://pages.cloudflare.com/ 에서 계정을 만듭니다.
+2. <https://pages.cloudflare.com/> 에서 계정을 만듭니다.
 3. 새 프로젝트를 생성하고 깃헙에 만든 저장소와 선택한 후 "Begin Setup"을 클릭합니다.
 4. "Framework preset"은 "None"을 선택합니다. 선택지 중 스벨트킷도 있지만 정적 사이트로만
    쓸 계획이니까 그냥 "None"을 고릅니다. "Build command"는 `npm run build`,
@@ -152,7 +155,7 @@ CloudFlare Pages에는 여러 기능이 있지만 일단은 두 가지 용도로
 
 프로젝트 이름에 따라 자동으로 도메인 이름을 생성해주는데, 남들이 아직 선택하지 않은 이름을
 잘 고르면 짧고 깔끔한 도메인을 받을 수 있습니다. 저는 `gbg`를 골라서
-https://gbg.pages.dev 주소가 생겼습니다.
+<https://gbg.pages.dev> 주소가 생겼습니다.
 
 설정을 약 30초에서 1분 정도 기다리면 배포가 끝납니다. 이제 누구나 접속할 수 있는 내 웹
 사이트가 생겼습니다. 앞으로는 깃헙에 코드를 푸시하기만 하면 1분 이내로 내용이 반영됩니다. 이를
