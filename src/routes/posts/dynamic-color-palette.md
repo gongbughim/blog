@@ -105,7 +105,6 @@ CSS의 `transition`을 이용하면 색상이 부드럽게 전환되도록 할 �
 
 ```css
 * {
-  box-sizing: border-box;
   transition-duration: 0.5s;
   transition-property: color, background-color, border-color, box-shadow;
   transition-timing-function: ease-out;
