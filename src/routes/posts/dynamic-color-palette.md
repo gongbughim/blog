@@ -14,7 +14,7 @@ summary: 블로그 색상 팔레트를 동적으로 바꾸기
 
 ```css
 :root {
-  /* 색조hue 채도saturation 명도lightness / 알파alphaa */
+  /* 색조hue 채도saturation 명도lightness / 알파alpha */
   color: hsl(0 100% 50% / 100%);
 }
 ```
