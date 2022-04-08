@@ -1,7 +1,21 @@
 <script lang="ts">
   import '$lib/css/root.css'
 
+  import { afterNavigate } from '$app/navigation'
+  import { ittenHue } from '$lib/color'
   import conf from '$lib/conf'
+
+  let hueDegree = 0
+  let el: HTMLElement | null = null
+
+  afterNavigate(() => (hueDegree = Math.random() * 360))
+
+  $: if (el) {
+    const html = el.ownerDocument!.firstElementChild as HTMLElement
+    html.style.setProperty('--c-primary-hue', `${ittenHue(hueDegree)}`)
+    html.style.setProperty('--c-secondary-hue', `${ittenHue(hueDegree + 120)}`)
+    html.style.setProperty('--c-tertiary-hue', `${ittenHue(hueDegree + 240)}`)
+  }
 </script>
 
 <svelte:head>
@@ -29,7 +43,7 @@
   </ul>
 </nav>
 
-<main>
+<main bind:this={el}>
   <slot />
 </main>
 
