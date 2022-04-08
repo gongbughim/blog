@@ -17,11 +17,11 @@
   --c-primary-hue: 0;
   --c-secondary-hue: calc(var(--c-primary-hue) + 120);
   --c-tertiary-hue: calc(var(--c-primary-hue) + 240);
-  --c-accent: hsl(var(--c-secondary-hue) 60% 40% / 100%);
-  --c-accent-bg0: hsl(var(--c-tertiary-hue) 40% 80%);
-  --c-accent-bg1: hsl(var(--c-tertiary-hue) 40% 70%);
-  --c-fg: hsl(var(--c-primary-hue) 5% 35% / 100%);
-  --c-bg: hsl(var(--c-primary-hue) 10% 95% / 100%);
+  --c-accent: lch(50% 90 var(--c-secondary-hue));
+  --c-accent-bg0: lch(80% 20 var(--c-tertiary-hue));
+  --c-accent-bg1: lch(80% 20 var(--c-tertiary-hue));
+  --c-fg: lch(40% 20 var(--c-primary-hue));
+  --c-bg: lch(98% 5 var(--c-primary-hue));
 
   max-width: 40em;
   padding: 1em;
@@ -33,6 +33,16 @@
   font-size: 16px;
   line-height: 1.8;
   word-break: keep-all;
+}
+
+@supports not (color: lch(0% 0 0 / 0.5)) {
+  :root {
+    --c-accent: hsl(var(--c-secondary-hue) 60% 40% / 100%);
+    --c-accent-bg0: hsl(var(--c-tertiary-hue) 40% 80%);
+    --c-accent-bg1: hsl(var(--c-tertiary-hue) 40% 70%);
+    --c-fg: hsl(var(--c-primary-hue) 5% 35% / 100%);
+    --c-bg: hsl(var(--c-primary-hue) 10% 95% / 100%);
+  }
 }
 
 a {
