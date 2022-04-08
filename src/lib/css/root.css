@@ -24,8 +24,8 @@
   --c-bg: lch(98% 5 var(--c-primary-hue));
 
   max-width: 40em;
-  padding: 1em;
-  margin: 8em auto;
+  padding: 8rem 1em;
+  margin: 0 auto;
   accent-color: var(--c-accent);
   background-color: var(--c-bg);
   color: var(--c-fg);
