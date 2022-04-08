@@ -56,7 +56,7 @@
       display: flex;
       padding: 0;
       margin: 1em 0;
-      gap: 0.75em;
+      gap: 1em;
       list-style-type: none;
     }
   }

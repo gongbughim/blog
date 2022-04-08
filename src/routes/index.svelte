@@ -32,7 +32,6 @@
   h1,
   h2 {
     margin: 0;
-    font-weight: normal;
     letter-spacing: -0.025em;
     line-height: 1.4;
   }

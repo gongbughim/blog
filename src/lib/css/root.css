@@ -23,13 +23,13 @@
   --c-fg: lch(40% 20 var(--c-primary-hue));
   --c-bg: lch(98% 5 var(--c-primary-hue));
 
-  max-width: 40em;
+  max-width: 50em;
   padding: 8rem 1em;
   margin: 0 auto;
   accent-color: var(--c-accent);
   background-color: var(--c-bg);
   color: var(--c-fg);
-  font-family: sans-serif;
+  font-family: serif;
   font-size: 16px;
   line-height: 1.8;
   word-break: keep-all;
@@ -43,6 +43,16 @@
     --c-fg: hsl(var(--c-primary-hue) 5% 35% / 100%);
     --c-bg: hsl(var(--c-primary-hue) 10% 95% / 100%);
   }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: sans-serif;
+  font-weight: normal;
 }
 
 a {
@@ -84,7 +94,7 @@ a:focus {
   }
 }
 
-@media (max-width: 40em) {
+@media (max-width: 50em) {
   h1 {
     font-size: 2.5em;
   }
@@ -98,7 +108,6 @@ article.post {
   h5,
   h6 {
     margin: 2em 0 1em;
-    font-weight: normal;
     letter-spacing: -0.025em;
     line-height: 1.4;
   }
