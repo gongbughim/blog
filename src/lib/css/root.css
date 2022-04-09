@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@700&display=swap');
 @import 'prism-themes/themes/prism-vsc-dark-plus.css';
 
 * {
@@ -18,8 +19,8 @@
   --c-secondary-hue: calc(var(--c-primary-hue) + 120);
   --c-tertiary-hue: calc(var(--c-primary-hue) + 240);
   --c-accent: lch(50% 90 var(--c-secondary-hue));
-  --c-accent-bg0: lch(80% 20 var(--c-tertiary-hue));
-  --c-accent-bg1: lch(80% 20 var(--c-tertiary-hue));
+  --c-accent-bg0: lch(90% 20 var(--c-tertiary-hue));
+  --c-accent-bg1: lch(90% 20 var(--c-tertiary-hue));
   --c-fg: lch(40% 20 var(--c-primary-hue));
   --c-bg: lch(98% 5 var(--c-primary-hue));
 
@@ -29,7 +30,7 @@
   accent-color: var(--c-accent);
   background-color: var(--c-bg);
   color: var(--c-fg);
-  font-family: serif;
+  font-family: sans-serif;
   font-size: 16px;
   line-height: 1.8;
   word-break: keep-all;
@@ -51,13 +52,14 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: sans-serif;
-  font-weight: normal;
+  font-family: 'Nanum Myeongjo', serif;
+  font-weight: 700;
 }
 
 a {
   border-bottom: 1px solid transparent;
   color: var(--c-accent);
+  font-family: 'Nanum Myeongjo', serif;
   outline: none;
   text-decoration: none;
 }
@@ -108,7 +110,6 @@ article.post {
   h5,
   h6 {
     margin: 2em 0 1em;
-    letter-spacing: -0.025em;
     line-height: 1.4;
   }
 
@@ -178,6 +179,7 @@ article.post {
   strong {
     border-bottom: 1px solid var(--c-accent-bg1);
     box-shadow: inset 0 -0.6em 0 var(--c-accent-bg0);
+    font-family: 'Nanum Myeongjo', serif;
   }
 
   img {

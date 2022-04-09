@@ -1,5 +1,5 @@
 ---
-title: 스벨트킷+WASM
+title: 스벨트킷 + WASM
 publishedAt: '2022-04-03'
 summary: 스벨트킷에서 러스트로 만든 WASM 코드를 실행하는 방법
 ---
