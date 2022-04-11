@@ -390,3 +390,4 @@ export type ArticleMeta = {
 - [스벨트킷 블로그에 RSS 추가하기](/posts/sveltekit-rss)
 - [스벨트킷 블로그 단위 테스트하기](/posts/mdsvex-unit-testing)
 - [스벨트킷+WASM](/posts/sveltekit-wasm)
+- [Svelte Cubed 기반의 3D 그래픽스](/posts/svelte-cubed)
