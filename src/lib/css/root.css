@@ -190,5 +190,7 @@ article.post {
     background-color: #00000016;
     border-radius: 0.2em;
     font-family: monospace;
+    hyphens: auto;
+    word-break: break-all;
   }
 }
