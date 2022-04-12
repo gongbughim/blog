@@ -7,6 +7,7 @@ summary: Svelte Cubed 라이브러리를 이용해서 3D 그래픽스 쉽게 하
 <script>
   import { onMount } from 'svelte'
   import SvelteCubedExample from '$components/SvelteCubedExample.svelte'
+  import SvelteCubedExample2 from '$components/SvelteCubedExample2.svelte'
 
   $: reduceMotion = true
 
@@ -267,6 +268,38 @@ onMount(() => {
 <SvelteCubedExample autoRotate={!reduceMotion} />
 ```
 
+## 모델 로딩하기
+
+아직 문서는 없지만 Svlete Cubed의 소스코드를 읽어보면 `<SC.Primitive>` 요소를 활용해서
+원하는 모델을 렌더링할 수 있습니다.
+
+<SvelteCubedExample2 autoRotate={!reduceMotion} />
+
+`static` 디렉토리에 임의의 모델 파일을 넣고 아래와 같이 모델 로더로 불러올 수 있습니다. 저는
+`*.glb` 파일을 읽어오기 위해 `GLTFLoader`를 사용했습니다.
+
+```svelte
+<script lang="ts">
+  import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+
+  let model: THREE.Group
+
+  onMount(async () => {
+    model = (await new GLTFLoader().loadAsync('../robot.glb')).scene
+  })
+</script>
+
+<SC.Canvas>
+  {#if model}
+    <SC.Primitive object={model} scale={[width, height, depth]} rotation={[0, spin, 0]} />
+  {/if}
+</SC.Canvas>
+```
+
+아직 `<SC.Primity>` 컴포넌트는 그림자를 지원하지 않는데요, 이
+[PR](https://github.com/Rich-Harris/svelte-cubed/pull/41)을 참고하여 쉽게 해결할 수
+있습니다.
+
 ## 번들 사이즈
 
 `npm run build` 명령으로 정적 사이트를 생성했을 때 이 문서의 번들 크기는 약 608 KiB
@@ -282,6 +315,8 @@ onMount(() => {
   [소스코드](https://github.com/gongbughim/blog/blob/main/src/routes/posts/svelte-cubed.ts)
 - SvelteCubedExample 컴포넌트의
   [소스코드](https://github.com/gongbughim/blog/blob/main/src/components/SvelteCubedExample.svelte)
+- 모델을 읽어오는 SvelteCubedExample2 컴포넌트의
+  [소스코드](https://github.com/gongbughim/blog/blob/main/src/components/SvelteCubedExample2.svelte)
 - 블로그 전체 [소스코드](https://github.com/gongbughim/blog)
 
 ## 관련 글
