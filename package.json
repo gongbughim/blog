@@ -63,7 +63,7 @@
     "svelte": "^3.47.0",
     "svelte-check": "^2.6.0",
     "svelte-cubed": "^0.2.1",
-    "svelte-preprocess": "^4.10.5",
+    "svelte-preprocess": "^4.10.6",
     "three": "^0.139.2",
     "ts-essentials": "^9.1.2",
     "tslib": "^2.3.1",
