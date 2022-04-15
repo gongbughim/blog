@@ -30,6 +30,6 @@ export const get: RequestHandler = async () => {
 
   return {
     body: feed.rss2(),
-    headers: { 'Content-Type': 'application/rss+xml; charset=utf-8' },
+    headers: { 'Content-Type': 'text/xml; charset=utf-8' },
   }
 }

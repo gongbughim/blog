@@ -56,7 +56,7 @@ export const get: RequestHandler = async () => {
 
   return {
     body: feed.rss2(),
-    headers: { 'Content-Type': 'application/rss+xml; charset=utf-8' },
+    headers: { 'Content-Type': 'text/xml; charset=utf-8' },
   }
 }
 ```
@@ -67,10 +67,15 @@ export const get: RequestHandler = async () => {
 ## 정적 사이트에 배포하기
 
 [표준에 의하면](https://www.rssboard.org/rss-mime-type-application.txt), RSS 문서의
-MIME 타입은 `application/rss+xml`입니다. 이에 따라 위 코드에서도 응답 헤더에
-`Content-Type: application/rss+xml; charset=utf-8`을 추가했습니다. 하지만 어차피 이
-블로그는 **정적 사이트 생성static site generation**을 사용하기 때문에 스벨트킷에서 응답
-헤더를 지정해도 별 소용이 없습니다.
+MIME 타입은 `application/rss+xml`입니다. 아지만 무슨 이유에서인지 이 MIME 타입을 쓰면
+크롬, 구글 서치 콘솔 등에서 이 파일을 XML로 인식하지 못하는 문제가 있습니다.
+`application/xml` 또는 `text/xml`을 사용하면 잘 작동합니다.
+[RFC7303 Section 4.3](https://www.rfc-editor.org/rfc/rfc7303#section-4.3)에
+따르면 `text/xml`은 `application/xml`의 별칭입니다.
+
+이에 따라 위 코드에서도 응답 헤더에 `Content-Type: text/xml; charset=utf-8`을
+추가했습니다. 하지만 어차피 이 블로그는 **정적 사이트 생성static site generation**을
+사용하기 때문에 스벨트킷에서 응답 헤더를 지정해도 별 소용이 없습니다.
 
 정적 파일을 서빙할 때 몇몇 웹 서버는 파일 확장자에 기반해서 `Content-Type` 헤더를
 추가해주기도 합니다. 이런 특성을 확용하기 위해 엔드포인트 주소를 `/rss`가 아닌 `/rss.xml`로
@@ -84,7 +89,7 @@ MIME 타입은 `application/rss+xml`입니다. 이에 따라 위 코드에서도
 
 ```yaml
 /rss.xml
-  Content-Type: application/rss+xml; charset=utf-8
+  Content-Type: text/xml; charset=utf-8
 ```
 
 ## 마치며
