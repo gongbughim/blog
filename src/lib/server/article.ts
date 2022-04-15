@@ -1,4 +1,4 @@
-import fs from 'fs'
+import fs from 'fs/promises'
 import yaml from 'js-yaml'
 
 /** Meatadata of article */
@@ -9,6 +9,8 @@ export type ArticleMeta = {
   title: string
   /** Published date as YYYY-MM-DD form */
   publishedAt: string
+  /** Modified datetime as ISO format */
+  modifiedAt: string
   /** Short summary in plain text */
   summary: string
   /** Draft flag */
@@ -21,7 +23,7 @@ export type ArticleMeta = {
  * @returns Metadata of all articles
  */
 export async function getArticleMetas(dir: string): Promise<ArticleMeta[]> {
-  const promises = (await fs.promises.readdir(dir))
+  const promises = (await fs.readdir(dir))
     .filter(f => f.endsWith('.md'))
     .map(f => f.replace(/\.md$/, ''))
     .map(id => getArticleMeta(dir, id))
@@ -35,8 +37,11 @@ export async function getArticleMetas(dir: string): Promise<ArticleMeta[]> {
  * @returns Metadata of article
  */
 export async function getArticleMeta(dir: string, id: string): Promise<ArticleMeta> {
-  const f = await fs.promises.readFile(`${dir}/${id}.md`)
-  return extractMeta(id, f.toString())
+  const filepath = `${dir}/${id}.md`
+  const f = await fs.readFile(filepath)
+  const mtime = (await fs.stat(filepath)).mtime
+
+  return extractMeta(id, f.toString(), mtime)
 }
 
 /**
@@ -45,9 +50,14 @@ export async function getArticleMeta(dir: string, id: string): Promise<ArticleMe
  * @param markdown Raw markdown content
  * @returns Metadata of article
  */
-export function extractMeta(id: string, markdown: string): ArticleMeta {
+export function extractMeta(id: string, markdown: string, mtime: Date): ArticleMeta {
   const S = '---\n' // separator
   const raw = markdown.substring(S.length, markdown.indexOf(S, S.length)).trim()
   const frontmatter = yaml.load(raw) as Record<string, any>
-  return { ...frontmatter, id, draft: !!frontmatter.draft } as ArticleMeta
+  return {
+    ...frontmatter,
+    id,
+    draft: !!frontmatter.draft,
+    modifiedAt: mtime.toISOString(),
+  } as ArticleMeta
 }

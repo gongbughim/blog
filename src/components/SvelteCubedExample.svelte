@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import * as SC from 'svelte-cubed'
   import * as THREE from 'three'
 

@@ -1,10 +1,10 @@
 ---
-title: 스벨트킷 블로그에 RSS 추가하기
+title: 스벨트킷 블로그에 RSS와 사이트맵 추가하기
 publishedAt: '2022-04-02'
-summary: 스벨트킷 블로그에 RSS 기능을 추가하는 방법
+summary: 스벨트킷 블로그에 RSS 및 사이트맵을 추가하는 방법
 ---
 
-스벨트킷으로 만든 블로그에 RSS 기능을 추가하는 방법을 설명합니다.
+스벨트킷으로 만든 블로그에 RSS 및 사이트맵을 추가하는 방법을 설명합니다.
 
 ## RSS란
 
@@ -64,12 +64,23 @@ export const get: RequestHandler = async () => {
 위 코드에서 임포트하고 있는 `getArticleMetas()` 함수에 대한 내용은
 [스벨트킷으로 블로그 만들기](/posts/sveltekit-blog) 글을 참고해주세요.
 
+## 링크 추가하기
+
+만든 XML의 URL을 아래와 같이 레이아웃에 추가해주면 각종 로봇이 RSS 피드를 발견할 수 있게
+됩니다. 스벨트킷의 정적 생성 기능이 `/rss.xml` 파일을 생성하게 하기 위해서도 필요합니다.
+
+```svelte
+<svelte:head>
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
+</svelte:head>
+```
+
 ## 정적 사이트에 배포하기
 
 [표준에 의하면](https://www.rssboard.org/rss-mime-type-application.txt), RSS 문서의
 MIME 타입은 `application/rss+xml`입니다. 아지만 무슨 이유에서인지 이 MIME 타입을 쓰면
-크롬, 구글 서치 콘솔 등에서 이 파일을 XML로 인식하지 못하는 문제가 있습니다.
-`application/xml` 또는 `text/xml`을 사용하면 잘 작동합니다.
+크롬에서 이 파일을 XML로 인식하지 못하는 문제가 있습니다. `application/xml` 또는
+`text/xml`을 사용하면 잘 작동합니다.
 [RFC7303 Section 4.3](https://www.rfc-editor.org/rfc/rfc7303#section-4.3)에
 따르면 `text/xml`은 `application/xml`의 별칭입니다.
 
@@ -90,6 +101,64 @@ MIME 타입은 `application/rss+xml`입니다. 아지만 무슨 이유에서인�
 ```yaml
 /rss.xml
   Content-Type: text/xml; charset=utf-8
+```
+
+## 사이트맵 만들기
+
+기왕 RSS를 만들었으니 [사이트맵 프로토콜](https://www.sitemaps.org/)을 따르는 사이트맵
+파일도 만들어주면 좋겠습니다. 사이트맵을 만들면 검색엔진최적화에 도움이 됩니다.
+
+`src/sitemap.xml.ts`를 생성하고 아래 내용을 적습니다.
+
+```typescript
+import type { RequestHandler } from '@sveltejs/kit'
+
+import conf from '$lib/conf'
+import { getArticleMetas } from '$lib/server/article'
+
+export const get: RequestHandler = async () => {
+  const posts = await getArticleMetas('src/routes/posts')
+  const links = posts.map(
+    p => `
+    <sitemap>
+      <loc>${conf.url}/posts/${p.id}</loc>
+      <lastmod>${p.modifiedAt}</lastmod>
+    </sitemap>
+  `,
+  )
+  const xml = `
+    <?xml version="1.0" encoding="UTF-8"?>
+    <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    ${links.join('')}
+    </sitemapindex>
+  `.trim()
+  return {
+    body: xml,
+    headers: { 'Content-Type': 'text/xml; charset=utf-8' },
+  }
+}
+```
+
+보통은 XML을 생성할 때 위와 같이 문자열을 직접 다루기보다는 XML 생성 라이브러리를 사용하는
+편이 좋지만 사이트맵 XML은 워낙 단순하니까 그냥 문자열을 직접 만들었습니다.
+
+RSS와 마찬가지로 이 파일도 `text/xml`로 서빙하기 위해 `/static/_headers`에 커스텀 헤더를
+추가합니다.
+
+```yaml
+/rss.xml
+  Content-Type: text/xml; charset=utf-8
+/sitemap.xml
+  Content-Type: text/xml; charset=utf-8
+```
+
+마지막으로, 레이아웃에도 링크를 추가해줍니다.
+
+```svelte
+<svelte:head>
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+</svelte:head>
 ```
 
 ## 마치며

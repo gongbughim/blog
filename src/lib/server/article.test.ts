@@ -14,12 +14,13 @@ describe('extractMeta()', () => {
       ---
       Hello
     `
-    const actual = extractMeta('ID', md)
+    const actual = extractMeta('ID', md, new Date('2022-04-01T00:00:00.000Z'))
     const expected: ArticleMeta = {
       id: 'ID',
       title: 'TITLE',
       summary: 'SUMMARY',
       publishedAt: '2022-04-01',
+      modifiedAt: '2022-04-01T00:00:00.000Z',
       draft: true,
     }
     expect(actual).toEqual(expected)
@@ -34,6 +35,6 @@ describe('extractMeta()', () => {
       ---
       Hello
     `
-    expect(extractMeta('ID', md).draft).toBe(false)
+    expect(extractMeta('ID', md, new Date('2022-04-01T00:00:00.000Z')).draft).toBe(false)
   })
 })

@@ -311,12 +311,6 @@ onMount(() => {
 
 ## 소스코드
 
-- 이 마크다운 문서의
-  [소스코드](https://github.com/gongbughim/blog/blob/main/src/routes/posts/svelte-cubed.ts)
-- SvelteCubedExample 컴포넌트의
-  [소스코드](https://github.com/gongbughim/blog/blob/main/src/components/SvelteCubedExample.svelte)
-- 모델을 읽어오는 SvelteCubedExample2 컴포넌트의
-  [소스코드](https://github.com/gongbughim/blog/blob/main/src/components/SvelteCubedExample2.svelte)
 - 블로그 전체 [소스코드](https://github.com/gongbughim/blog)
 
 ## 관련 글
