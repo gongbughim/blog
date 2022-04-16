@@ -1,5 +1,5 @@
 ---
-title: 스벨트킷+mdsvex 프리페치 설정하기
+title: 스벨트킷 mdsvex 프리페치 설정하기
 publishedAt: '2022-04-02'
 summary: 스벨트킷과 mdsvex 조합에서 프리페치(sveltekit:prefetch) 설정하는 방법
 ---
