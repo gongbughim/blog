@@ -169,7 +169,7 @@ article.post {
     max-width: 100%;
   }
 
-  code:not([class]) {
+  code:not([class*='language-']) {
     padding: 0.1em 0.25em;
     background-color: #8884;
     border-radius: 0.2em;

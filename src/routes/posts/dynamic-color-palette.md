@@ -61,8 +61,21 @@ summary: 블로그 색상 팔레트를 동적으로 바꾸기
 기본 색조인 `--c-primary-hue`를 설정하고, 여기에서 120도, 240도를 돌려서 2차색을
 위한 색조를 얻어내서 이를 각각 `--c-secondary-hue`와 `--c-tertiary-hue`로 지정합니다.
 
+<ul class="chips">
+  <li class="chip primary">Primary</li>
+  <li class="chip secondary">Secondary</li>
+  <li class="chip tertiary">Tertiary</li>
+</ul>
+
 이렇게 뽑은 세 가지 색에서 밝기와 채도를 조정하여 강조색, 강조색 배경1, 강조색 배경2, 글자색,
 배경색 등을 만들어냈습니다.
+
+<ul class="chips">
+  <li class="chip fg">FG</li>
+  <li class="chip bg">BG</li>
+  <li class="chip accent">Accent FG</li>
+  <li class="chip accent-bg0">Accent BG</li>
+</ul>
 
 이제 기본 색조만 바꿔주면 나머지 색상들이 적당히 어울리는 색상으로 바뀌게 되었습니다.
 
@@ -164,3 +177,52 @@ LAB 또는 LCH와 달리 RGB 또는 HSL 색공간은 **지각적 균일성percep
 ## 관련 글
 
 - [스벨트킷으로 블로그 만들기](/posts/sveltekit-blog)
+
+<style>
+  .chips {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    gap: 0.5em;
+  }
+
+  .chip {
+    padding: 0.5em;
+    box-shadow: 0 0 0.5em #8888;
+    text-align: center;
+    font-size: 0.8em;
+  }
+
+  .chip.primary {
+    color: #FFF;
+    background-color: hsl(var(--c-primary-hue), 50%, 50%);
+  }
+  .chip.secondary {
+    color: #FFF;
+    background-color: hsl(var(--c-secondary-hue), 50%, 50%);
+  }
+  .chip.tertiary {
+    color: #FFF;
+    background-color: hsl(var(--c-tertiary-hue), 50%, 50%);
+  }
+  .chip.fg {
+    color: var(--c-bg);
+    background-color: var(--c-fg);
+  }
+  .chip.bg {
+    color: var(--c-fg);
+    background-color: var(--c-bg);
+  }
+  .chip.accent {
+    color: var(--c-accent-bg0);
+    background-color: var(--c-accent);
+  }
+  .chip.accent-bg0 {
+    color: var(--c-accent);
+    background-color: var(--c-accent-bg0);
+  }
+  .chip.accent-bg1 {
+    color: var(--c-accent);
+    background-color: var(--c-accent-bg1);
+  }
+</style>
