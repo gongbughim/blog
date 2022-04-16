@@ -65,7 +65,7 @@
 
   footer {
     padding-top: 0.5em;
-    border-top: 1px solid #0006;
+    border-top: 1px solid currentColor;
     margin-top: 5rem;
     font-size: smaller;
   }

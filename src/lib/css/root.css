@@ -8,20 +8,14 @@
   transition-timing-function: ease-out;
 }
 
-@media (prefers-reduced-motion) {
-  * {
-    transition-property: none;
-  }
-}
-
 :root {
   --c-primary-hue: 0;
   --c-secondary-hue: calc(var(--c-primary-hue) + 120);
   --c-tertiary-hue: calc(var(--c-primary-hue) + 240);
-  --c-accent: lch(50% 90 var(--c-secondary-hue));
+  --c-accent: lch(50% 50 var(--c-secondary-hue));
   --c-accent-bg0: lch(90% 20 var(--c-tertiary-hue));
   --c-accent-bg1: lch(90% 20 var(--c-tertiary-hue));
-  --c-fg: lch(40% 20 var(--c-primary-hue));
+  --c-fg: lch(40% 10 var(--c-primary-hue));
   --c-bg: lch(98% 5 var(--c-primary-hue));
 
   max-width: 50em;
@@ -34,16 +28,6 @@
   font-size: 16px;
   line-height: 1.8;
   word-break: keep-all;
-}
-
-@supports not (color: lch(0% 0 0 / 0.5)) {
-  :root {
-    --c-accent: hsl(var(--c-secondary-hue) 60% 40% / 100%);
-    --c-accent-bg0: hsl(var(--c-tertiary-hue) 40% 80%);
-    --c-accent-bg1: hsl(var(--c-tertiary-hue) 40% 70%);
-    --c-fg: hsl(var(--c-primary-hue) 5% 35% / 100%);
-    --c-bg: hsl(var(--c-primary-hue) 10% 95% / 100%);
-  }
 }
 
 h1,
@@ -69,7 +53,7 @@ a.external::after {
   width: 0.6em;
   height: 0.6em;
   margin: 0 0.1em;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z'/%3E%3Cpath fill-rule='evenodd' d='M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='black' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z'/%3E%3Cpath fill-rule='evenodd' d='M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z'/%3E%3C/svg%3E");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -187,10 +171,52 @@ article.post {
 
   code:not([class]) {
     padding: 0.1em 0.25em;
-    background-color: #00000016;
+    background-color: #8884;
     border-radius: 0.2em;
     font-family: monospace;
+    font-size: 0.9em;
     hyphens: auto;
     word-break: break-all;
+  }
+}
+
+@media (prefers-reduced-motion) {
+  * {
+    transition-property: none;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --c-accent: lch(50% 50 var(--c-secondary-hue));
+    --c-accent-bg0: lch(10% 20 var(--c-tertiary-hue));
+    --c-accent-bg1: lch(20% 80 var(--c-tertiary-hue));
+    --c-fg: lch(60% 10 var(--c-primary-hue));
+    --c-bg: lch(2% 5 var(--c-primary-hue));
+  }
+
+  a[rel='nofollow']::after,
+  a.external::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z'/%3E%3Cpath fill-rule='evenodd' d='M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z'/%3E%3C/svg%3E");
+  }
+}
+
+@supports not (color: lch(0% 0 0 / 0.5)) {
+  :root {
+    --c-accent: hsl(var(--c-secondary-hue) 60% 40% / 100%);
+    --c-accent-bg0: hsl(var(--c-tertiary-hue) 40% 80%);
+    --c-accent-bg1: hsl(var(--c-tertiary-hue) 40% 70%);
+    --c-fg: hsl(var(--c-primary-hue) 5% 35% / 100%);
+    --c-bg: hsl(var(--c-primary-hue) 10% 95% / 100%);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --c-accent: hsl(var(--c-secondary-hue) 30% 60% / 100%);
+      --c-accent-bg0: hsl(var(--c-tertiary-hue) 80% 15%);
+      --c-accent-bg1: hsl(var(--c-tertiary-hue) 80% 20%);
+      --c-fg: hsl(var(--c-primary-hue) 10% 70% / 100%);
+      --c-bg: hsl(var(--c-primary-hue) 10% 5% / 100%);
+    }
   }
 }
