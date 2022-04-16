@@ -262,7 +262,7 @@ onMount(() => {
 })
 ```
 
-이제 아래와 같이 `reduceMotion` 플래그의 값을 컴포넌트에 전달할 수 있게 됐습니다.
+이제 `reduceMotion` 플래그의 값을 컴포넌트에 전달할 수 있게 됐습니다.
 
 ```svelte
 <SvelteCubedExample autoRotate={!reduceMotion} />
@@ -275,8 +275,8 @@ onMount(() => {
 
 <SvelteCubedExample2 autoRotate={!reduceMotion} />
 
-`static` 디렉토리에 임의의 모델 파일을 넣고 아래와 같이 모델 로더로 불러올 수 있습니다. 저는
-`*.glb` 파일을 읽어오기 위해 `GLTFLoader`를 사용했습니다.
+`static` 디렉토리에 임의의 모델 파일을 넣고 모델 로더로 불러올 수 있습니다. 저는 `*.glb`
+파일을 읽어오기 위해 `GLTFLoader`를 사용했습니다.
 
 ```svelte
 <script lang="ts">

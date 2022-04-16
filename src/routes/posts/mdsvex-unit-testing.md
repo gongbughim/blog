@@ -33,7 +33,7 @@ import { extractFromSvelteConfig } from 'vitest-svelte-kit'
 export default extractFromSvelteConfig()
 ```
 
-그리고 `package.json`에 테스트 스크립트를 아래와 같이 추가해줍니다.
+그리고 `package.json`에 테스트 스크립트를 추가해줍니다.
 
 ```json
 {
