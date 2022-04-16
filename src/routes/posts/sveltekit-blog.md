@@ -389,5 +389,7 @@ export type ArticleMeta = {
 - [스벨트킷+mdsvex 프리페치 설정하기](/posts/mdsvex-prefetch)
 - [스벨트킷 블로그에 RSS 추가하기](/posts/sveltekit-rss)
 - [스벨트킷 블로그 단위 테스트하기](/posts/mdsvex-unit-testing)
+- [동적 컬러 팔레트](/posts/dynamic-color-palette)
+- [다크모드 지원하기](/posts/dark-mode)
 - [스벨트킷+WASM](/posts/sveltekit-wasm)
 - [Svelte Cubed 기반의 3D 그래픽스](/posts/svelte-cubed)
