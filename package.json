@@ -53,7 +53,7 @@
     "rehype-slug": "^5.0.1",
     "remark-abbr": "^1.4.1",
     "remark-math": "^3.0.1",
-    "stylelint": "^14.7.0",
+    "stylelint": "^14.7.1",
     "stylelint-config-css-modules": "^4.1.0",
     "stylelint-config-html": "^1.0.0",
     "stylelint-config-idiomatic-order": "^8.1.0",
