@@ -221,8 +221,4 @@ LAB 또는 LCH와 달리 RGB 또는 HSL 색공간은 **지각적 균일성percep
     color: var(--c-accent);
     background-color: var(--c-accent-bg0);
   }
-  .chip.accent-bg1 {
-    color: var(--c-accent);
-    background-color: var(--c-accent-bg1);
-  }
 </style>
