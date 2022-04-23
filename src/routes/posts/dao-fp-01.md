@@ -117,9 +117,10 @@ x :: A
 
 ```render-dot
 digraph {
-  initial -> terminal;
+  initial -> {a; terminal};
   initial -> initial;
-  terminal -> terminal;
+  a -> {a; terminal};
+  terminal -> {a; terminal} [color="#FF0000"];
 }
 ```
 
