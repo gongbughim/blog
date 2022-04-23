@@ -2,10 +2,18 @@
   import 'katex/dist/katex.css'
 
   import conf from '$lib/conf'
+  import { renderDot } from '$lib/graphviz'
 
   export let title = ''
   export let summary = ''
   export let publishedAt = ''
+
+  import { onMount } from 'svelte'
+
+  onMount(async () => {
+    const els = [...document.querySelectorAll('pre.language-render-dot')]
+    els.forEach(renderDot)
+  })
 </script>
 
 <svelte:head>

@@ -142,6 +142,16 @@ article.post {
     }
   }
 
+  pre[class*='language-render-'] {
+    display: none;
+  }
+
+  .rendered-image {
+    overflow: auto;
+    padding: 1.2rem 1.1rem;
+    background-color: #1e1e1e;
+  }
+
   blockquote > :first-child {
     margin-top: 0;
   }
