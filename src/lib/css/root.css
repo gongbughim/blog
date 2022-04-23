@@ -150,6 +150,7 @@ article.post {
     overflow: auto;
     padding: 1.2rem 1.1rem;
     background-color: #1e1e1e;
+    text-align: center;
   }
 
   blockquote > :first-child {
@@ -187,6 +188,11 @@ article.post {
     font-size: 0.9em;
     hyphens: auto;
     word-break: break-all;
+  }
+
+  p > span.math:only-child {
+    display: block;
+    text-align: center;
   }
 }
 
