@@ -393,3 +393,4 @@ export type ArticleMeta = {
 - [다크모드 지원하기](/posts/dark-mode)
 - [스벨트킷+WASM](/posts/sveltekit-wasm)
 - [Svelte Cubed 기반의 3D 그래픽스](/posts/svelte-cubed)
+- [Graphviz 연결하기](/posts/graphviz)
