@@ -11,8 +11,11 @@
   import { onMount } from 'svelte'
 
   onMount(async () => {
-    const els = [...document.querySelectorAll('pre.language-render-dot')]
-    els.forEach(renderDot)
+    const els = [...document.querySelectorAll('pre[class*="language-render-"]')]
+    els.forEach(el => {
+      const lang = el.classList[0].split('-')[2]
+      renderDot(el, lang)
+    })
   })
 </script>
 

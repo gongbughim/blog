@@ -63,15 +63,13 @@ $
 논리학에서는 **참true**이라고 부르고 기호로는 $\top$으로 표현하며, 해스켈 언어에서는
 `()`으로 나타내며 **유닛Unit**이라고 부릅니다.
 
-```render-dot
-digraph {
-  initial -> {a;b;c} -> terminal;
-  initial -> initial;
-  a -> a;
-  b -> b;
-  c -> c;
-  terminal -> terminal;
-}
+```render-category
+initial -> {a;b;c} -> terminal;
+initial -> initial;
+a -> a:ne;
+b -> b;
+c:sw -> c;
+terminal -> terminal;
 ```
 
 ## 1.3. 원소들Elements
@@ -115,13 +113,11 @@ x :: A
 끝 대상, 즉 `()`은 단일한 원소를 가집니다. 끝 대상을 찔러볼 수 있는 방법(즉, 끝 대상에서 끝
 대상으로 향하는 사상)이 하나 뿐이기 때문입니다.
 
-```render-dot
-digraph {
-  initial -> {a; terminal};
-  initial -> initial;
-  a -> {a; terminal};
-  terminal -> {a; terminal} [color="#FF0000"];
-}
+```render-category
+initial -> {a; terminal};
+initial -> initial;
+a -> {a; terminal};
+terminal -> {a; terminal} [color="#33FF33"];
 ```
 
 ## 1.4. 화살표들을 담고 있는 대상The Object of Arrows
