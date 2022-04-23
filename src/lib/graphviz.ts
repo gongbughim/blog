@@ -2,8 +2,8 @@ const DEFAULT_DOT = `digraph G {}`
 
 const GLOBAL_OVERRIDE = `
   bgcolor="transparent";
-  node [color="#DDDDDD"; fontcolor="#DDDDDD"];
-  edge [color="#DDDDDD"; fontcolor="#DDDDDD"];
+  node [color="#999999", fontcolor="#999999", fontsize=11, width=0.1, height=0.1];
+  edge [color="#999999", fontcolor="#999999"];
 `
 
 export async function renderDot(el: HTMLElement) {
