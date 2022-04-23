@@ -7,7 +7,8 @@ const GLOBAL_OVERRIDES: Record<string, string> = {
   category: `
     bgcolor="transparent";
     rankdir=LR;
-    node [color="#888888", fontcolor="#888888", shape=none, width=0, height=0, margin=0.05, fontsize=14];
+    ranksep=0.3;
+    node [color="#888888", fontcolor="#888888", shape=none, width=0, height=0, margin=0.04, fontsize=14];
     edge [color="#888888", fontcolor="#888888", arrowsize=0.5, fontsize=11];
   `,
 }
@@ -16,8 +17,6 @@ export async function renderDot(el: HTMLElement, lang: string) {
   // @ts-ignore: no type definition
   const hpcc = await import('https://cdn.jsdelivr.net/npm/@hpcc-js/wasm/dist/index.es6.js')
   hpcc.wasmFolder('https://cdn.jsdelivr.net/npm/@hpcc-js/wasm/dist/')
-
-  console.log(lang)
 
   // inject GLOBAL_OVERRIDE and render
   const raw = preprocess(el.textContent || '', lang)
