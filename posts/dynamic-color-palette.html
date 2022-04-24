@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="content-security-policy" content=""><title>동적 컬러 팔레트 :: 공부왕 김공부</title><link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" data-svelte="svelte-1bmcg5l"><link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" data-svelte="svelte-1bmcg5l"><script data-svelte="svelte-1bmcg5l">;(function (w, d, s, l, i) {
+      w[l] = w[l] || []
+      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' })
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : ''
+      j.async = true
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl
+      f.parentNode.insertBefore(j, f)
+    })(window, document, 'script', 'dataLayer', 'GTM-PHD2KSF')
+  </script><meta name="description" content="블로그 색상 팔레트를 동적으로 바꾸기" data-svelte="svelte-1etj527">
+	<link rel="stylesheet" href="/_app/assets/pages/__layout.svelte-0e724954.css">
+	<link rel="stylesheet" href="/_app/assets/pages/posts/dynamic-color-palette.md-0053f885.css">
+	<link rel="stylesheet" href="/_app/assets/LayoutDefault-f057f759.css">
+	<link rel="modulepreload" href="/_app/start-a8523dc4.js">
+	<link rel="modulepreload" href="/_app/chunks/index-1c92eaba.js">
+	<link rel="modulepreload" href="/_app/chunks/preload-helper-e4860ae8.js">
+	<link rel="modulepreload" href="/_app/chunks/singletons-d1fb5791.js">
+	<link rel="modulepreload" href="/_app/pages/__layout.svelte-6c6ca375.js">
+	<link rel="modulepreload" href="/_app/chunks/conf-cbd2bb0f.js">
+	<link rel="modulepreload" href="/_app/pages/posts/dynamic-color-palette.md-ef0662d3.js">
+	<link rel="modulepreload" href="/_app/chunks/LayoutDefault-fe085398.js">
+  </head>
+  <body>
+    
+
+
+
+
+<nav class="gnb svelte-1y5881k"><ul class="svelte-1y5881k"><li><a sveltekit:prefetch href="/">블로그 홈</a></li>
+    <li><a sveltekit:prefetch href="/posts/about">소개</a></li></ul></nav>
+
+<main>
+
+<article class="post"><h1>동적 컬러 팔레트</h1>
+  <p class="info svelte-1fq8f0d"><time>2022-04-08</time></p>
+  <p>이 블로그는 페이지가 바뀌거나 새로고침을 하면 색상 팔레트가 바뀝니다. CSS 변수와 자바스크립트를
+적당히 섞어서 구현한 기능인데요, 구현 과정을 정리해 보았습니다.</p>
+<h2 id="lch-색상-표현과-css-변수"><a href="#lch-색상-표현과-css-변수">LCH 색상 표현과 CSS 변수</a></h2>
+<p><a href="https://www.w3.org/TR/css-color-4/" rel="nofollow">CSS Color Module Level 4</a>는 LCH 색상 표현을
+지원합니다. 그래서 아래와 같은 CSS를 쓸 수 있습니다.</p>
+<pre class="language-css"><!-- HTML_TAG_START --><code class="language-css"><span class="token selector">:root</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">/* 밝기lightness 채도chroma 색조hue */</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> <span class="token function">lch</span><span class="token punctuation">(</span>50% 30 0<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<p>그리고 표준 브라우저는 CSS 변수도 잘 지원하기 때문에 색조 채널만 변수로 분리할
+수도 있습니다.</p>
+<pre class="language-css"><!-- HTML_TAG_START --><code class="language-css"><span class="token selector">:root</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">--hue</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> <span class="token function">lch</span><span class="token punctuation">(</span>50% 30 <span class="token function">--var</span><span class="token punctuation">(</span>--hue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<p>또한 <code>calc()</code> 표현식을 쓰면 간단한 사칙연산을 할 수 있으므로 색조 채널을 적당히
+돌려서 파생된 색상을 만들 수 있습니다. 180도 돌리면 보색이 나옵니다.</p>
+<pre class="language-css"><!-- HTML_TAG_START --><code class="language-css"><span class="token selector">:root</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">--hue</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+  <span class="token property">--hue2</span><span class="token punctuation">:</span> <span class="token function">calc</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--hue<span class="token punctuation">)</span> + 180<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">--c-fg</span><span class="token punctuation">:</span> <span class="token function">lch</span><span class="token punctuation">(</span>35% 10 <span class="token function">var</span><span class="token punctuation">(</span>--hue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">--c-bg</span><span class="token punctuation">:</span> <span class="token function">lch</span><span class="token punctuation">(</span>95% 5 <span class="token function">var</span><span class="token punctuation">(</span>--hue2<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<h2 id="색상-팔레트-만들기"><a href="#색상-팔레트-만들기">색상 팔레트 만들기</a></h2>
+<p>위 특성을 이용해서 블로그에서 사용할 색상 팔레트를 만들었습니다.</p>
+<pre class="language-css"><!-- HTML_TAG_START --><code class="language-css"><span class="token selector">:root</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">--c-primary-hue</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+  <span class="token property">--c-secondary-hue</span><span class="token punctuation">:</span> <span class="token function">calc</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--c-primary-hue<span class="token punctuation">)</span> + 120<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">--c-tertiary-hue</span><span class="token punctuation">:</span> <span class="token function">calc</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--c-primary-hue<span class="token punctuation">)</span> + 240<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">--c-accent</span><span class="token punctuation">:</span> <span class="token function">lch</span><span class="token punctuation">(</span>50% 90 <span class="token function">var</span><span class="token punctuation">(</span>--c-secondary-hue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">--c-accent-bg0</span><span class="token punctuation">:</span> <span class="token function">lch</span><span class="token punctuation">(</span>80% 20 <span class="token function">var</span><span class="token punctuation">(</span>--c-tertiary-hue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">--c-accent-bg1</span><span class="token punctuation">:</span> <span class="token function">lch</span><span class="token punctuation">(</span>80% 20 <span class="token function">var</span><span class="token punctuation">(</span>--c-tertiary-hue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">--c-fg</span><span class="token punctuation">:</span> <span class="token function">lch</span><span class="token punctuation">(</span>40% 20 <span class="token function">var</span><span class="token punctuation">(</span>--c-primary-hue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">--c-bg</span><span class="token punctuation">:</span> <span class="token function">lch</span><span class="token punctuation">(</span>98% 5 <span class="token function">var</span><span class="token punctuation">(</span>--c-primary-hue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<p>기본 색조인 <code>--c-primary-hue</code>를 설정하고, 여기에서 120도, 240도를 돌려서 2차색을
+위한 색조를 얻어내서 이를 각각 <code>--c-secondary-hue</code>와 <code>--c-tertiary-hue</code>로 지정합니다.</p>
+<ul class="chips svelte-1fw8pnn"><li class="chip primary svelte-1fw8pnn">Primary</li>
+  <li class="chip secondary svelte-1fw8pnn">Secondary</li>
+  <li class="chip tertiary svelte-1fw8pnn">Tertiary</li></ul>
+<p>이렇게 뽑은 세 가지 색에서 밝기와 채도를 조정하여 강조색, 강조색 배경1, 강조색 배경2, 글자색,
+배경색 등을 만들어냈습니다.</p>
+<ul class="chips svelte-1fw8pnn"><li class="chip fg svelte-1fw8pnn">FG</li>
+  <li class="chip bg svelte-1fw8pnn">BG</li>
+  <li class="chip accent svelte-1fw8pnn">Accent FG</li>
+  <li class="chip accent-bg0 svelte-1fw8pnn">Accent BG</li></ul>
+<p>이제 기본 색조만 바꿔주면 나머지 색상들이 적당히 어울리는 색상으로 바뀌게 되었습니다.</p>
+<h2 id="자바스크립트를-이용하여-색상을-랜덤하게-바꾸기"><a href="#자바스크립트를-이용하여-색상을-랜덤하게-바꾸기">자바스크립트를 이용하여 색상을 랜덤하게 바꾸기</a></h2>
+<p>SCSS 류의 전처리기와 달리, 표준 CSS의 변수를 이용하면 변수의 값을 동적으로 바꿀 때 나머지
+연관된 값들이 연쇄적으로 알아서 바뀌기 때문에 아주 좋습니다. 예를 들어 아래와 같이 특정 요소에
+인라인 스타일로 변수값을 덮어쓰면 이 요소에서는 나머지 변수들도 다 값이 바뀌게 됩니다.</p>
+<pre class="language-svelte"><!-- HTML_TAG_START --><code class="language-svelte"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>--c-primary-hue: 200;<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code><!-- HTML_TAG_END --></pre>
+<p>이 특성을 이용해서 레이아웃 컴포넌트에 아래와 같은 코드를 넣었습니다.</p>
+<pre class="language-typescript"><!-- HTML_TAG_START --><code class="language-typescript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> afterNavigate <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'$app/navigation'</span>
+<span class="token keyword">import</span> conf <span class="token keyword">from</span> <span class="token string">'$lib/conf'</span>
+
+<span class="token keyword">let</span> hueDegree <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token keyword">let</span> el<span class="token operator">:</span> HTMLElement <span class="token operator">|</span> <span class="token keyword">null</span> <span class="token operator">=</span> <span class="token keyword">null</span>
+
+<span class="token function">afterNavigate</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span>hueDegree <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">360</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+$<span class="token operator">:</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>el<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> html <span class="token operator">=</span> el<span class="token punctuation">.</span>ownerDocument<span class="token operator">!</span><span class="token punctuation">.</span>firstElementChild <span class="token keyword">as</span> HTMLElement
+  html<span class="token punctuation">.</span>style<span class="token punctuation">.</span><span class="token function">setProperty</span><span class="token punctuation">(</span><span class="token string">'--c-primary-hue'</span><span class="token punctuation">,</span> <span class="token template-string"><span class="token template-punctuation string">&#96;</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>hueDegree <span class="token operator">|</span> <span class="token number">0</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">&#96;</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<p>스벨트킷의 <code>afterNavigate</code> 라이프사이클 이벤트를 이용해서 페이지가 바뀌면 <code>html</code> 요소에
+인라인 스타일로 <code>--c-primary-hue</code>를 랜덤 값으로 지정하게 해주었습니다.</p>
+<p>자바스크립트가 작동하지 않는 환경에서도 기본 색조가 CSS에 명시되어 있기 때문에 사이트 이용에
+지장이 없어서 좋습니다.</p>
+<h2 id="부드럽게-바뀌는-효과-넣기"><a href="#부드럽게-바뀌는-효과-넣기">부드럽게 바뀌는 효과 넣기</a></h2>
+<p>CSS의 <code>transition</code>을 이용하면 색상이 부드럽게 전환되도록 할 수 있습니다.</p>
+<pre class="language-css"><!-- HTML_TAG_START --><code class="language-css"><span class="token selector">*</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">transition-duration</span><span class="token punctuation">:</span> 0.5s<span class="token punctuation">;</span>
+  <span class="token property">transition-property</span><span class="token punctuation">:</span> color<span class="token punctuation">,</span> background-color<span class="token punctuation">,</span> border-color<span class="token punctuation">,</span> box-shadow<span class="token punctuation">;</span>
+  <span class="token property">transition-timing-function</span><span class="token punctuation">:</span> ease-out<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<p>하지만 모션을 원하지 않는 사용자들이 있을 수 있으므로 미디어쿼리를 추가해주었습니다.</p>
+<pre class="language-css"><!-- HTML_TAG_START --><code class="language-css"><span class="token atrule"><span class="token rule">@media</span> <span class="token punctuation">(</span>prefers-reduced-motion<span class="token punctuation">)</span></span> <span class="token punctuation">&#123;</span>
+  <span class="token selector">*</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">transition-property</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<h2 id="lch-색상을-지원하지-않는-브라우저"><a href="#lch-색상을-지원하지-않는-브라우저">LCH 색상을 지원하지 않는 브라우저</a></h2>
+<p><code>lab()</code> 이나 <code>lch()</code>는 2022년 4월 기준으로 아직은 사파리에서만 지원을 합니다. 따라서
+<code>@support</code> 미디어쿼리를 이용해서 <code>lch()</code>를 지원하지 않는 브라우저에서는 대안으로 <code>hsl()</code>을
+사용하게 했습니다.</p>
+<pre class="language-css"><!-- HTML_TAG_START --><code class="language-css"><span class="token atrule"><span class="token rule">@supports</span> <span class="token keyword">not</span> <span class="token punctuation">(</span><span class="token property">color</span><span class="token punctuation">:</span> <span class="token function">lch</span><span class="token punctuation">(</span>0% 0 0 / 0.5<span class="token punctuation">)</span><span class="token punctuation">)</span></span> <span class="token punctuation">&#123;</span>
+  <span class="token selector">:root</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">--c-accent</span><span class="token punctuation">:</span> <span class="token function">hsl</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--c-secondary-hue<span class="token punctuation">)</span> 60% 40% / 100%<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token property">--c-accent-bg0</span><span class="token punctuation">:</span> <span class="token function">hsl</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--c-tertiary-hue<span class="token punctuation">)</span> 40% 80%<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token property">--c-accent-bg1</span><span class="token punctuation">:</span> <span class="token function">hsl</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--c-tertiary-hue<span class="token punctuation">)</span> 40% 70%<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token property">--c-fg</span><span class="token punctuation">:</span> <span class="token function">hsl</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--c-primary-hue<span class="token punctuation">)</span> 5% 35% / 100%<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token property">--c-bg</span><span class="token punctuation">:</span> <span class="token function">hsl</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--c-primary-hue<span class="token punctuation">)</span> 10% 95% / 100%<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<p>LAB 또는 LCH와 달리 RGB 또는 HSL 색공간은 <strong>지각적 균일성perceptual uniformity</strong>이
+보장되지 않기 때문에 접근성 측면에서 문제가 있을 수 있습니다. 특히 랜덤하게 선택된 색조가
+무엇인지에 따라 글자색-배경색 간 거리가 늘거나 줄 여지가 있습니다.</p>
+<p>심미적인 문제도 있는데, HSL의 색조에서 원하는 보색 또는 3차색을 찾아내는 것도 쉽지가 않기
+때문에 만들어진 색상들이 때론 어색하기도 합니다.</p>
+<p><a href="https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-lab-function" rel="nofollow">PostCSS Lab Function</a>
+같은 전처리기를 쓰면 모든 브라우저에서 LCH를 쓸 수는 있으나 그렇게 하면 위 예시에서처럼 CSS
+변수를 동적으로 사용할 수 없다는 단점이 생깁니다.</p>
+<p><a href="https://d3js.org" rel="nofollow">d3</a>나 c<a href="https://www.npmjs.com/package/color-math" rel="nofollow">olor-math</a>
+등을 활용하여 모든 색 연산을 자바스크립트로 구현해도 되겠지만 이런 접근을 선호하지는 않습니다.</p>
+<p>그런 이유로 당분간은 나머지 브라우저에서는 <code>hsl()</code>을 쓰도록 놔두려고 해요. 심미적인 면은
+여전히 좀 별로지만, 접근성에는 문제가 생기지 않도록 값들을 잘 조절했습니다.</p>
+<h2 id="마치며"><a href="#마치며">마치며</a></h2>
+<p>이 글에서 설명한 코드는 이 블로그에도 적용되어 있습니다.
+<a href="https://github.com/gongbughim/blog" rel="nofollow">소스 코드</a>가 공개되어 있으니 참고해주세요.</p>
+<h2 id="관련-글"><a href="#관련-글">관련 글</a></h2>
+<ul><li><a href="/posts/sveltekit-blog" sveltekit:prefetch="sveltekit:prefetch">스벨트킷으로 블로그 만들기</a></li></ul>
+</article></main>
+
+<footer class="svelte-1y5881k">Copyright ©2022,
+  <a href="https://twitter.com/gongbughim" class="external">Twitter</a> |
+  <a href="https://github.com/gongbughim" class="external">Github</a>
+</footer>
+
+
+		<script type="module" data-hydrate="7kn1um">
+		import { start } from "/_app/start-a8523dc4.js";
+		start({
+			target: document.querySelector('[data-hydrate="7kn1um"]').parentNode,
+			paths: {"base":"","assets":""},
+			session: {},
+			route: true,
+			spa: false,
+			trailing_slash: "ignore",
+			hydrate: {
+				status: 200,
+				error: null,
+				nodes: [
+					import("/_app/pages/__layout.svelte-6c6ca375.js"),
+						import("/_app/pages/posts/dynamic-color-palette.md-ef0662d3.js")
+				],
+				params: {},
+				routeId: "posts/dynamic-color-palette"
+			}
+		});
+	</script>
+  </body>
+</html>

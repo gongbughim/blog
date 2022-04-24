@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="content-security-policy" content=""><title>Svelte Cubed 기반의 3D 그래픽스 :: 공부왕 김공부</title><link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" data-svelte="svelte-1bmcg5l"><link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" data-svelte="svelte-1bmcg5l"><script data-svelte="svelte-1bmcg5l">;(function (w, d, s, l, i) {
+      w[l] = w[l] || []
+      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' })
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : ''
+      j.async = true
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl
+      f.parentNode.insertBefore(j, f)
+    })(window, document, 'script', 'dataLayer', 'GTM-PHD2KSF')
+  </script><meta name="description" content="Svelte Cubed 라이브러리를 이용해서 3D 그래픽스 쉽게 하기" data-svelte="svelte-1etj527">
+	<link rel="stylesheet" href="/_app/assets/pages/__layout.svelte-0e724954.css">
+	<link rel="stylesheet" href="/_app/assets/pages/posts/svelte-cubed.md-b6170671.css">
+	<link rel="stylesheet" href="/_app/assets/LayoutDefault-f057f759.css">
+	<link rel="modulepreload" href="/_app/start-a8523dc4.js">
+	<link rel="modulepreload" href="/_app/chunks/index-1c92eaba.js">
+	<link rel="modulepreload" href="/_app/chunks/preload-helper-e4860ae8.js">
+	<link rel="modulepreload" href="/_app/chunks/singletons-d1fb5791.js">
+	<link rel="modulepreload" href="/_app/pages/__layout.svelte-6c6ca375.js">
+	<link rel="modulepreload" href="/_app/chunks/conf-cbd2bb0f.js">
+	<link rel="modulepreload" href="/_app/pages/posts/svelte-cubed.md-4eb4df3f.js">
+	<link rel="modulepreload" href="/_app/chunks/LayoutDefault-fe085398.js">
+  </head>
+  <body>
+    
+
+
+
+
+<nav class="gnb svelte-1y5881k"><ul class="svelte-1y5881k"><li><a sveltekit:prefetch href="/">블로그 홈</a></li>
+    <li><a sveltekit:prefetch href="/posts/about">소개</a></li></ul></nav>
+
+<main>
+
+<article class="post"><h1>Svelte Cubed 기반의 3D 그래픽스</h1>
+  <p class="info svelte-1fq8f0d"><time>2022-04-11</time></p>
+  <p><a href="https://svelte-cubed.vercel.app/" rel="nofollow">Svelte Cubed</a>는 스벨트를 개발한 리치 해리스가
+얼마 전에 공개한 라이브러리로, 스벨트 및 스벨트킷에서 <a href="https://threejs.org/" rel="nofollow">three.js</a>를
+쉽게 쓸 수 있도록 도와주는 간단한 래퍼wrapper입니다.</p>
+<p>다음은 <a href="https://svelte-cubed.vercel.app/docs/getting-started" rel="nofollow">Getting Started</a>의
+예시를 따라서 만들어본 컴포넌트입니다.</p>
+<div class="root svelte-1u745ih">
+
+<div class="container svelte-3er7c9"><canvas class="svelte-3er7c9"></canvas>
+
+	
+</div>
+
+  <div class="controls svelte-1u745ih"><label class="svelte-1u745ih"><input type="range" min="0.1" max="3" step="0.1" class="svelte-1u745ih" value="1"> width</label>
+    <label class="svelte-1u745ih"><input type="range" min="0.1" max="3" step="0.1" class="svelte-1u745ih" value="1"> height</label>
+    <label class="svelte-1u745ih"><input type="range" min="0.1" max="3" step="0.1" class="svelte-1u745ih" value="1"> depth</label></div>
+</div>
+<p>마우스나 터치로 카메라를 회전시킬 수 있고, 좌측 상단의 컨트롤을 이용해서 육면체의 모양을 바꿀
+수 있습니다.</p>
+<h2 id="threejs"><a href="#threejs">three.js</a></h2>
+<p>three.js는 웹 브라우저에서 GPU 기반 3D 그래픽스를 쉽게 구현할 수 있도록 도와주는
+라이브러리입니다. WebGL 프로그래밍을 직접하는 것에 비해 정말 편리하지만 아주 간단한 작업을
+하기에는 작성할 코드의 양이 많게 느껴지기도 합니다.</p>
+<h2 id="svelte-cubed"><a href="#svelte-cubed">Svelte Cubed</a></h2>
+<p>스벨트 큐브드는 스벨트를 개발한 리치 해리스가
+<a href="https://www.youtube.com/watch?v=qD6Pmp45sO4" rel="nofollow">2021년 12월에 공개</a>한 작은
+라이브러리입니다. 스벨트 또는 스벨트킷에서 선언적인 코드로 three.js를 쓸 수 있게 도와줍니다.</p>
+<p>예를 들어 Svelte Cubed를 설치한 후 아래 코드를 작성하면 검은 배경에 정육면체가 그려집니다.</p>
+<pre class="language-svelte"><!-- HTML_TAG_START --><code class="language-svelte"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+  <span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> <span class="token constant">THREE</span> <span class="token keyword">from</span> <span class="token string">'three'</span>
+  <span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> <span class="token constant">SC</span> <span class="token keyword">from</span> <span class="token string">'svelte-cubed'</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>SC.Canvas</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>SC.Mesh</span> <span class="token attr-name">geometry=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>BoxGeometry</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span></span> <span class="token punctuation">/></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>SC.PerspectiveCamera</span> <span class="token attr-name">position=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>SC.Canvas</span><span class="token punctuation">></span></span></code><!-- HTML_TAG_END --></pre>
+<p>동일한 코드를 <code>three.js</code>로 쓰면 다음과 같습니다.</p>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> <span class="token constant">THREE</span> <span class="token keyword">from</span> <span class="token string">'three'</span>
+
+<span class="token keyword">function</span> <span class="token function">render</span><span class="token punctuation">(</span><span class="token parameter">element</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> scene <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>Scene</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">const</span> camera <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>PerspectiveCamera</span><span class="token punctuation">(</span>
+    <span class="token number">45</span><span class="token punctuation">,</span>
+    element<span class="token punctuation">.</span>clientWidth <span class="token operator">/</span> element<span class="token punctuation">.</span>clientHeight<span class="token punctuation">,</span>
+    <span class="token number">0.1</span><span class="token punctuation">,</span>
+    <span class="token number">2000</span><span class="token punctuation">,</span>
+  <span class="token punctuation">)</span>
+
+  <span class="token keyword">const</span> renderer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>WebGLRenderer</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  renderer<span class="token punctuation">.</span><span class="token function">setSize</span><span class="token punctuation">(</span>element<span class="token punctuation">.</span>clientWidth <span class="token operator">/</span> element<span class="token punctuation">.</span>clientHeight<span class="token punctuation">)</span>
+  element<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>renderer<span class="token punctuation">.</span>domElement<span class="token punctuation">)</span>
+
+  <span class="token keyword">const</span> geometry <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>BoxGeometry</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">const</span> material <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>MeshNormalMaterial</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">const</span> box <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>Mesh</span><span class="token punctuation">(</span>geometry<span class="token punctuation">,</span> material<span class="token punctuation">)</span>
+  scene<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>box<span class="token punctuation">)</span>
+
+  camera<span class="token punctuation">.</span>position<span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token number">2</span>
+  camera<span class="token punctuation">.</span>position<span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token number">2</span>
+  camera<span class="token punctuation">.</span>position<span class="token punctuation">.</span>z <span class="token operator">=</span> <span class="token number">5</span>
+
+  camera<span class="token punctuation">.</span><span class="token function">lookAt</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>Vector3</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+  renderer<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span>scene<span class="token punctuation">,</span> camera<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<p>특히 스벨트는 가상돔Virtual DOM을 사용하지 않기 때문에 거의 아무런 오버헤드 없이 애니메이션
+또는 인터랙션을 자연스럽게 추가할 수 있어서 좋습니다.</p>
+<h2 id="설치하기"><a href="#설치하기">설치하기</a></h2>
+<p>스벨트킷 프로젝트에서 스벨트 큐브드는 설치하기는 아주 쉽습니다.</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token function">npm</span> i three svelte-cubed</code><!-- HTML_TAG_END --></pre>
+<p>타입스크립트를 사용한다면 <code>threejs</code>에 대한 타입 정의를 별도로 설치하면 좋습니다.</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token function">npm</span> i -D @types/three</code><!-- HTML_TAG_END --></pre>
+<h2 id="블로그에-연결하기"><a href="#블로그에-연결하기">블로그에 연결하기</a></h2>
+<p><a href="https://svelte-cubed.vercel.app/docs/getting-started" rel="nofollow">Getting Started</a>의 예시를
+따라서 컴포넌트를 만들고 블로그에 맞춰 조금 수정했는데요, 어떤 부분을 어떻게 수정했는지
+정리했습니다.</p>
+<p>다음은 전체 코드입니다. 저는 <code>/src/components/SvelteCubedExample.svelte</code> 파일을
+만들었습니다.</p>
+<pre class="language-svelte"><!-- HTML_TAG_START --><code class="language-svelte"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+  <span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> <span class="token constant">SC</span> <span class="token keyword">from</span> <span class="token string">'svelte-cubed'</span>
+  <span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> <span class="token constant">THREE</span> <span class="token keyword">from</span> <span class="token string">'three'</span>
+
+  <span class="token keyword">export</span> <span class="token keyword">let</span> autoRotate <span class="token operator">=</span> <span class="token boolean">false</span>
+
+  <span class="token keyword">let</span> width <span class="token operator">=</span> <span class="token number">1</span>
+  <span class="token keyword">let</span> height <span class="token operator">=</span> <span class="token number">1</span>
+  <span class="token keyword">let</span> depth <span class="token operator">=</span> <span class="token number">1</span>
+
+  <span class="token keyword">let</span> spin <span class="token operator">=</span> <span class="token number">0</span>
+
+  <span class="token constant">SC</span><span class="token punctuation">.</span><span class="token function">onFrame</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>autoRotate<span class="token punctuation">)</span> spin <span class="token operator">+=</span> <span class="token number">0.01</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>root<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>SC.Canvas</span>
+    <span class="token attr-name">antialias</span>
+    <span class="token attr-name">background=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>Color</span><span class="token punctuation">(</span><span class="token string">'papayawhip'</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span></span>
+    <span class="token attr-name">fog=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>FogExp2</span><span class="token punctuation">(</span><span class="token string">'papayawhip'</span><span class="token punctuation">,</span> <span class="token number">0.1</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span></span>
+    <span class="token attr-name">shadows</span>
+  <span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>SC.Group</span> <span class="token attr-name">position=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span>height <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span></span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>SC.Mesh</span>
+        <span class="token attr-name">geometry=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>PlaneGeometry</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span></span>
+        <span class="token attr-name">material=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>MeshStandardMaterial</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">color</span><span class="token operator">:</span> <span class="token string">'burlywood'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span></span>
+        <span class="token attr-name">rotation=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token punctuation">[</span><span class="token operator">-</span>Math<span class="token punctuation">.</span><span class="token constant">PI</span> <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span></span>
+        <span class="token attr-name">receiveShadow</span>
+      <span class="token punctuation">/></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>SC.Primitive</span>
+        <span class="token attr-name">object=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>GridHelper</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">,</span> <span class="token string">'papayawhip'</span><span class="token punctuation">,</span> <span class="token string">'papayawhip'</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span></span>
+        <span class="token attr-name">position=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0.001</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span></span>
+      <span class="token punctuation">/></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>SC.Group</span><span class="token punctuation">></span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>SC.Mesh</span>
+      <span class="token attr-name">geometry=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>BoxGeometry</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span></span>
+      <span class="token attr-name">material=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>MeshStandardMaterial</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">color</span><span class="token operator">:</span> <span class="token number">0xff3e00</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span></span>
+      <span class="token attr-name">scale=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token punctuation">[</span>width<span class="token punctuation">,</span> height<span class="token punctuation">,</span> depth<span class="token punctuation">]</span><span class="token punctuation">&#125;</span></span>
+      <span class="token attr-name">rotation=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> spin<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span></span>
+      <span class="token attr-name">castShadow</span>
+    <span class="token punctuation">/></span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>SC.PerspectiveCamera</span> <span class="token attr-name">position=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span></span> <span class="token punctuation">/></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>SC.OrbitControls</span> <span class="token attr-name">enableZoom=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token boolean">false</span><span class="token punctuation">&#125;</span></span> <span class="token attr-name">maxPolarAngle=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span>Math<span class="token punctuation">.</span><span class="token constant">PI</span> <span class="token operator">*</span> <span class="token number">0.51</span><span class="token punctuation">&#125;</span></span> <span class="token punctuation">/></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>SC.AmbientLight</span> <span class="token attr-name">intensity=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token number">0.6</span><span class="token punctuation">&#125;</span></span> <span class="token punctuation">/></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>SC.DirectionalLight</span> <span class="token attr-name">intensity=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token number">0.6</span><span class="token punctuation">&#125;</span></span> <span class="token attr-name">position=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span></span> <span class="token attr-name">shadow=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">mapSize</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">2048</span><span class="token punctuation">,</span> <span class="token number">2048</span><span class="token punctuation">]</span> <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span></span> <span class="token punctuation">/></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>SC.Canvas</span><span class="token punctuation">></span></span>
+
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>controls<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>range<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">bind:</span>value=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span>width<span class="token punctuation">&#125;</span></span> <span class="token attr-name">min=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token number">0.1</span><span class="token punctuation">&#125;</span></span> <span class="token attr-name">max=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token number">3</span><span class="token punctuation">&#125;</span></span> <span class="token attr-name">step=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token number">0.1</span><span class="token punctuation">&#125;</span></span> <span class="token punctuation">/></span></span> width<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>range<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">bind:</span>value=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span>height<span class="token punctuation">&#125;</span></span> <span class="token attr-name">min=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token number">0.1</span><span class="token punctuation">&#125;</span></span> <span class="token attr-name">max=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token number">3</span><span class="token punctuation">&#125;</span></span> <span class="token attr-name">step=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token number">0.1</span><span class="token punctuation">&#125;</span></span> <span class="token punctuation">/></span></span> height<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>range<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">bind:</span>value=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span>depth<span class="token punctuation">&#125;</span></span> <span class="token attr-name">min=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token number">0.1</span><span class="token punctuation">&#125;</span></span> <span class="token attr-name">max=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token number">3</span><span class="token punctuation">&#125;</span></span> <span class="token attr-name">step=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token number">0.1</span><span class="token punctuation">&#125;</span></span> <span class="token punctuation">/></span></span> depth<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+  <span class="token selector">.root</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">position</span><span class="token punctuation">:</span> relative<span class="token punctuation">;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+    <span class="token property">border</span><span class="token punctuation">:</span> 1px solid #000<span class="token punctuation">;</span>
+    <span class="token property">aspect-ratio</span><span class="token punctuation">:</span> 2 /1<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token selector">.controls</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">position</span><span class="token punctuation">:</span> absolute<span class="token punctuation">;</span>
+    <span class="token property">top</span><span class="token punctuation">:</span> 1em<span class="token punctuation">;</span>
+    <span class="token property">left</span><span class="token punctuation">:</span> 1em<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token selector">label</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 60px<span class="token punctuation">;</span>
+    <span class="token property">align-items</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+    <span class="token property">gap</span><span class="token punctuation">:</span> 0.5em<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token selector">input</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 80px<span class="token punctuation">;</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span></code><!-- HTML_TAG_END --></pre>
+<p><code>&lt;SC.Canvas&gt;</code> 요소는 <code>&lt;div&gt;</code> 컨테이너를 생성하고 그 안에 <code>&lt;canvas&gt;</code>를 만드는데,
+컨테이너의 CSS에 <code>position: absolute</code>가 설정되어 있습니다. 따라서 컴포넌트 전체를 <code>&lt;div&gt;</code>
+안에 담고 해당 요소의 CSS에 <code>position: relative</code>를 추가했습니다.</p>
+<pre class="language-svelte"><!-- HTML_TAG_START --><code class="language-svelte"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>root<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>SC.Canvas</span><span class="token punctuation">></span></span>...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>SC.Canvas</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+  <span class="token selector">.root</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">position</span><span class="token punctuation">:</span> relative<span class="token punctuation">;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+    <span class="token property">border</span><span class="token punctuation">:</span> 1px solid #000<span class="token punctuation">;</span>
+    <span class="token property">aspect-ratio</span><span class="token punctuation">:</span> 2 / 1<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span></code><!-- HTML_TAG_END --></pre>
+<p>원래 코드에서는 애니메이션이 얼마나 쉽게 구현되는지 설명하기 위한 목적으로 육면체가 자동으로
+회전하도록 되어 있습니다. 다만 이렇게 하면 ‘움직임 줄이기’ 옵션을 켠 사람들에게 접근성 문제를
+야기할 수 있습니다.</p>
+<p>이 문제를 해결하기 위해 우선 자동 회전을 켜고 끌 수 있는 속성을 추가했습니다.</p>
+<pre class="language-svelte"><!-- HTML_TAG_START --><code class="language-svelte"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+  <span class="token keyword">export</span> <span class="token keyword">let</span> autoRotate <span class="token operator">=</span> <span class="token boolean">false</span>
+
+  <span class="token constant">SC</span><span class="token punctuation">.</span><span class="token function">onFrame</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>autoRotate<span class="token punctuation">)</span> spin <span class="token operator">+=</span> <span class="token number">0.01</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></code><!-- HTML_TAG_END --></pre>
+<p>그 다음으로는, 마크다운 파일에 아래 코드를 추가해서 ‘움직임 줄이기’ 옵션이 켜져 있는지
+감지하도록 했습니다.</p>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> onMount <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'svelte'</span>
+
+<span class="token literal-property property">$</span><span class="token operator">:</span> reduceMotion <span class="token operator">=</span> <span class="token boolean">true</span>
+
+<span class="token keyword">let</span> mq
+
+<span class="token keyword">const</span> <span class="token function-variable function">updateReduceMotionFlag</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span>reduceMotion <span class="token operator">=</span> <span class="token operator">!</span>mq <span class="token operator">||</span> mq<span class="token punctuation">.</span>matches<span class="token punctuation">)</span>
+
+<span class="token function">onMount</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  mq <span class="token operator">=</span> window<span class="token punctuation">.</span><span class="token function">matchMedia</span><span class="token punctuation">(</span><span class="token string">'(prefers-reduced-motion: reduce)'</span><span class="token punctuation">)</span>
+  <span class="token function">updateReduceMotionFlag</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  mq<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'change'</span><span class="token punctuation">,</span> updateReduceMotionFlag<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> mq<span class="token punctuation">.</span><span class="token function">removeEventListener</span><span class="token punctuation">(</span><span class="token string">'change'</span><span class="token punctuation">,</span> updateReduceMotionFlag<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span></code><!-- HTML_TAG_END --></pre>
+<p>이제 <code>reduceMotion</code> 플래그의 값을 컴포넌트에 전달할 수 있게 됐습니다.</p>
+<pre class="language-svelte"><!-- HTML_TAG_START --><code class="language-svelte"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>SvelteCubedExample</span> <span class="token attr-name">autoRotate=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token operator">!</span>reduceMotion<span class="token punctuation">&#125;</span></span> <span class="token punctuation">/></span></span></code><!-- HTML_TAG_END --></pre>
+<h2 id="모델-로딩하기"><a href="#모델-로딩하기">모델 로딩하기</a></h2>
+<p>아직 문서는 없지만 Svlete Cubed의 소스코드를 읽어보면 <code>&lt;SC.Primitive&gt;</code> 요소를 활용해서
+원하는 모델을 렌더링할 수 있습니다.</p>
+<div class="root svelte-1u745ih">
+
+<div class="container svelte-3er7c9"><canvas class="svelte-3er7c9"></canvas>
+
+	
+</div>
+
+  <div class="controls svelte-1u745ih"><label class="svelte-1u745ih"><input type="range" min="0.1" max="3" step="0.1" class="svelte-1u745ih" value="0.2"> width</label>
+    <label class="svelte-1u745ih"><input type="range" min="0.1" max="3" step="0.1" class="svelte-1u745ih" value="0.2"> height</label>
+    <label class="svelte-1u745ih"><input type="range" min="0.1" max="3" step="0.1" class="svelte-1u745ih" value="0.2"> depth</label></div>
+</div>
+<p><code>static</code> 디렉토리에 임의의 모델 파일을 넣고 모델 로더로 불러올 수 있습니다. 저는 <code>*.glb</code>
+파일을 읽어오기 위해 <code>GLTFLoader</code>를 사용했습니다.</p>
+<pre class="language-svelte"><!-- HTML_TAG_START --><code class="language-svelte"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ts<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+  <span class="token keyword">import</span> <span class="token punctuation">&#123;</span> GLTFLoader <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'three/examples/jsm/loaders/GLTFLoader.js'</span>
+
+  <span class="token keyword">let</span> <span class="token literal-property property">model</span><span class="token operator">:</span> <span class="token constant">THREE</span><span class="token punctuation">.</span>Group
+
+  <span class="token function">onMount</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    model <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">await</span> <span class="token keyword">new</span> <span class="token class-name">GLTFLoader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">loadAsync</span><span class="token punctuation">(</span><span class="token string">'../robot.glb'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>scene
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>SC.Canvas</span><span class="token punctuation">></span></span>
+  <span class="token language-javascript"><span class="token punctuation">&#123;</span>#<span class="token keyword">if</span> model<span class="token punctuation">&#125;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>SC.Primitive</span> <span class="token attr-name">object=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span>model<span class="token punctuation">&#125;</span></span> <span class="token attr-name">scale=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token punctuation">[</span>width<span class="token punctuation">,</span> height<span class="token punctuation">,</span> depth<span class="token punctuation">]</span><span class="token punctuation">&#125;</span></span> <span class="token attr-name">rotation=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> spin<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span></span> <span class="token punctuation">/></span></span>
+  <span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token operator">/</span><span class="token keyword">if</span><span class="token punctuation">&#125;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>SC.Canvas</span><span class="token punctuation">></span></span></code><!-- HTML_TAG_END --></pre>
+<p>아직 <code>&lt;SC.Primity&gt;</code> 컴포넌트는 그림자를 지원하지 않는데요, 이
+<a href="https://github.com/Rich-Harris/svelte-cubed/pull/41" rel="nofollow">PR</a>을 참고하여 쉽게 해결할 수
+있습니다.</p>
+<h2 id="번들-사이즈"><a href="#번들-사이즈">번들 사이즈</a></h2>
+<p><code>npm run build</code> 명령으로 정적 사이트를 생성했을 때 이 문서의 번들 크기는 약 608 KiB
+입니다(압축을 하면 148.19 KiB). 다른 평균적인 사이트와 비교해서 너무 크다고 할 수는 없지만
+그렇다고 가벼운 것도 아닙니다.</p>
+<p>그래도 다행스러운 점은 스벨트킷이 각 페이지별로 번들링을 해주기 때문에 <code>threejs</code>에 의존성이
+없는 일반 페이지들은 여전히 작은 크기가 유지된다는 점입니다.</p>
+<h2 id="소스코드"><a href="#소스코드">소스코드</a></h2>
+<ul><li>블로그 전체 <a href="https://github.com/gongbughim/blog" rel="nofollow">소스코드</a></li></ul>
+<h2 id="관련-글"><a href="#관련-글">관련 글</a></h2>
+<ul><li><a href="/posts/sveltekit-blog" sveltekit:prefetch="sveltekit:prefetch">스벨트킷으로 블로그 만들기</a></li></ul>
+</article></main>
+
+<footer class="svelte-1y5881k">Copyright ©2022,
+  <a href="https://twitter.com/gongbughim" class="external">Twitter</a> |
+  <a href="https://github.com/gongbughim" class="external">Github</a>
+</footer>
+
+
+		<script type="module" data-hydrate="18lyove">
+		import { start } from "/_app/start-a8523dc4.js";
+		start({
+			target: document.querySelector('[data-hydrate="18lyove"]').parentNode,
+			paths: {"base":"","assets":""},
+			session: {},
+			route: true,
+			spa: false,
+			trailing_slash: "ignore",
+			hydrate: {
+				status: 200,
+				error: null,
+				nodes: [
+					import("/_app/pages/__layout.svelte-6c6ca375.js"),
+						import("/_app/pages/posts/svelte-cubed.md-4eb4df3f.js")
+				],
+				params: {},
+				routeId: "posts/svelte-cubed"
+			}
+		});
+	</script>
+  </body>
+</html>

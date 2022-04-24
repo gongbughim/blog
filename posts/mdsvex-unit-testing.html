@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="content-security-policy" content=""><title>스벨트킷 블로그 단위 테스트하기 :: 공부왕 김공부</title><link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" data-svelte="svelte-1bmcg5l"><link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" data-svelte="svelte-1bmcg5l"><script data-svelte="svelte-1bmcg5l">;(function (w, d, s, l, i) {
+      w[l] = w[l] || []
+      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' })
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : ''
+      j.async = true
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl
+      f.parentNode.insertBefore(j, f)
+    })(window, document, 'script', 'dataLayer', 'GTM-PHD2KSF')
+  </script><meta name="description" content="스벨트킷으로 만든 블로그에 단위 테스트를 적용하는 방법" data-svelte="svelte-1etj527">
+	<link rel="stylesheet" href="/_app/assets/pages/__layout.svelte-0e724954.css">
+	<link rel="stylesheet" href="/_app/assets/LayoutDefault-f057f759.css">
+	<link rel="modulepreload" href="/_app/start-a8523dc4.js">
+	<link rel="modulepreload" href="/_app/chunks/index-1c92eaba.js">
+	<link rel="modulepreload" href="/_app/chunks/preload-helper-e4860ae8.js">
+	<link rel="modulepreload" href="/_app/chunks/singletons-d1fb5791.js">
+	<link rel="modulepreload" href="/_app/pages/__layout.svelte-6c6ca375.js">
+	<link rel="modulepreload" href="/_app/chunks/conf-cbd2bb0f.js">
+	<link rel="modulepreload" href="/_app/pages/posts/mdsvex-unit-testing.md-ffbcad28.js">
+	<link rel="modulepreload" href="/_app/chunks/LayoutDefault-fe085398.js">
+  </head>
+  <body>
+    
+
+
+
+
+<nav class="gnb svelte-1y5881k"><ul class="svelte-1y5881k"><li><a sveltekit:prefetch href="/">블로그 홈</a></li>
+    <li><a sveltekit:prefetch href="/posts/about">소개</a></li></ul></nav>
+
+<main>
+
+<article class="post"><h1>스벨트킷 블로그 단위 테스트하기</h1>
+  <p class="info svelte-1fq8f0d"><time>2022-04-03</time></p>
+  <p><a href="/posts/sveltekit-blog" sveltekit:prefetch="sveltekit:prefetch">스벨트킷으로 블로그 만들기</a> 글과 이어지는 내용입니다. 이 글에서는
+이렇게 만들어진 블로그에 단위 테스트를 적용하는 방법을 설명합니다.</p>
+<h2 id="단위-테스트란"><a href="#단위-테스트란">단위 테스트란</a></h2>
+<p>단위 테스트unit test는 소프트웨어의 개별 모듈들이 의도한 방식대로 작동하는지 확인하는
+절차입니다. 과거에는 사람이 수동으로 테스트를 했지만 요즘에는 <strong>자동화된 단위 테스트automated
+unit test</strong> 코드를 만들어서 실행하는 방식을 더 선호하며, 특별히 언급하는 경우를 빼면
+‘단위 테스트’는 모두 ‘자동화된 단위 테스트’를 말합니다.</p>
+<h2 id="타입스크립트-단위-테스트"><a href="#타입스크립트-단위-테스트">타입스크립트 단위 테스트</a></h2>
+<p>스벨트킷은 <a href="https://vitejs.dev/" rel="nofollow">vite</a>를 사용하기 때문에 단위 테스트 프레임워크로
+<a href="https://vitest.dev/" rel="nofollow">vitest</a>를 사용하면 호환이 잘 되어서 편리합니다. 특히
+<a href="https://github.com/nickbreaton/vitest-svelte-kit" rel="nofollow">vitest-svelte-kit</a>과 함께
+쓰면 스벨트킷 설정을 vite가 자동으로 인식하도록 설정할 수 있어서 좋습니다.</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token function">npm</span> i -D vitest vitest-svelte-kit</code><!-- HTML_TAG_END --></pre>
+<p>이제 프로젝트 루트 디렉터리에 <code>vitest.config.js</code>를 만들고 아래 내용을 적어줍니다.</p>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> extractFromSvelteConfig <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'vitest-svelte-kit'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">extractFromSvelteConfig</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code><!-- HTML_TAG_END --></pre>
+<p>그리고 <code>package.json</code>에 테스트 스크립트를 추가해줍니다.</p>
+<pre class="language-json"><!-- HTML_TAG_START --><code class="language-json"><span class="token punctuation">&#123;</span>
+  <span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">"test"</span><span class="token operator">:</span> <span class="token string">"vitest --run"</span><span class="token punctuation">,</span>
+    <span class="token property">"test:watch"</span><span class="token operator">:</span> <span class="token string">"vitest"</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<p><code>npm run test</code>를 입력하면 테스트가 1회 실행됩니다. <code>npm run test:watch</code>를 실행하면
+파일이 바뀌면 자동으로 테스트를 실행합니다. watch 모드는 특히
+<strong>테스트 주도 개발test-driven development</strong>을 할 때 좋습니다.</p>
+<p>이제 환경 설정이 끝났으니 테스트를 추가할 차례입니다. 마침 마크다운 파일에서 메타데이터를
+추출하는 코드가 있는데, 이 코드에 대한 테스트를 붙여보면 좋겠습니다.</p>
+<p>다음은 <code>src/lib/server/article.ts</code>의 일부입니다.</p>
+<pre class="language-typescript"><!-- HTML_TAG_START --><code class="language-typescript"><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">extractMeta</span><span class="token punctuation">(</span>id<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> markdown<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token operator">:</span> ArticleMeta <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> <span class="token constant">S</span> <span class="token operator">=</span> <span class="token string">'---&#92;n'</span> <span class="token comment">// separator</span>
+  <span class="token keyword">const</span> raw <span class="token operator">=</span> markdown<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span><span class="token constant">S</span><span class="token punctuation">.</span>length<span class="token punctuation">,</span> markdown<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token constant">S</span><span class="token punctuation">,</span> <span class="token constant">S</span><span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">const</span> frontmatter <span class="token operator">=</span> yaml<span class="token punctuation">.</span><span class="token function">load</span><span class="token punctuation">(</span>raw<span class="token punctuation">)</span> <span class="token keyword">as</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">></span>
+  <span class="token keyword">return</span> <span class="token punctuation">&#123;</span> <span class="token operator">...</span>frontmatter<span class="token punctuation">,</span> id<span class="token punctuation">,</span> draft<span class="token operator">:</span> <span class="token operator">!</span><span class="token operator">!</span>frontmatter<span class="token punctuation">.</span>draft <span class="token punctuation">&#125;</span> <span class="token keyword">as</span> ArticleMeta
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<p>이제 위 코드를 테스트하는 <code>src/lib/server/article.test.ts</code> 파일을 추가하겠습니다.</p>
+<pre class="language-typescript"><!-- HTML_TAG_START --><code class="language-typescript"><span class="token keyword">import</span> dedent <span class="token keyword">from</span> <span class="token string">'dedent'</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> describe<span class="token punctuation">,</span> expect<span class="token punctuation">,</span> test <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'vitest'</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> <span class="token keyword">type</span> <span class="token class-name">ArticleMeta</span><span class="token punctuation">,</span> extractMeta <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'./article'</span>
+
+<span class="token function">describe</span><span class="token punctuation">(</span><span class="token string">'extractMeta()'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">'Basic'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> md <span class="token operator">=</span> dedent<span class="token template-string"><span class="token template-punctuation string">&#96;</span><span class="token string">
+      ---
+      title: TITLE
+      summary: SUMMARY
+      publishedAt: '2022-04-01'
+      draft: true
+      ---
+      Hello
+    </span><span class="token template-punctuation string">&#96;</span></span>
+    <span class="token keyword">const</span> actual <span class="token operator">=</span> <span class="token function">extractMeta</span><span class="token punctuation">(</span><span class="token string">'ID'</span><span class="token punctuation">,</span> md<span class="token punctuation">)</span>
+    <span class="token keyword">const</span> expected<span class="token operator">:</span> ArticleMeta <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+      id<span class="token operator">:</span> <span class="token string">'ID'</span><span class="token punctuation">,</span>
+      title<span class="token operator">:</span> <span class="token string">'TITLE'</span><span class="token punctuation">,</span>
+      summary<span class="token operator">:</span> <span class="token string">'SUMMARY'</span><span class="token punctuation">,</span>
+      publishedAt<span class="token operator">:</span> <span class="token string">'2022-04-01'</span><span class="token punctuation">,</span>
+      draft<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token function">expect</span><span class="token punctuation">(</span>actual<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toEqual</span><span class="token punctuation">(</span>expected<span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+  <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">'"draft" should be false if omitted'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> md <span class="token operator">=</span> dedent<span class="token template-string"><span class="token template-punctuation string">&#96;</span><span class="token string">
+      ---
+      title: TITLE
+      summary: SUMMARY
+      publishedAt: '2022-04-01'
+      ---
+      Hello
+    </span><span class="token template-punctuation string">&#96;</span></span>
+    <span class="token function">expect</span><span class="token punctuation">(</span><span class="token function">extractMeta</span><span class="token punctuation">(</span><span class="token string">'ID'</span><span class="token punctuation">,</span> md<span class="token punctuation">)</span><span class="token punctuation">.</span>draft<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span></code><!-- HTML_TAG_END --></pre>
+<p>위 테스트에서는 <code>dedent</code>라는 태그드 템플릿tagged template을 사용하고 있습니다.
+자바스크립트에서 멀티라인 문자열을 깔끔하게 쓸 수 있게 해주는 라이브러리입니다. 아래 명령으로
+설치하시면 됩니다.</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token function">npm</span> i -D dedent</code><!-- HTML_TAG_END --></pre>
+<h2 id="마크다운-문서-단위-테스트"><a href="#마크다운-문서-단위-테스트">마크다운 문서 단위 테스트</a></h2>
+<p>마크다운 문서는 어떻게 테스트를 하면 좋을까요? <a href="https://mdsvex.pngwn.io/" rel="nofollow">mdsvex</a>
+라이브러리를 설정했기 때문에 <code>*.md</code> 파일도 일반 스벨트킷 컴포넌트와 동일한 방법으로 불러올 수
+있습니다.</p>
+<p>이를 위해
+<a href="https://github.com/testing-library/svelte-testing-library" rel="nofollow">@testing-library/svelte</a>를
+설치합니다.</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token function">npm</span> i -D @testing-library/svelte</code><!-- HTML_TAG_END --></pre>
+<p>그런데 마크다운 문서를 테스트할 필요가 있을까요? 보통은 굳이 테스트할 필요가 없습니다. 다만 몇
+가지 상황에서는 테스트가 유용할 수 있습니다.</p>
+<ul><li>일반 마크다운이 아니라 MDX 파일이라 문서 안에 컴포넌트가 담기거나 로직이 들어가는 경우</li>
+<li>레이아웃 구조가 복잡한 경우</li></ul>
+<p>이 글에서는 레이아웃을 테스트하고자 합니다. 마크다운의 프론트메터frontmatter에 적혀있는
+<code>title</code>과 <code>summary</code>가 제대로 렌더링되는지 확인하면 좋겠습니다.</p>
+<p>모든 문서에 중복된 테스트를 만들 필요는 없으니 하나의 문서에 대한 테스트만 만들면 좋겠습니다.
+다음은 <code>/routes/posts/about.md</code> 파일의 앞 부분입니다.</p>
+<pre class="language-markdown"><!-- HTML_TAG_START --><code class="language-markdown"><span class="token front-matter-block"><span class="token punctuation">---</span>
+<span class="token front-matter yaml language-yaml">title: 소개
+publishedAt: '2022-03-31'
+summary: 블로그 소개</span>
+<span class="token punctuation">---</span></span>
+
+공부하고 정리하는 블로그입니다. 주로 프로그래밍 이야기를 합니다.</code><!-- HTML_TAG_END --></pre>
+<p>이 문서를 렌더링하면 다음과 같이 되어야 합니다.</p>
+<ul><li><code>&lt;head&gt;</code>의 <code>&lt;title&gt;</code>에 제목이 담겨야 합니다.</li>
+<li><code>&lt;head&gt;</code>의 <meta name="description">에 요약이 담겨야 합니다.</li>
+<li>문서의 제목이 <code>&lt;h1&gt;</code>에 담겨야 합니다.</li></ul>
+<p>아래와 같이 <code>/routes/posts/about.test.ts</code> 파일을 만들면 이 테스트를 수행할 수 있습니다.</p>
+<pre class="language-typescript"><!-- HTML_TAG_START --><code class="language-typescript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> cleanup <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@testing-library/svelte'</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> beforeEach<span class="token punctuation">,</span> expect<span class="token punctuation">,</span> test <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'vitest'</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> getQueryAPI <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'$lib/utils'</span>
+
+<span class="token comment">// @ts-ignore: eslint에서 아직 인식하지 못합니다.</span>
+<span class="token keyword">import</span> About <span class="token keyword">from</span> <span class="token string">'./about.md'</span>
+
+<span class="token function">beforeEach</span><span class="token punctuation">(</span>cleanup<span class="token punctuation">)</span>
+
+<span class="token function">test</span><span class="token punctuation">(</span><span class="token string">'Metadata rendering'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> $ <span class="token operator">=</span> <span class="token function">getQueryAPI</span><span class="token punctuation">(</span>About<span class="token punctuation">)</span>
+  <span class="token function">expect</span><span class="token punctuation">(</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'title'</span><span class="token punctuation">)</span><span class="token operator">?.</span>textContent<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">'소개 :: 공부왕 김공부 블로그'</span><span class="token punctuation">)</span>
+  <span class="token function">expect</span><span class="token punctuation">(</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'meta[name="description"]'</span><span class="token punctuation">)</span><span class="token operator">?.</span><span class="token function">getAttribute</span><span class="token punctuation">(</span><span class="token string">'content'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">'블로그 소개'</span><span class="token punctuation">)</span>
+  <span class="token function">expect</span><span class="token punctuation">(</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'h1'</span><span class="token punctuation">)</span><span class="token operator">?.</span>textContent<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">'소개'</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span></code><!-- HTML_TAG_END --></pre>
+<p>다음은 마크다운 문서 또는 스벨트 컴포넌트에 대한 테스트를 도와주는 작은 유틸리티입니다.</p>
+<pre class="language-typescript"><!-- HTML_TAG_START --><code class="language-typescript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> render <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@testing-library/svelte'</span>
+<span class="token keyword">import</span> <span class="token keyword">type</span> <span class="token punctuation">&#123;</span> SvelteComponent <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'svelte'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">getQueryAPI</span> <span class="token operator">=</span> <span class="token punctuation">(</span>c<span class="token operator">:</span> <span class="token keyword">typeof</span> SvelteComponent<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> doc <span class="token operator">=</span> <span class="token function">render</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">.</span>container<span class="token punctuation">.</span>ownerDocument
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>selector<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">=></span> doc<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span>selector<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<h2 id="스벨트-컴포넌트-단위-테스트"><a href="#스벨트-컴포넌트-단위-테스트">스벨트 컴포넌트 단위 테스트</a></h2>
+<p>마크다운 문서의 단위 테스트와 동일하므로 설명을 생략합니다. 테스트 코드 예시가 필요하신 분은
+<a href="https://testing-library.com/docs/svelte-testing-library/intro/" rel="nofollow">Svelte Testing Library</a>를
+참고해주세요.</p>
+<h2 id="마치며"><a href="#마치며">마치며</a></h2>
+<p>이 글에서 설명한 코드는 이 블로그에도 적용되어 있습니다.
+<a href="https://github.com/gongbughim/blog" rel="nofollow">소스 코드</a>가 공개되어 있으니 참고해주세요.</p>
+<h2 id="관련-글"><a href="#관련-글">관련 글</a></h2>
+<ul><li><a href="/posts/sveltekit-blog" sveltekit:prefetch="sveltekit:prefetch">스벨트킷으로 블로그 만들기</a></li></ul>
+</article></main>
+
+<footer class="svelte-1y5881k">Copyright ©2022,
+  <a href="https://twitter.com/gongbughim" class="external">Twitter</a> |
+  <a href="https://github.com/gongbughim" class="external">Github</a>
+</footer>
+
+
+		<script type="module" data-hydrate="wg5bgs">
+		import { start } from "/_app/start-a8523dc4.js";
+		start({
+			target: document.querySelector('[data-hydrate="wg5bgs"]').parentNode,
+			paths: {"base":"","assets":""},
+			session: {},
+			route: true,
+			spa: false,
+			trailing_slash: "ignore",
+			hydrate: {
+				status: 200,
+				error: null,
+				nodes: [
+					import("/_app/pages/__layout.svelte-6c6ca375.js"),
+						import("/_app/pages/posts/mdsvex-unit-testing.md-ffbcad28.js")
+				],
+				params: {},
+				routeId: "posts/mdsvex-unit-testing"
+			}
+		});
+	</script>
+  </body>
+</html>

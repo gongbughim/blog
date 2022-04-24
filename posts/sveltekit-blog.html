@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="content-security-policy" content=""><title>스벨트킷으로 블로그 만들기 :: 공부왕 김공부</title><link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" data-svelte="svelte-1bmcg5l"><link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" data-svelte="svelte-1bmcg5l"><script data-svelte="svelte-1bmcg5l">;(function (w, d, s, l, i) {
+      w[l] = w[l] || []
+      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' })
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : ''
+      j.async = true
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl
+      f.parentNode.insertBefore(j, f)
+    })(window, document, 'script', 'dataLayer', 'GTM-PHD2KSF')
+  </script><meta name="description" content="스벨트킷으로 블로그 만드는 과정을 기록했습니다." data-svelte="svelte-1etj527">
+	<link rel="stylesheet" href="/_app/assets/pages/__layout.svelte-0e724954.css">
+	<link rel="stylesheet" href="/_app/assets/LayoutDefault-f057f759.css">
+	<link rel="modulepreload" href="/_app/start-a8523dc4.js">
+	<link rel="modulepreload" href="/_app/chunks/index-1c92eaba.js">
+	<link rel="modulepreload" href="/_app/chunks/preload-helper-e4860ae8.js">
+	<link rel="modulepreload" href="/_app/chunks/singletons-d1fb5791.js">
+	<link rel="modulepreload" href="/_app/pages/__layout.svelte-6c6ca375.js">
+	<link rel="modulepreload" href="/_app/chunks/conf-cbd2bb0f.js">
+	<link rel="modulepreload" href="/_app/pages/posts/sveltekit-blog.md-769c6214.js">
+	<link rel="modulepreload" href="/_app/chunks/LayoutDefault-fe085398.js">
+	<link rel="modulepreload" href="/_app/chunks/Asciinema-3c2a3e19.js">
+  </head>
+  <body>
+    
+
+
+
+
+<nav class="gnb svelte-1y5881k"><ul class="svelte-1y5881k"><li><a sveltekit:prefetch href="/">블로그 홈</a></li>
+    <li><a sveltekit:prefetch href="/posts/about">소개</a></li></ul></nav>
+
+<main>
+
+<article class="post"><h1>스벨트킷으로 블로그 만들기</h1>
+  <p class="info svelte-1fq8f0d"><time>2022-04-01</time></p>
+  <p><a href="https://kit.svelte.dev" rel="nofollow">스벨트킷</a>은 <a href="https://svelte.dev" rel="nofollow">스벨트</a> 기반의 웹
+프레임워크입니다. 스벨트와 스벨트킷의 관계는 <a href="https://reactjs.org/" rel="nofollow">리엑트</a>와
+<a href="https://nextjs.org/" rel="nofollow">넥스트JS</a>의 관계와 같습니다.</p>
+<p>이 글에서는 스벨트킷을 이용하여 마크다운 기반의 블로그를 만들고 CloudFlare Pages에 배포하는
+방법을 소개합니다. 무료로 이용할 수 있는 서비스만 사용합니다.</p>
+<h2 id="스벨트킷-설치하기"><a href="#스벨트킷-설치하기">스벨트킷 설치하기</a></h2>
+<p>노드JS 16 또는 그 이상의 버전이 설치되어 있어야 합니다. 이 글을 쓰는 현재(2022-04-01) 제
+컴퓨터에는 <code>v17.8.0</code>이 설치되어 있습니다. 아래 명령으로 버전을 확인할 수 있습니다.</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token function">node</span> -v</code><!-- HTML_TAG_END --></pre>
+<p>프로젝트를 생성할 디렉터리로 이동합니다. 저는 프로젝트를 <code>~/prjs</code>에 모아둡니다.</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token builtin class-name">cd</span> ~/prjs</code><!-- HTML_TAG_END --></pre>
+<p>스벨트킷 홈페이지의 안내에 따라 스벨트킷을 설치합니다. 저는 <code>blog</code>라는 이름으로 프로젝트를
+만들었습니다.</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token function">npm</span> init svelte@next blog</code><!-- HTML_TAG_END --></pre>
+<p>위 명령을 실행하면 몇 가지를 물어보는데 저는 이렇게 답했습니다.</p>
+<ul><li>Which Svelte app template? (어떤 템플릿을 사용하시겠습니까?) <strong>Skeleton project</strong><br>
+(예제 파일들이 없는 빈 프로젝트를 만들고 싶어서 이 템플릿을 골랐습니다)</li>
+<li>Use TypeScript? (타입스크립트를 사용하시겠습니까?) <strong>Yes</strong><br>
+(간단한 블로그라서 타입스크립트를 꼭 쓰지 않아도 괜찮지만, 자꾸 쓰면서 익히고 싶은 마음에
+“Yes”를 선택했습니다.)</li>
+<li>Add ESLint for code linting? (ESLint를 사용하시겠습니까?) <strong>Yes</strong><br>
+(저는 되도록 모든 프로젝트에서 린터를 사용하면 좋다고 생각합니다.)</li>
+<li>Add Prettier for code formatting? <strong>Yes</strong><br>
+(저는 되도록 모든 프로젝트에서 포멧터를 사용하면 좋다고 생각합니다.)</li>
+<li>Add Playwright for browser testing? <strong>No</strong><br>
+(간단한 블로그니까 테스트를 만들지 않을 생각입니다. 만들더라도 브라우저 테스트보다는 가벼운
+단위 테스트를 먼저 만들면 좋다고 생각합니다. 관련글:
+<a href="/posts/mdsvex-unit-testing" sveltekit:prefetch="sveltekit:prefetch">스벨트킷 블로그 단위 테스트하기</a>)</li></ul>
+<pre class="language-undefined"><!-- HTML_TAG_START --><code class="language-undefined">✔ Which Svelte app template? › Skeleton project
+✔ Use TypeScript? … Yes
+✔ Add ESLint for code linting? … Yes
+✔ Add Prettier for code formatting? … Yes
+✔ Add Playwright for browser testing? … No</code><!-- HTML_TAG_END --></pre>
+<p>이제 프로젝트 디렉터리가 생겼습니다. 개발 서버를 실행하고 브라우저에서 확인해보겠습니다.</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token builtin class-name">cd</span> blog
+<span class="token function">npm</span> i
+<span class="token function">npm</span> run dev -- --open</code><!-- HTML_TAG_END --></pre>
+<p>“Welcome to SvelteKit”이라는 문서가 열리면 성공입니다. 다음은 지금까지 설명한 내용을 녹화한
+화면입니다.</p>
+<div class="frame"></div>
+<p>Visual Studio Code에서 이 디렉터리를 열고 <code>src/routes/index.svelte</code>를 열어보면 에러
+가 뜹니다. 타입스크립트 설정 파일인 <code>tsconfig.json</code>을 열어보면 아래와 같이
+<code>.svelte-kit/tsconfig.json</code>을 확장하고 있으나, 해당 파일이 아직 존재하지 않기 때문입니다.</p>
+<pre class="language-json"><!-- HTML_TAG_START --><code class="language-json"><span class="token punctuation">&#123;</span>
+  <span class="token property">"extends"</span><span class="token operator">:</span> <span class="token string">"./.svelte-kit/tsconfig.json"</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<p>다음 명령을 실행하면 이 파일이 만들어집니다.</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token function">npm</span> run build</code><!-- HTML_TAG_END --></pre>
+<p>VSCode를 재시작하거나 “Developer: Reload Window”를 선택하면 에러가 사라집니다.</p>
+<h2 id="정적-사이트-생성하기"><a href="#정적-사이트-생성하기">정적 사이트 생성하기</a></h2>
+<p>스벨트킷은 서버측 랜더링server-side rendering, 클라이언트측 렌더링client-side rendeing,
+사전생성pregeneration을 모두 지원합니다. 우리는 정적 블로그 사이트를 만들 것이므로, 모든
+페이지를 사전 생성하고자 합니다. 이를 <strong>정적 사이트 생성static site generation</strong>이라고
+부릅니다.</p>
+<p>스벨트킷에서 기본으로 제공하는 어뎁터(<code>@sveltejs/adapter-auto</code>)를 제거하고 정적 사이트
+생성 어뎁터(<code>@sveltejs/adapter-static</code>)를 설치합니다.</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token function">npm</span> uninstall @sveltejs/adapter-auto
+<span class="token function">npm</span> i -D @sveltejs/adapter-static@next</code><!-- HTML_TAG_END --></pre>
+<p>빌드를 해보면 실제로 정적 사이트 생성이 잘 작동하는지 확인해볼 수 있습니다.</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token function">npm</span> run build</code><!-- HTML_TAG_END --></pre>
+<p><code>build</code>라는 이름의 디렉터리가 생기고 해당 디렉터리 안에 <code>index.html</code>을 포함한 정적 파일들이
+생성되었습니다. 다음 명령으로 정적 사이트를 열어볼 수 있습니다.</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token function">npm</span> run preview</code><!-- HTML_TAG_END --></pre>
+<p><code>npm run dev</code>를 했을 때와 겉보기엔 같아 보이지만, 모든 페이지가 정적으로 생성되었고 서버
+측에서는 어떠한 코드도 실행되지 않는다는 차이가 있습니다.</p>
+<p>빈 웹사이트를 만들었지만 아직은 제 컴퓨터에서만 접속할 수 있습니다. 세상 누구나 내 웹 사이트에
+접속할 수 있도록 하려면 인터넷에 연결된 서버에 <code>build</code> 디렉터리의 파일들을 업로드해야 합니다.
+이를 <strong>배포deployment</strong>라고 부릅니다.</p>
+<h2 id="cloudflare-pages에-배포하기"><a href="#cloudflare-pages에-배포하기">CloudFlare Pages에 배포하기</a></h2>
+<p>배포는 되도록 빠르게 자주 할수록 좋습니다. 방금 만든 프로젝트를 깃헙에 올린 후
+<a href="https://pages.cloudflare.com/" rel="nofollow">CloudFlare Pages</a>에 배포하도록 하겠습니다.
+CloudFlare Pages에는 여러 기능이 있지만 일단은 두 가지 용도로만 쓰려고 합니다.</p>
+<ul><li>깃헙에 소스코드를 커밋하면 자동으로 사이트를 빌드하기</li>
+<li>빌드한 정적 사이트를 빠르고 안정적으로 호스팅하기</li></ul>
+<p><a href="https://pages.github.com/" rel="nofollow">GitHub Pages</a>, <a href="https://vercel.com/" rel="nofollow">Vercel</a>,
+<a href="https://netlify.com/" rel="nofollow">Netlify</a> 등 다른 서비스를 이용해도 되지만, 공부도 할 겸 아직
+사용해보지 않은 CloudFlare Pages를 선택했습니다.</p>
+<p>다음 절차대로 설정하세요.</p>
+<ol><li>우선 깃헙에 새 저장소를 만들고 코드를 올립니다.</li>
+<li><a href="https://pages.cloudflare.com/" rel="nofollow">https://pages.cloudflare.com/</a> 에서 계정을 만듭니다.</li>
+<li>새 프로젝트를 생성하고 깃헙에 만든 저장소와 선택한 후 “Begin Setup”을 클릭합니다.</li>
+<li>“Framework preset”은 “None”을 선택합니다. 선택지 중 스벨트킷도 있지만 정적 사이트로만
+쓸 계획이니까 그냥 “None”을 고릅니다. “Build command”는 <code>npm run build</code>,
+“Build output directory”는 <code>build</code>를 선택합니다.</li>
+<li>“Environment variables”에 <code>NODE_VERSION</code> 변수를 추가하고 값은 <code>16</code>을 입력합니다.</li></ol>
+<p>프로젝트 이름에 따라 자동으로 도메인 이름을 생성해주는데, 남들이 아직 선택하지 않은 이름을
+잘 고르면 짧고 깔끔한 도메인을 받을 수 있습니다. 저는 <code>gbg</code>를 골라서
+<a href="https://gbg.pages.dev" rel="nofollow">https://gbg.pages.dev</a> 주소가 생겼습니다.</p>
+<p>설정을 약 30초에서 1분 정도 기다리면 배포가 끝납니다. 이제 누구나 접속할 수 있는 내 웹
+사이트가 생겼습니다. 앞으로는 깃헙에 코드를 푸시하기만 하면 1분 이내로 내용이 반영됩니다. 이를
+<strong>지속적인 배포continuous deployment</strong>라고 부릅니다.</p>
+<h2 id="마크다운-설정하기"><a href="#마크다운-설정하기">마크다운 설정하기</a></h2>
+<p>스벨트킷에서 마크다운을 쓰려면 보통 <a href="https://mdsvex.com/" rel="nofollow">mdsvex</a>를 설치합니다. mdsvex를
+쓰면 마크다운 문서 중간에 스벨트 컴포넌트를 넣을 수 있어서 좋습니다.
+<a href="https://mdxjs.com/" rel="nofollow">MDX</a>의 스벨트 버전이라고 생각하시면 됩니다.</p>
+<pre class="language-markdown"><!-- HTML_TAG_START --><code class="language-markdown"><span class="token title important"><span class="token punctuation">#</span> mdsvex</span>
+
+마크다운 문서에 스벨트 컴포넌트를 넣기
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>SomeComponent</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span>&#123;1+2&#125;</span> <span class="token punctuation">/></span></span></code><!-- HTML_TAG_END --></pre>
+<p>우선 mdsvex 및 관련 패키지들을 설치합니다.</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token function">npm</span> i -D mdsvex rehype-autolink-headings rehype-slug remark-abbr</code><!-- HTML_TAG_END --></pre>
+<p><code>svelte.config.js</code> 파일을 아래와 같이 수정합니다.</p>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> fileURLToPath <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'url'</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> mdsvex <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'mdsvex'</span>
+<span class="token keyword">import</span> adapter <span class="token keyword">from</span> <span class="token string">'@sveltejs/adapter-static'</span>
+<span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">'path'</span>
+<span class="token keyword">import</span> preprocess <span class="token keyword">from</span> <span class="token string">'svelte-preprocess'</span>
+<span class="token keyword">import</span> rehypeAutolinkHeadings <span class="token keyword">from</span> <span class="token string">'rehype-autolink-headings'</span>
+<span class="token keyword">import</span> rehypeSlug <span class="token keyword">from</span> <span class="token string">'rehype-slug'</span>
+<span class="token keyword">import</span> remarkAbbr <span class="token keyword">from</span> <span class="token string">'remark-abbr'</span>
+
+<span class="token keyword">const</span> __filename <span class="token operator">=</span> <span class="token function">fileURLToPath</span><span class="token punctuation">(</span><span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span>
+<span class="token keyword">const</span> __dirname <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span>__filename<span class="token punctuation">)</span>
+
+<span class="token comment">/** @type &#123;import('@sveltejs/kit').Config&#125; */</span>
+<span class="token keyword">const</span> config <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">extensions</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'.svelte'</span><span class="token punctuation">,</span> <span class="token string">'.md'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">preprocess</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token function">preprocess</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">mdsvex</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">extensions</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'.md'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">smartypants</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">dashes</span><span class="token operator">:</span> <span class="token string">'oldschool'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">remarkPlugins</span><span class="token operator">:</span> <span class="token punctuation">[</span>remarkAbbr<span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">rehypePlugins</span><span class="token operator">:</span> <span class="token punctuation">[</span>rehypeSlug<span class="token punctuation">,</span> <span class="token punctuation">[</span>rehypeAutolinkHeadings<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">behavior</span><span class="token operator">:</span> <span class="token string">'wrap'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">layout</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">_</span><span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'./src/components/LayoutDefault.svelte'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">kit</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">adapter</span><span class="token operator">:</span> <span class="token function">adapter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> config</code><!-- HTML_TAG_END --></pre>
+<p><code>src/components/LayoutDefault.svelte</code>는 마크다운 포스트 페이지들의 기본 레이아웃을
+렌더링하는 컴포넌트인데 아직 파일을 만들지 않았으니 만들어주겠습니다.
+<code>src/components</code> 디렉터리를 만들고 <code>LayoutDefault.svelte</code> 파일을 만듭니다.</p>
+<pre class="language-svelte"><!-- HTML_TAG_START --><code class="language-svelte"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+  <span class="token keyword">export</span> <span class="token keyword">let</span> title <span class="token operator">=</span> <span class="token string">''</span>
+  <span class="token keyword">export</span> <span class="token keyword">let</span> summary <span class="token operator">=</span> <span class="token string">''</span>
+  <span class="token keyword">export</span> <span class="token keyword">let</span> publishedAt <span class="token operator">=</span> <span class="token string">''</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">svelte:</span>head</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span><span class="token language-javascript"><span class="token punctuation">&#123;</span>title<span class="token punctuation">&#125;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>description<span class="token punctuation">"</span></span> <span class="token attr-name">content=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span>summary<span class="token punctuation">&#125;</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">svelte:</span>head</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>article</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>post<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">></span></span><span class="token language-javascript"><span class="token punctuation">&#123;</span>title<span class="token punctuation">&#125;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>info<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>time</span><span class="token punctuation">></span></span><span class="token language-javascript"><span class="token punctuation">&#123;</span>publishedAt<span class="token punctuation">&#125;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>time</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slot</span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>article</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+  <span class="token selector">.info</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span> 1em 0 6em<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span></code><!-- HTML_TAG_END --></pre>
+<p>컴포넌트의 속성으로 <code>title</code>, <code>summary</code>, <code>publishedAt</code>이 명시되어 있는데, 이 속성들은
+마크다운 파일의 프론트매터frontmatter를 파싱하여 자동으로 설정됩니다.</p>
+<p>이제 준비가 끝났으니 첫 포스트를 작성해보겠습니다.</p>
+<p><code>src/routes/posts</code> 디렉터리를 만들고 <code>hello.md</code> 파일을 만듭니다.</p>
+<pre class="language-markdown"><!-- HTML_TAG_START --><code class="language-markdown"><span class="token front-matter-block"><span class="token punctuation">---</span>
+<span class="token front-matter yaml language-yaml">title: 제목
+summary: 요약
+publishedAt: '2020-04-01'</span>
+<span class="token punctuation">---</span></span>
+
+<span class="token italic"><span class="token punctuation">*</span><span class="token content">안녕</span><span class="token punctuation">*</span></span>하세요.</code><!-- HTML_TAG_END --></pre>
+<p><code>npm run dev</code>로 개발 서버를 실행하고 브라우저에서
+<code>http://localhost:3000/posts/hello</code>로 접속하면 렌더링된 페이지를 확인할 수 있습니다.</p>
+<h2 id="인덱스-페이지-만들기"><a href="#인덱스-페이지-만들기">인덱스 페이지 만들기</a></h2>
+<p>블로그 첫 페이지에서는 보통 글 목록을 보여줍니다. 이를 인덱스 페이지라고 부릅니다. 서버측
+API를 만들어서 마크다운 파일들을 자동으로 스캔하도록 하면 인덱스 페이지를 쉽게 구현할 수
+있습니다.</p>
+<p>서버측 렌더링 모드 또는 클라이언트측 렌더링 모드에서는 사용자가 첫 페이지에 접속할 때마다
+이 API가 호출되겠지만, 우리는 정적 사이트 생성을 하기 때문에 이 API는 <code>npm run build</code>를
+할 때에만 호출이 됩니다.</p>
+<p>스벨트킷에서 서버측 API를 만드는 방법은 간단합니다. <code>src/routes</code> 디렉터리에 <code>*.svelte</code>
+파일이나 <code>*.md</code> 파일을 만들면 “페이지”로 인식이 되고, <code>*.ts</code> 파일을 만들면 API 엔드포인트로
+인식이 됩니다. 따라서 우리는 <code>*.ts</code> 파일을 만들면 됩니다.</p>
+<p>한편, 페이지와 동일한 이름의 API 엔드포인트를 만들면 해당 페이지를 스벨트킷이 렌더링할 때
+자동으로 API 엔드포인트를 실행하고 그 결과를 속성으로 대입해줍니다. (2022년 3월에
+<a href="https://github.com/sveltejs/kit/pull/3679" rel="nofollow">새로 추가된 기능</a>입니다.) 이 기능을
+이용해보겠습니다.</p>
+<p>우선 마크다운의 프론트매터를 파싱하여 제목, 요약, 발행일 등을 얻어내기 위해 필요한 패키지를
+설치합니다.</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token function">npm</span> i -D js-yaml</code><!-- HTML_TAG_END --></pre>
+<p><code>src/routes/index.svelte</code> 파일에서 기존 코드를 모두 지우고 아래 코드를 적습니다.</p>
+<pre class="language-svelte"><!-- HTML_TAG_START --><code class="language-svelte"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ts<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+  <span class="token keyword">import</span> type <span class="token punctuation">&#123;</span> ArticleMeta <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'$lib/types'</span>
+
+  <span class="token keyword">export</span> <span class="token keyword">let</span> <span class="token literal-property property">posts</span><span class="token operator">:</span> ArticleMeta<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">svelte:</span>head</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>웹사이트 제목<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>description<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>웹사이트 설명<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">svelte:</span>head</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">></span></span>웹사이트 제목<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>posts<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token each"><span class="token punctuation">&#123;</span><span class="token keyword">#each</span> <span class="token language-javascript">posts </span><span class="token keyword">as</span> <span class="token language-javascript">post<span class="token punctuation">&#125;</span></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>article</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>title<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href=</span><span class="token language-javascript"><span class="token punctuation">&#123;</span><span class="token template-string"><span class="token template-punctuation string">&#96;</span><span class="token string">/posts/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>post<span class="token punctuation">.</span>id<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">&#96;</span></span><span class="token punctuation">&#125;</span></span><span class="token punctuation">></span></span><span class="token language-javascript"><span class="token punctuation">&#123;</span>post<span class="token punctuation">.</span>title<span class="token punctuation">&#125;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>time</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>published-at<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token language-javascript"><span class="token punctuation">&#123;</span>post<span class="token punctuation">.</span>publishedAt<span class="token punctuation">&#125;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>time</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>summary<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token language-javascript"><span class="token punctuation">&#123;</span>post<span class="token punctuation">.</span>summary<span class="token punctuation">&#125;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>article</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+  <span class="token each"><span class="token punctuation">&#123;</span><span class="token keyword">/each</span><span class="token punctuation">&#125;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span></code><!-- HTML_TAG_END --></pre>
+<p>API 엔드포인트인 <code>src/routes/index.ts</code> 파일도 만들어줍니다.</p>
+<pre class="language-typescript"><!-- HTML_TAG_START --><code class="language-typescript"><span class="token keyword">import</span> <span class="token keyword">type</span> <span class="token punctuation">&#123;</span> RequestHandler <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@sveltejs/kit'</span>
+<span class="token keyword">import</span> fs <span class="token keyword">from</span> <span class="token string">'fs'</span>
+<span class="token keyword">import</span> yaml <span class="token keyword">from</span> <span class="token string">'js-yaml'</span>
+
+<span class="token keyword">import</span> <span class="token keyword">type</span> <span class="token punctuation">&#123;</span> ArticleMeta <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'$lib/types'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> get<span class="token operator">:</span> <span class="token function-variable function">RequestHandler</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> posts <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">getArticleMetas</span><span class="token punctuation">(</span><span class="token string">'src/routes/posts'</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
+    body<span class="token operator">:</span> <span class="token punctuation">&#123;</span> posts <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">getArticleMetas</span><span class="token punctuation">(</span>dir<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span>ArticleMeta<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> promises <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">await</span> fs<span class="token punctuation">.</span>promises<span class="token punctuation">.</span><span class="token function">readdir</span><span class="token punctuation">(</span>dir<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>f <span class="token operator">=></span> f<span class="token punctuation">.</span><span class="token function">endsWith</span><span class="token punctuation">(</span><span class="token string">'.md'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>f <span class="token operator">=></span> f<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">.md$</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>id <span class="token operator">=></span> <span class="token function">getArticleMeta</span><span class="token punctuation">(</span>dir<span class="token punctuation">,</span> id<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token keyword">await</span> <span class="token builtin">Promise</span><span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span>promises<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span>a<span class="token punctuation">.</span>publishedAt <span class="token operator">&lt;</span> b<span class="token punctuation">.</span>publishedAt <span class="token operator">?</span> <span class="token number">1</span> <span class="token operator">:</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">getArticleMeta</span><span class="token punctuation">(</span>dir<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> id<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span>ArticleMeta<span class="token operator">></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> content <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">await</span> fs<span class="token punctuation">.</span>promises<span class="token punctuation">.</span><span class="token function">readFile</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">&#96;</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>dir<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>id<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">.md</span><span class="token template-punctuation string">&#96;</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">const</span> frag <span class="token operator">=</span> content<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span> content<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">'---&#92;n'</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> <span class="token punctuation">&#123;</span> id<span class="token punctuation">,</span> <span class="token operator">...</span><span class="token punctuation">(</span>yaml<span class="token punctuation">.</span><span class="token function">load</span><span class="token punctuation">(</span>frag<span class="token punctuation">)</span> <span class="token keyword">as</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">></span><span class="token punctuation">)</span> <span class="token punctuation">&#125;</span> <span class="token keyword">as</span> ArticleMeta
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<p>마지막으로, <code>index.svelte</code>와 <code>index.ts</code>에서 참조할 <code>src/lib/types.ts</code> 파일을 만듭니다.</p>
+<pre class="language-typescript"><!-- HTML_TAG_START --><code class="language-typescript"><span class="token keyword">export</span> <span class="token keyword">type</span> <span class="token class-name">ArticleMeta</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  id<span class="token operator">:</span> <span class="token builtin">string</span>
+  title<span class="token operator">:</span> <span class="token builtin">string</span>
+  publishedAt<span class="token operator">:</span> <span class="token builtin">string</span>
+  summary<span class="token operator">:</span> <span class="token builtin">string</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<p>이제 <code>http://localhost:3000</code>에 접속하면 글 목록이 나옵니다.</p>
+<h2 id="나머지-작업들"><a href="#나머지-작업들">나머지 작업들</a></h2>
+<p>코드 품질을 잘 관리하고 개발 환경을 더 편리하게 개선하려면 아래와 같이 다양한 설정을 추가하면
+좋습니다.</p>
+<ul><li>Visual Studio Code 설정</li>
+<li>prettier 설정</li>
+<li>stylelint 설정</li>
+<li>eslint 설정</li>
+<li>pre-commit hook 설정</li>
+<li>Github Actions 기반 지속적 통합continuous integration 설정</li>
+<li>단위 테스트 프레임워크 설정</li></ul>
+<p>이런 각종 설정들은 <a href="https://github.com/gongbughim/blog" rel="nofollow">이 블로그의 소스코드</a>에서
+확인하시기 바랍니다.</p>
+<h2 id="관련-글"><a href="#관련-글">관련 글</a></h2>
+<ul><li><a href="/posts/mdsvex-prefetch" sveltekit:prefetch="sveltekit:prefetch">스벨트킷+mdsvex 프리페치 설정하기</a></li>
+<li><a href="/posts/sveltekit-rss" sveltekit:prefetch="sveltekit:prefetch">스벨트킷 블로그에 RSS 추가하기</a></li>
+<li><a href="/posts/mdsvex-unit-testing" sveltekit:prefetch="sveltekit:prefetch">스벨트킷 블로그 단위 테스트하기</a></li>
+<li><a href="/posts/dynamic-color-palette" sveltekit:prefetch="sveltekit:prefetch">동적 컬러 팔레트</a></li>
+<li><a href="/posts/dark-mode" sveltekit:prefetch="sveltekit:prefetch">다크모드 지원하기</a></li>
+<li><a href="/posts/sveltekit-wasm" sveltekit:prefetch="sveltekit:prefetch">스벨트킷+WASM</a></li>
+<li><a href="/posts/svelte-cubed" sveltekit:prefetch="sveltekit:prefetch">Svelte Cubed 기반의 3D 그래픽스</a></li>
+<li><a href="/posts/graphviz" sveltekit:prefetch="sveltekit:prefetch">Graphviz 연결하기</a></li></ul>
+</article></main>
+
+<footer class="svelte-1y5881k">Copyright ©2022,
+  <a href="https://twitter.com/gongbughim" class="external">Twitter</a> |
+  <a href="https://github.com/gongbughim" class="external">Github</a>
+</footer>
+
+
+		<script type="module" data-hydrate="83m5qu">
+		import { start } from "/_app/start-a8523dc4.js";
+		start({
+			target: document.querySelector('[data-hydrate="83m5qu"]').parentNode,
+			paths: {"base":"","assets":""},
+			session: {},
+			route: true,
+			spa: false,
+			trailing_slash: "ignore",
+			hydrate: {
+				status: 200,
+				error: null,
+				nodes: [
+					import("/_app/pages/__layout.svelte-6c6ca375.js"),
+						import("/_app/pages/posts/sveltekit-blog.md-769c6214.js")
+				],
+				params: {},
+				routeId: "posts/sveltekit-blog"
+			}
+		});
+	</script>
+  </body>
+</html>

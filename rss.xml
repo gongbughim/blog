@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>공부왕 김공부</title>
+        <link>undefined</link>
+        <description>공부하고 정리하는 블로그입니다. 주로 프로그래밍 이야기를 합니다.</description>
+        <lastBuildDate>Sun, 24 Apr 2022 00:06:41 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>ko</language>
+        <copyright>Copyright ©2022</copyright>
+        <item>
+            <title><![CDATA[GraphViz로 그래프 그리기]]></title>
+            <link>https://gbg.pages.dev/posts/graphviz</link>
+            <guid>graphviz</guid>
+            <pubDate>Sat, 23 Apr 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[GraphViz WASM을 연결해서 그래프를 그리는 방법]]></description>
+        </item>
+        <item>
+            <title><![CDATA[함수형 프로그래밍의 도 1장 - 빈 서판]]></title>
+            <link>https://gbg.pages.dev/posts/dao-fp-01</link>
+            <guid>dao-fp-01</guid>
+            <pubDate>Sat, 23 Apr 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[함수형 프로그래밍의 도 1장을 읽고 요약했습니다]]></description>
+        </item>
+        <item>
+            <title><![CDATA[다크모드 지원하기]]></title>
+            <link>https://gbg.pages.dev/posts/dark-mode</link>
+            <guid>dark-mode</guid>
+            <pubDate>Sat, 16 Apr 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[블로그에서 다크모드를 지원하도록 CSS를 수정하는 방법]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Svelte Cubed 기반의 3D 그래픽스]]></title>
+            <link>https://gbg.pages.dev/posts/svelte-cubed</link>
+            <guid>svelte-cubed</guid>
+            <pubDate>Mon, 11 Apr 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Svelte Cubed 라이브러리를 이용해서 3D 그래픽스 쉽게 하기]]></description>
+        </item>
+        <item>
+            <title><![CDATA[동적 컬러 팔레트]]></title>
+            <link>https://gbg.pages.dev/posts/dynamic-color-palette</link>
+            <guid>dynamic-color-palette</guid>
+            <pubDate>Fri, 08 Apr 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[블로그 색상 팔레트를 동적으로 바꾸기]]></description>
+        </item>
+        <item>
+            <title><![CDATA[크롬 익스텐션 개발 공부하기]]></title>
+            <link>https://gbg.pages.dev/posts/chrome-extension</link>
+            <guid>chrome-extension</guid>
+            <pubDate>Wed, 06 Apr 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[크롬 익스텐션 개발하는 방법을 공부한 과정을 기록했습니다.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[스벨트킷 + WASM]]></title>
+            <link>https://gbg.pages.dev/posts/sveltekit-wasm</link>
+            <guid>sveltekit-wasm</guid>
+            <pubDate>Sun, 03 Apr 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[스벨트킷에서 러스트로 만든 WASM 코드를 실행하는 방법]]></description>
+        </item>
+        <item>
+            <title><![CDATA[스벨트킷 블로그 단위 테스트하기]]></title>
+            <link>https://gbg.pages.dev/posts/mdsvex-unit-testing</link>
+            <guid>mdsvex-unit-testing</guid>
+            <pubDate>Sun, 03 Apr 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[스벨트킷으로 만든 블로그에 단위 테스트를 적용하는 방법]]></description>
+        </item>
+        <item>
+            <title><![CDATA[스벨트킷 블로그에 RSS와 사이트맵 추가하기]]></title>
+            <link>https://gbg.pages.dev/posts/sveltekit-rss</link>
+            <guid>sveltekit-rss</guid>
+            <pubDate>Sat, 02 Apr 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[스벨트킷 블로그에 RSS 및 사이트맵을 추가하는 방법]]></description>
+        </item>
+        <item>
+            <title><![CDATA[스벨트킷 mdsvex 프리페치 설정하기]]></title>
+            <link>https://gbg.pages.dev/posts/mdsvex-prefetch</link>
+            <guid>mdsvex-prefetch</guid>
+            <pubDate>Sat, 02 Apr 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[스벨트킷과 mdsvex 조합에서 프리페치(sveltekit:prefetch) 설정하는 방법]]></description>
+        </item>
+        <item>
+            <title><![CDATA[스벨트킷으로 블로그 만들기]]></title>
+            <link>https://gbg.pages.dev/posts/sveltekit-blog</link>
+            <guid>sveltekit-blog</guid>
+            <pubDate>Fri, 01 Apr 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[스벨트킷으로 블로그 만드는 과정을 기록했습니다.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[소개]]></title>
+            <link>https://gbg.pages.dev/posts/about</link>
+            <guid>about</guid>
+            <pubDate>Thu, 31 Mar 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[블로그 소개]]></description>
+        </item>
+    </channel>
+</rss>

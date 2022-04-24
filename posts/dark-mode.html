@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="content-security-policy" content=""><title>다크모드 지원하기 :: 공부왕 김공부</title><link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" data-svelte="svelte-1bmcg5l"><link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" data-svelte="svelte-1bmcg5l"><script data-svelte="svelte-1bmcg5l">;(function (w, d, s, l, i) {
+      w[l] = w[l] || []
+      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' })
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : ''
+      j.async = true
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl
+      f.parentNode.insertBefore(j, f)
+    })(window, document, 'script', 'dataLayer', 'GTM-PHD2KSF')
+  </script><meta name="description" content="블로그에서 다크모드를 지원하도록 CSS를 수정하는 방법" data-svelte="svelte-1etj527">
+	<link rel="stylesheet" href="/_app/assets/pages/__layout.svelte-0e724954.css">
+	<link rel="stylesheet" href="/_app/assets/LayoutDefault-f057f759.css">
+	<link rel="modulepreload" href="/_app/start-a8523dc4.js">
+	<link rel="modulepreload" href="/_app/chunks/index-1c92eaba.js">
+	<link rel="modulepreload" href="/_app/chunks/preload-helper-e4860ae8.js">
+	<link rel="modulepreload" href="/_app/chunks/singletons-d1fb5791.js">
+	<link rel="modulepreload" href="/_app/pages/__layout.svelte-6c6ca375.js">
+	<link rel="modulepreload" href="/_app/chunks/conf-cbd2bb0f.js">
+	<link rel="modulepreload" href="/_app/pages/posts/dark-mode.md-eec43f99.js">
+	<link rel="modulepreload" href="/_app/chunks/LayoutDefault-fe085398.js">
+  </head>
+  <body>
+    
+
+
+
+
+<nav class="gnb svelte-1y5881k"><ul class="svelte-1y5881k"><li><a sveltekit:prefetch href="/">블로그 홈</a></li>
+    <li><a sveltekit:prefetch href="/posts/about">소개</a></li></ul></nav>
+
+<main>
+
+<article class="post"><h1>다크모드 지원하기</h1>
+  <p class="info svelte-1fq8f0d"><time>2022-04-16</time></p>
+  <p>CSS 변수와 LCH 및 HSL 색공간을 이용해서 다크모드를 쉽게 지원하는 방법을 정리했습니다.
+<a href="/posts/dynamic-color-palette" sveltekit:prefetch="sveltekit:prefetch">동적 컬러 팔레트</a>에서 이어지는 내용입니다.</p>
+<h2 id="미디어쿼리"><a href="#미디어쿼리">미디어쿼리</a></h2>
+<p>사용자가 다크모드를 선호하는지 여부를 알아내는 미디어쿼리는 다음과 같습니다.</p>
+<pre class="language-css"><!-- HTML_TAG_START --><code class="language-css"><span class="token atrule"><span class="token rule">@media</span> <span class="token punctuation">(</span><span class="token property">prefers-color-scheme</span><span class="token punctuation">:</span> dark<span class="token punctuation">)</span></span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">/* ... */</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<p>위 미디어쿼리 블럭 안에 다크모드에서 사용할 CSS를 적어주면 다크모드를 쉽게 지원할 수 있습니다.</p>
+<h2 id="변수-재정의"><a href="#변수-재정의">변수 재정의</a></h2>
+<p>이 블로그는 <a href="/posts/dynamic-color-palette" sveltekit:prefetch="sveltekit:prefetch">동적 컬러 팔레트</a>에서 설명한대로 CSS 변수를
+활용하여 색상 팔레트를 정의하고 있습니다.</p>
+<pre class="language-css"><!-- HTML_TAG_START --><code class="language-css"><span class="token selector">:root</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">--c-primary-hue</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+  <span class="token property">--c-secondary-hue</span><span class="token punctuation">:</span> <span class="token function">calc</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--c-primary-hue<span class="token punctuation">)</span> + 120<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">--c-tertiary-hue</span><span class="token punctuation">:</span> <span class="token function">calc</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--c-primary-hue<span class="token punctuation">)</span> + 240<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">--c-accent</span><span class="token punctuation">:</span> <span class="token function">lch</span><span class="token punctuation">(</span>50% 50 <span class="token function">var</span><span class="token punctuation">(</span>--c-secondary-hue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">--c-accent-bg0</span><span class="token punctuation">:</span> <span class="token function">lch</span><span class="token punctuation">(</span>90% 20 <span class="token function">var</span><span class="token punctuation">(</span>--c-tertiary-hue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">--c-accent-bg1</span><span class="token punctuation">:</span> <span class="token function">lch</span><span class="token punctuation">(</span>90% 20 <span class="token function">var</span><span class="token punctuation">(</span>--c-tertiary-hue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">--c-fg</span><span class="token punctuation">:</span> <span class="token function">lch</span><span class="token punctuation">(</span>40% 10 <span class="token function">var</span><span class="token punctuation">(</span>--c-primary-hue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">--c-bg</span><span class="token punctuation">:</span> <span class="token function">lch</span><span class="token punctuation">(</span>98% 5 <span class="token function">var</span><span class="token punctuation">(</span>--c-primary-hue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<p><code>--c-primary-hue</code> 변수로 색조hue만 정해주면 나머지 색상들이 자동으로 생성됩니다. 특히
+기본 색조와 어울리는 다른 색조들을 얻어내고, 명도와 채도를 바꿔주기 위해서 LCH 색공간을 쓰고
+있기 때문에 다크모드를 쉽게 지원할 수 있습니다. 색조는 유지하면서 글자색의 명도와 배경색의
+명도를 역전시키면 되기 때문입니다.</p>
+<pre class="language-css"><!-- HTML_TAG_START --><code class="language-css"><span class="token atrule"><span class="token rule">@media</span> <span class="token punctuation">(</span><span class="token property">prefers-color-scheme</span><span class="token punctuation">:</span> dark<span class="token punctuation">)</span></span> <span class="token punctuation">&#123;</span>
+  <span class="token selector">:root</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">--c-accent</span><span class="token punctuation">:</span> <span class="token function">lch</span><span class="token punctuation">(</span>50% 50 <span class="token function">var</span><span class="token punctuation">(</span>--c-secondary-hue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token property">--c-accent-bg0</span><span class="token punctuation">:</span> <span class="token function">lch</span><span class="token punctuation">(</span>10% 20 <span class="token function">var</span><span class="token punctuation">(</span>--c-tertiary-hue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token property">--c-accent-bg1</span><span class="token punctuation">:</span> <span class="token function">lch</span><span class="token punctuation">(</span>20% 20 <span class="token function">var</span><span class="token punctuation">(</span>--c-tertiary-hue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token property">--c-fg</span><span class="token punctuation">:</span> <span class="token function">lch</span><span class="token punctuation">(</span>60% 10 <span class="token function">var</span><span class="token punctuation">(</span>--c-primary-hue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token property">--c-bg</span><span class="token punctuation">:</span> <span class="token function">lch</span><span class="token punctuation">(</span>2% 5 <span class="token function">var</span><span class="token punctuation">(</span>--c-primary-hue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<p>색조를 정의하는 변수들(<code>--c-primary-hue</code>, <code>--c-secondary-hue</code>, <code>--c-tertiary-hue</code>)은
+그대로 두고, 색조로부터 명도와 채도를 조절하여 실제 색상을 만들어내는 변수들만 새로 정의를
+했습니다. 명도(L), 밝기(C), 색조(H) 중 명도만 뒤집었습니다.</p>
+<h2 id="lch를-지원하지-않는-브라우저에-대한-처리"><a href="#lch를-지원하지-않는-브라우저에-대한-처리">LCH를 지원하지 않는 브라우저에 대한 처리</a></h2>
+<p><code>lab()</code> 이나 <code>lch()</code>는 2022년 4월 기준으로 아직은 사파리에서만 지원을 합니다. 따라서
+<code>@support</code> 미디어쿼리를 이용해서 <code>lch()</code>를 지원하지 않는 브라우저에서는 대안으로 <code>hsl()</code>을
+사용해야 합니다.</p>
+<p><code>@support</code>와 <code>@media</code>를 중첩해서 쓰면 <strong>lch를 지원하지 않고 다크모드를 선호하는 경우</strong>에
+대한 CSS를 정의할 수 있습니다.</p>
+<pre class="language-css"><!-- HTML_TAG_START --><code class="language-css"><span class="token atrule"><span class="token rule">@supports</span> <span class="token keyword">not</span> <span class="token punctuation">(</span><span class="token property">color</span><span class="token punctuation">:</span> <span class="token function">lch</span><span class="token punctuation">(</span>0% 0 0 / 0.5<span class="token punctuation">)</span><span class="token punctuation">)</span></span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">/* LCH를 지원하지 않는 브라우저의 색상 팔레트 */</span>
+  <span class="token selector">:root</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">--c-accent</span><span class="token punctuation">:</span> <span class="token function">hsl</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--c-secondary-hue<span class="token punctuation">)</span> 60% 40% / 100%<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token property">--c-accent-bg0</span><span class="token punctuation">:</span> <span class="token function">hsl</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--c-tertiary-hue<span class="token punctuation">)</span> 40% 80%<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token property">--c-accent-bg1</span><span class="token punctuation">:</span> <span class="token function">hsl</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--c-tertiary-hue<span class="token punctuation">)</span> 40% 70%<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token property">--c-fg</span><span class="token punctuation">:</span> <span class="token function">hsl</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--c-primary-hue<span class="token punctuation">)</span> 5% 35% / 100%<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token property">--c-bg</span><span class="token punctuation">:</span> <span class="token function">hsl</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--c-primary-hue<span class="token punctuation">)</span> 10% 95% / 100%<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token atrule"><span class="token rule">@media</span> <span class="token punctuation">(</span><span class="token property">prefers-color-scheme</span><span class="token punctuation">:</span> dark<span class="token punctuation">)</span></span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">/* LCH를 지원하지 않는 브라우저의 다크모드 색상 팔레트 */</span>
+    <span class="token selector">:root</span> <span class="token punctuation">&#123;</span>
+      <span class="token property">--c-accent</span><span class="token punctuation">:</span> <span class="token function">hsl</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--c-secondary-hue<span class="token punctuation">)</span> 30% 60% / 100%<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token property">--c-accent-bg0</span><span class="token punctuation">:</span> <span class="token function">hsl</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--c-tertiary-hue<span class="token punctuation">)</span> 80% 15%<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token property">--c-accent-bg1</span><span class="token punctuation">:</span> <span class="token function">hsl</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--c-tertiary-hue<span class="token punctuation">)</span> 80% 20%<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token property">--c-fg</span><span class="token punctuation">:</span> <span class="token function">hsl</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--c-primary-hue<span class="token punctuation">)</span> 10% 70% / 100%<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token property">--c-bg</span><span class="token punctuation">:</span> <span class="token function">hsl</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--c-primary-hue<span class="token punctuation">)</span> 10% 5% / 100%<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<p><code>lch()</code>와 달리 <code>hsl()</code>은 기계적으로 명도만 뒤집었을 때 예쁜 색조합이 나오지 않기 때문에
+눈으로 보면서 수치들을 미세하게 조정했습니다.</p>
+<h2 id="마치며"><a href="#마치며">마치며</a></h2>
+<p>이 글에서 설명한 코드는 이 블로그에도 적용되어 있습니다.
+<a href="https://github.com/gongbughim/blog" rel="nofollow">소스 코드</a>가 공개되어 있으니 참고해주세요.</p>
+<h2 id="관련-글"><a href="#관련-글">관련 글</a></h2>
+<ul><li><a href="/posts/sveltekit-blog" sveltekit:prefetch="sveltekit:prefetch">스벨트킷으로 블로그 만들기</a></li></ul>
+</article></main>
+
+<footer class="svelte-1y5881k">Copyright ©2022,
+  <a href="https://twitter.com/gongbughim" class="external">Twitter</a> |
+  <a href="https://github.com/gongbughim" class="external">Github</a>
+</footer>
+
+
+		<script type="module" data-hydrate="cn29kw">
+		import { start } from "/_app/start-a8523dc4.js";
+		start({
+			target: document.querySelector('[data-hydrate="cn29kw"]').parentNode,
+			paths: {"base":"","assets":""},
+			session: {},
+			route: true,
+			spa: false,
+			trailing_slash: "ignore",
+			hydrate: {
+				status: 200,
+				error: null,
+				nodes: [
+					import("/_app/pages/__layout.svelte-6c6ca375.js"),
+						import("/_app/pages/posts/dark-mode.md-eec43f99.js")
+				],
+				params: {},
+				routeId: "posts/dark-mode"
+			}
+		});
+	</script>
+  </body>
+</html>

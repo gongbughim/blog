@@ -1,0 +1,5 @@
+# For CloudFlare Pages: https://developers.cloudflare.com/pages/platform/headers/
+/rss.xml
+  Content-Type: text/xml; charset=utf-8
+/sitemap.txt
+  Content-Type: text/plain; charset=utf-8

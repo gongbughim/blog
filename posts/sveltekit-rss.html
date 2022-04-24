@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="content-security-policy" content=""><title>스벨트킷 블로그에 RSS와 사이트맵 추가하기 :: 공부왕 김공부</title><link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" data-svelte="svelte-1bmcg5l"><link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" data-svelte="svelte-1bmcg5l"><script data-svelte="svelte-1bmcg5l">;(function (w, d, s, l, i) {
+      w[l] = w[l] || []
+      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' })
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : ''
+      j.async = true
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl
+      f.parentNode.insertBefore(j, f)
+    })(window, document, 'script', 'dataLayer', 'GTM-PHD2KSF')
+  </script><meta name="description" content="스벨트킷 블로그에 RSS 및 사이트맵을 추가하는 방법" data-svelte="svelte-1etj527">
+	<link rel="stylesheet" href="/_app/assets/pages/__layout.svelte-0e724954.css">
+	<link rel="stylesheet" href="/_app/assets/LayoutDefault-f057f759.css">
+	<link rel="modulepreload" href="/_app/start-a8523dc4.js">
+	<link rel="modulepreload" href="/_app/chunks/index-1c92eaba.js">
+	<link rel="modulepreload" href="/_app/chunks/preload-helper-e4860ae8.js">
+	<link rel="modulepreload" href="/_app/chunks/singletons-d1fb5791.js">
+	<link rel="modulepreload" href="/_app/pages/__layout.svelte-6c6ca375.js">
+	<link rel="modulepreload" href="/_app/chunks/conf-cbd2bb0f.js">
+	<link rel="modulepreload" href="/_app/pages/posts/sveltekit-rss.md-7c34af7e.js">
+	<link rel="modulepreload" href="/_app/chunks/LayoutDefault-fe085398.js">
+  </head>
+  <body>
+    
+
+
+
+
+<nav class="gnb svelte-1y5881k"><ul class="svelte-1y5881k"><li><a sveltekit:prefetch href="/">블로그 홈</a></li>
+    <li><a sveltekit:prefetch href="/posts/about">소개</a></li></ul></nav>
+
+<main>
+
+<article class="post"><h1>스벨트킷 블로그에 RSS와 사이트맵 추가하기</h1>
+  <p class="info svelte-1fq8f0d"><time>2022-04-02</time></p>
+  <p>스벨트킷으로 만든 블로그에 RSS 및 사이트맵을 추가하는 방법을 설명합니다.</p>
+<h2 id="rss란"><a href="#rss란">RSS란</a></h2>
+<p>RSS는 “Really Simple Syndication”의 약자이며 XML 문서의 일종입니다. 블로그 등의
+웹사이트에서 RSS를 지원하면 <a href="https://feedly.com" rel="nofollow">https://feedly.com</a> 같은 RSS 구독 서비스로 해당 사이트를
+구독할 수 있게 해줍니다.</p>
+<h2 id="구현"><a href="#구현">구현</a></h2>
+<p>RSS 형식에 맞는 XML 문자열을 생성해주는 라이브러리를 설치합니다.</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token function">npm</span> i -D feed</code><!-- HTML_TAG_END --></pre>
+<p>이제 RSS 문서를 서빙하는 엔드포인트를 추가해야 합니다. 저는 <code>src/routes/rss.xml.ts</code> 파일을
+추가하여 <code>/rss.xml</code> 엔드포인트를 만들었습니다.</p>
+<pre class="language-typescript"><!-- HTML_TAG_START --><code class="language-typescript"><span class="token keyword">import</span> <span class="token keyword">type</span> <span class="token punctuation">&#123;</span> RequestHandler <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@sveltejs/kit'</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> Feed <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'feed'</span>
+
+<span class="token keyword">import</span> conf <span class="token keyword">from</span> <span class="token string">'$lib/conf'</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> getArticleMetas <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'$lib/server/article'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> get<span class="token operator">:</span> <span class="token function-variable function">RequestHandler</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> posts <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">getArticleMetas</span><span class="token punctuation">(</span><span class="token string">'src/routes/posts'</span><span class="token punctuation">)</span>
+  <span class="token keyword">const</span> feed <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Feed</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+    title<span class="token operator">:</span> conf<span class="token punctuation">.</span>title<span class="token punctuation">,</span>
+    description<span class="token operator">:</span> conf<span class="token punctuation">.</span>description<span class="token punctuation">,</span>
+    id<span class="token operator">:</span> conf<span class="token punctuation">.</span>url<span class="token punctuation">,</span>
+    language<span class="token operator">:</span> <span class="token string">'ko'</span><span class="token punctuation">,</span>
+    copyright<span class="token operator">:</span> conf<span class="token punctuation">.</span>copyright<span class="token punctuation">,</span>
+    author<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      name<span class="token operator">:</span> conf<span class="token punctuation">.</span>authorName<span class="token punctuation">,</span>
+      email<span class="token operator">:</span> conf<span class="token punctuation">.</span>authorEmail<span class="token punctuation">,</span>
+      link<span class="token operator">:</span> conf<span class="token punctuation">.</span>authroTwitter<span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+  posts<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span>p <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    feed<span class="token punctuation">.</span><span class="token function">addItem</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+      title<span class="token operator">:</span> p<span class="token punctuation">.</span>title<span class="token punctuation">,</span>
+      id<span class="token operator">:</span> p<span class="token punctuation">.</span>id<span class="token punctuation">,</span>
+      link<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">&#96;</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>conf<span class="token punctuation">.</span>url<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">/posts/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>p<span class="token punctuation">.</span>id<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">&#96;</span></span><span class="token punctuation">,</span>
+      description<span class="token operator">:</span> p<span class="token punctuation">.</span>summary<span class="token punctuation">,</span>
+      date<span class="token operator">:</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span>p<span class="token punctuation">.</span>publishedAt<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+  <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
+    body<span class="token operator">:</span> feed<span class="token punctuation">.</span><span class="token function">rss2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    headers<span class="token operator">:</span> <span class="token punctuation">&#123;</span> <span class="token string-property property">'Content-Type'</span><span class="token operator">:</span> <span class="token string">'text/xml; charset=utf-8'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<p>위 코드에서 임포트하고 있는 <code>getArticleMetas()</code> 함수에 대한 내용은
+<a href="/posts/sveltekit-blog" sveltekit:prefetch="sveltekit:prefetch">스벨트킷으로 블로그 만들기</a> 글을 참고해주세요.</p>
+<h2 id="링크-추가하기"><a href="#링크-추가하기">링크 추가하기</a></h2>
+<p>만든 XML의 URL을 아래와 같이 레이아웃에 추가해주면 각종 로봇이 RSS 피드를 발견할 수 있게
+됩니다. 스벨트킷의 정적 생성 기능이 <code>/rss.xml</code> 파일을 생성하게 하기 위해서도 필요합니다.</p>
+<pre class="language-svelte"><!-- HTML_TAG_START --><code class="language-svelte"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">svelte:</span>head</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>alternate<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>application/rss+xml<span class="token punctuation">"</span></span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>RSS<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>/rss.xml<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">svelte:</span>head</span><span class="token punctuation">></span></span></code><!-- HTML_TAG_END --></pre>
+<h2 id="정적-사이트에-배포하기"><a href="#정적-사이트에-배포하기">정적 사이트에 배포하기</a></h2>
+<p><a href="https://www.rssboard.org/rss-mime-type-application.txt" rel="nofollow">표준에 의하면</a>, RSS 문서의
+MIME 타입은 <code>application/rss+xml</code>입니다. 아지만 무슨 이유에서인지 이 MIME 타입을 쓰면
+크롬에서 이 파일을 XML로 인식하지 못하는 문제가 있습니다. <code>application/xml</code> 또는
+<code>text/xml</code>을 사용하면 잘 작동합니다.
+<a href="https://www.rfc-editor.org/rfc/rfc7303#section-4.3" rel="nofollow">RFC7303 Section 4.3</a>에
+따르면 <code>text/xml</code>은 <code>application/xml</code>의 별칭입니다.</p>
+<p>이에 따라 위 코드에서도 응답 헤더에 <code>Content-Type: text/xml; charset=utf-8</code>을
+추가했습니다. 하지만 어차피 이 블로그는 <strong>정적 사이트 생성static site generation</strong>을
+사용하기 때문에 스벨트킷에서 응답 헤더를 지정해도 별 소용이 없습니다.</p>
+<p>정적 파일을 서빙할 때 몇몇 웹 서버는 파일 확장자에 기반해서 <code>Content-Type</code> 헤더를
+추가해주기도 합니다. 이런 특성을 확용하기 위해 엔드포인트 주소를 <code>/rss</code>가 아닌 <code>/rss.xml</code>로
+지정했습니다.</p>
+<p>다만, 이 블로그를 배포하고 있는 CloudFlare Pages에서는 확장자가 <code>xml</code>인 파일도 그냥
+<code>text/html</code>로 서빙하고 있었습니다. 다행히도
+<a href="https://developers.cloudflare.com/pages/platform/headers/" rel="nofollow">검색을 해보니</a>
+<code>_headers</code>라는 파일을 만들어주면 CloufFlare Pages에도 원하는 커스텀 헤더를 추가할 수
+있었습니다.</p>
+<pre class="language-yaml"><!-- HTML_TAG_START --><code class="language-yaml">/rss.xml
+  <span class="token key atrule">Content-Type</span><span class="token punctuation">:</span> text/xml; charset=utf<span class="token punctuation">-</span><span class="token number">8</span></code><!-- HTML_TAG_END --></pre>
+<h2 id="사이트맵-만들기"><a href="#사이트맵-만들기">사이트맵 만들기</a></h2>
+<p>기왕 RSS를 만들었으니 <a href="https://www.sitemaps.org/" rel="nofollow">사이트맵 프로토콜</a>을 따르는 사이트맵
+파일도 만들어주면 좋겠습니다. 사이트맵을 만들면 검색엔진최적화에 도움이 됩니다.</p>
+<p><code>src/sitemap.xml.ts</code>를 생성하고 아래 내용을 적습니다.</p>
+<pre class="language-typescript"><!-- HTML_TAG_START --><code class="language-typescript"><span class="token keyword">import</span> <span class="token keyword">type</span> <span class="token punctuation">&#123;</span> RequestHandler <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'@sveltejs/kit'</span>
+
+<span class="token keyword">import</span> conf <span class="token keyword">from</span> <span class="token string">'$lib/conf'</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> getArticleMetas <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'$lib/server/article'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> get<span class="token operator">:</span> <span class="token function-variable function">RequestHandler</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> posts <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">getArticleMetas</span><span class="token punctuation">(</span><span class="token string">'src/routes/posts'</span><span class="token punctuation">)</span>
+  <span class="token keyword">const</span> links <span class="token operator">=</span> posts<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>
+    p <span class="token operator">=></span> <span class="token template-string"><span class="token template-punctuation string">&#96;</span><span class="token string">
+    &lt;sitemap>
+      &lt;loc></span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>conf<span class="token punctuation">.</span>url<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">/posts/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>p<span class="token punctuation">.</span>id<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">&lt;/loc>
+      &lt;lastmod></span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>p<span class="token punctuation">.</span>modifiedAt<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">&lt;/lastmod>
+    &lt;/sitemap>
+  </span><span class="token template-punctuation string">&#96;</span></span><span class="token punctuation">,</span>
+  <span class="token punctuation">)</span>
+  <span class="token keyword">const</span> xml <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">&#96;</span><span class="token string">
+    &lt;?xml version="1.0" encoding="UTF-8"?>
+    &lt;sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>links<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">
+    &lt;/sitemapindex>
+  </span><span class="token template-punctuation string">&#96;</span></span><span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
+    body<span class="token operator">:</span> xml<span class="token punctuation">,</span>
+    headers<span class="token operator">:</span> <span class="token punctuation">&#123;</span> <span class="token string-property property">'Content-Type'</span><span class="token operator">:</span> <span class="token string">'text/xml; charset=utf-8'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<p>보통은 XML을 생성할 때 위와 같이 문자열을 직접 다루기보다는 XML 생성 라이브러리를 사용하는
+편이 좋지만 사이트맵 XML은 워낙 단순하니까 그냥 문자열을 직접 만들었습니다.</p>
+<p>RSS와 마찬가지로 이 파일도 <code>text/xml</code>로 서빙하기 위해 <code>/static/_headers</code>에 커스텀 헤더를
+추가합니다.</p>
+<pre class="language-yaml"><!-- HTML_TAG_START --><code class="language-yaml">/rss.xml
+  <span class="token key atrule">Content-Type</span><span class="token punctuation">:</span> text/xml; charset=utf<span class="token punctuation">-</span><span class="token number">8</span>
+/sitemap.xml
+  <span class="token key atrule">Content-Type</span><span class="token punctuation">:</span> text/xml; charset=utf<span class="token punctuation">-</span><span class="token number">8</span></code><!-- HTML_TAG_END --></pre>
+<p>마지막으로, 레이아웃에도 링크를 추가해줍니다.</p>
+<pre class="language-svelte"><!-- HTML_TAG_START --><code class="language-svelte"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">svelte:</span>head</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>alternate<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>application/rss+xml<span class="token punctuation">"</span></span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>RSS<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>/rss.xml<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>sitemap<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>application/xml<span class="token punctuation">"</span></span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Sitemap<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>/sitemap.xml<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">svelte:</span>head</span><span class="token punctuation">></span></span></code><!-- HTML_TAG_END --></pre>
+<h2 id="마치며"><a href="#마치며">마치며</a></h2>
+<p>이 글에서 설명한 코드는 이 블로그에도 적용되어 있습니다.
+<a href="https://github.com/gongbughim/blog" rel="nofollow">소스 코드</a>가 공개되어 있으니 참고해주세요.</p>
+<h2 id="관련-글"><a href="#관련-글">관련 글</a></h2>
+<ul><li><a href="/posts/sveltekit-blog" sveltekit:prefetch="sveltekit:prefetch">스벨트킷으로 블로그 만들기</a></li></ul>
+</article></main>
+
+<footer class="svelte-1y5881k">Copyright ©2022,
+  <a href="https://twitter.com/gongbughim" class="external">Twitter</a> |
+  <a href="https://github.com/gongbughim" class="external">Github</a>
+</footer>
+
+
+		<script type="module" data-hydrate="v614qy">
+		import { start } from "/_app/start-a8523dc4.js";
+		start({
+			target: document.querySelector('[data-hydrate="v614qy"]').parentNode,
+			paths: {"base":"","assets":""},
+			session: {},
+			route: true,
+			spa: false,
+			trailing_slash: "ignore",
+			hydrate: {
+				status: 200,
+				error: null,
+				nodes: [
+					import("/_app/pages/__layout.svelte-6c6ca375.js"),
+						import("/_app/pages/posts/sveltekit-rss.md-7c34af7e.js")
+				],
+				params: {},
+				routeId: "posts/sveltekit-rss"
+			}
+		});
+	</script>
+  </body>
+</html>

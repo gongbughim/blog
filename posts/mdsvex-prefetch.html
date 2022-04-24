@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="content-security-policy" content=""><title>스벨트킷 mdsvex 프리페치 설정하기 :: 공부왕 김공부</title><link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" data-svelte="svelte-1bmcg5l"><link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" data-svelte="svelte-1bmcg5l"><script data-svelte="svelte-1bmcg5l">;(function (w, d, s, l, i) {
+      w[l] = w[l] || []
+      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' })
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : ''
+      j.async = true
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl
+      f.parentNode.insertBefore(j, f)
+    })(window, document, 'script', 'dataLayer', 'GTM-PHD2KSF')
+  </script><meta name="description" content="스벨트킷과 mdsvex 조합에서 프리페치(sveltekit:prefetch) 설정하는 방법" data-svelte="svelte-1etj527">
+	<link rel="stylesheet" href="/_app/assets/pages/__layout.svelte-0e724954.css">
+	<link rel="stylesheet" href="/_app/assets/LayoutDefault-f057f759.css">
+	<link rel="modulepreload" href="/_app/start-a8523dc4.js">
+	<link rel="modulepreload" href="/_app/chunks/index-1c92eaba.js">
+	<link rel="modulepreload" href="/_app/chunks/preload-helper-e4860ae8.js">
+	<link rel="modulepreload" href="/_app/chunks/singletons-d1fb5791.js">
+	<link rel="modulepreload" href="/_app/pages/__layout.svelte-6c6ca375.js">
+	<link rel="modulepreload" href="/_app/chunks/conf-cbd2bb0f.js">
+	<link rel="modulepreload" href="/_app/pages/posts/mdsvex-prefetch.md-6007ff5f.js">
+	<link rel="modulepreload" href="/_app/chunks/LayoutDefault-fe085398.js">
+  </head>
+  <body>
+    
+
+
+
+
+<nav class="gnb svelte-1y5881k"><ul class="svelte-1y5881k"><li><a sveltekit:prefetch href="/">블로그 홈</a></li>
+    <li><a sveltekit:prefetch href="/posts/about">소개</a></li></ul></nav>
+
+<main>
+
+<article class="post"><h1>스벨트킷 mdsvex 프리페치 설정하기</h1>
+  <p class="info svelte-1fq8f0d"><time>2022-04-02</time></p>
+  <p>스벨트킷과 mdsvex 조합에서 프리페치(sveltekit:prefetch) 설정하는 방법을 설명합니다.</p>
+<h2 id="프리페치란"><a href="#프리페치란">프리페치란</a></h2>
+<p>프리페치prefetch는 사용자가 링크 위에 마우스를 올리거나 모바일 기기에서 링크를 터치하는 순간
+해당 페이지를 렌더링하기 위해 필요한 데이터를 미리 받아오는 걸 말합니다. 프리페치를 설정하면
+링크를 클릭하자마자 사용자가 체감하는 페이지 로딩 지연이 거의 사라집니다.</p>
+<p>스벨트킷에서는 내부링크에 대해 <code>sveltekit:prefetch</code> 속성을 넣어주면 클라이언트 측 프리페치가
+작동하게 됩니다.</p>
+<pre class="language-svelte"><!-- HTML_TAG_START --><code class="language-svelte"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>/some-link<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">svelte:</span>prefetch</span><span class="token punctuation">></span></span>Some link<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span></code><!-- HTML_TAG_END --></pre>
+<p>자세한 내용은 스벨트킷 공식 문서의
+<a href="https://kit.svelte.dev/docs/a-options#sveltekit-prefetch" rel="nofollow">해당 섹션</a>을 참고하세요.</p>
+<h2 id="mdsvex-패키지"><a href="#mdsvex-패키지">mdsvex 패키지</a></h2>
+<p>스벨트킷에서 MDX를 사용하려면 보통 <a href="https://mdsvex.pngwn.io/" rel="nofollow">mdsvex 패키지</a>를 씁니다.</p>
+<p>하지만 mdsvex 패키지로 렌더링된 페이지의 경우 링크에 <code>svelte:prefetch</code>가 설정되지 않는다는
+단점이 있습니다.</p>
+<pre class="language-markdown"><!-- HTML_TAG_START --><code class="language-markdown"><span class="token url">[<span class="token content">Some link</span>](<span class="token url">/some-link</span>)</span></code><!-- HTML_TAG_END --></pre>
+<p>다행히 mdsvex는 내부에서 <a href="https://github.com/rehypejs/rehype" rel="nofollow">rehype 패키지</a>를
+사용하기 때문에 rehype 플러그인을 작성하면 렌더링 결과를 원하는대로 바꿀 수 있습니다.</p>
+<h2 id="플러그인-만들기"><a href="#플러그인-만들기">플러그인 만들기</a></h2>
+<p>플러그인 제작을 위해 필요한 라이브러리를 추가합니다.</p>
+<pre class="language-bash"><!-- HTML_TAG_START --><code class="language-bash"><span class="token function">npm</span> i -D unist-util-visit</code><!-- HTML_TAG_END --></pre>
+<p>그 다음, mdsvex 설정의 rehypePlugins 변수에 플러그인을 추가했습니다.</p>
+<pre class="language-js"><!-- HTML_TAG_START --><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> visit <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'unist-util-visit'</span>
+
+<span class="token comment">// ...</span>
+<span class="token punctuation">;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// Attach "sveltekit:prefetch" to internal links</span>
+  <span class="token keyword">return</span> <span class="token parameter">tree</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> pInnerLink <span class="token operator">=</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">^(/|.)</span><span class="token regex-delimiter">/</span></span>
+    <span class="token function">visit</span><span class="token punctuation">(</span>tree<span class="token punctuation">,</span> <span class="token string">'element'</span><span class="token punctuation">,</span> <span class="token parameter">node</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>node<span class="token punctuation">.</span>tagName <span class="token operator">!==</span> <span class="token string">'a'</span><span class="token punctuation">)</span> <span class="token keyword">return</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>node<span class="token punctuation">.</span>properties<span class="token punctuation">.</span>href<span class="token punctuation">.</span><span class="token function">match</span><span class="token punctuation">(</span>pInnerLink<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span>
+      node<span class="token punctuation">.</span>properties<span class="token punctuation">[</span><span class="token string">'sveltekit:prefetch'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'sveltekit:prefetch'</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code><!-- HTML_TAG_END --></pre>
+<p>마크다운에서 렌더링된 HTML의 모든 엘리먼트 노드를 방문(<code>visit()</code>)하며 태그 이름이 <code>a</code>이면서
+<code>href</code>에 적힌 주소가 블로그 내부 링크인 경우 <code>sveltekit:prefetch</code> 속성을 추가하도록
+했습니다. 내부 링크인지 확인하는 패턴이 약간 어설프지만(주소가 <code>/</code>으로 시작하거나 <code>.</code>으로
+시작하는지만 검사), 당장 적용하기에는 큰 문제가 없어 보입니다.</p>
+<p>이제 마크다운 파일의 링크에도 프리페치가 적용되었습니다.</p>
+<h2 id="마치며"><a href="#마치며">마치며</a></h2>
+<p>이 글에서 설명한 코드는 이 블로그에도 적용되어 있습니다.
+<a href="https://github.com/gongbughim/blog" rel="nofollow">소스 코드</a>가 공개되어 있으니 참고해주세요.</p>
+<h2 id="관련-글"><a href="#관련-글">관련 글</a></h2>
+<ul><li><a href="/posts/sveltekit-blog" sveltekit:prefetch="sveltekit:prefetch">스벨트킷으로 블로그 만들기</a></li></ul>
+</article></main>
+
+<footer class="svelte-1y5881k">Copyright ©2022,
+  <a href="https://twitter.com/gongbughim" class="external">Twitter</a> |
+  <a href="https://github.com/gongbughim" class="external">Github</a>
+</footer>
+
+
+		<script type="module" data-hydrate="13ezkel">
+		import { start } from "/_app/start-a8523dc4.js";
+		start({
+			target: document.querySelector('[data-hydrate="13ezkel"]').parentNode,
+			paths: {"base":"","assets":""},
+			session: {},
+			route: true,
+			spa: false,
+			trailing_slash: "ignore",
+			hydrate: {
+				status: 200,
+				error: null,
+				nodes: [
+					import("/_app/pages/__layout.svelte-6c6ca375.js"),
+						import("/_app/pages/posts/mdsvex-prefetch.md-6007ff5f.js")
+				],
+				params: {},
+				routeId: "posts/mdsvex-prefetch"
+			}
+		});
+	</script>
+  </body>
+</html>
