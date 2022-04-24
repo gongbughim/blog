@@ -26,9 +26,9 @@ Programming](https://github.com/BartoszMilewski/Publications/tree/master/TheDaoO
 **함수function**라고 부르고, 범주론에서는 **사상morphism**이라고 부르며, 논리학에서는
 **수반entailment** 또는 **함축implication**이라고 부릅니다.
 
-$
+$$
 a \rightarrow b
-$
+$$
 
 위 수식은 다음과 같이 해석할 수 있습니다.
 
@@ -38,9 +38,9 @@ $
 
 두 타입 사이에 여러 함수가 존재할 수 있으므로, 필요하면 함수에도 이름을 붙일 수 있습니다.
 
-$
+$$
 a \overset{f}{\rightarrow} b
-$
+$$
 
 위 수식은 다음과 같이 해석할 수 있습니다.
 
@@ -93,9 +93,9 @@ terminal -> terminal;
 끝 대상(1)에서 어떤 대상 $a$로 향하는 사상 $x$가 있다면, $x$를 $a$의
 **전역 원소global element** 또는 그냥 원소라고 부릅니다.
 
-$
+$$
 1 \overset{x}{\rightarrow} a
-$
+$$
 
 타입 이론에서는 $x: A$라고 쓰며 $x$의 타입은 $A$라는 의미입니다. 해스켈에서는 아래와 같이
 콜론 두 개를 써서 표현합니다.
@@ -145,9 +145,9 @@ f :: a -> b
 프로그래밍 언어에서 쓰는 표기법들을 종종 3과 4의 차이를 잘 드러내지 못합니다. 범주론에서는
 4를 아래와 같이 표현합니다.
 
-$
+$$
 1 \overset{f}{\rightarrow} b^a
-$
+$$
 
 논리학에서는 $A \rightarrow B$가 함축을 의미합니다. 즉 "A이면 B이다"를 뜻합니다. 위 식에서
 $B^A$가 이 명제에 대응합니다. 이 명제는 참일 수도 있고, 거짓일 수도 있습니다. 이 명제가

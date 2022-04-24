@@ -189,11 +189,6 @@ article.post {
     hyphens: auto;
     word-break: break-all;
   }
-
-  p > span.math:only-child {
-    display: block;
-    text-align: center;
-  }
 }
 
 @media (prefers-reduced-motion) {
