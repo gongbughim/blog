@@ -27,7 +27,7 @@
     "@types/seedrandom": "^3.0.2",
     "@types/three": "^0.139.0",
     "@typescript-eslint/eslint-plugin": "^5.20.0",
-    "@typescript-eslint/parser": "^5.20.0",
+    "@typescript-eslint/parser": "^5.21.0",
     "autoprefixer": "^10.4.2",
     "blogwasm": "https://github.com/gongbughim/blogwasm/releases/download/v0.1.3/blogwasm.tar.gz",
     "dedent": "^0.7.0",
