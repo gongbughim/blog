@@ -16,13 +16,13 @@
   </script><meta name="description" content="함수형 프로그래밍의 도 2장을 읽고 요약했습니다" data-svelte="svelte-1etj527">
 	<link rel="stylesheet" href="/_app/assets/pages/__layout.svelte-a310949f.css">
 	<link rel="stylesheet" href="/_app/assets/LayoutDefault-f057f759.css">
-	<link rel="modulepreload" href="/_app/start-f70b2807.js">
+	<link rel="modulepreload" href="/_app/start-edb8fa14.js">
 	<link rel="modulepreload" href="/_app/chunks/index-1c92eaba.js">
 	<link rel="modulepreload" href="/_app/chunks/preload-helper-e4860ae8.js">
 	<link rel="modulepreload" href="/_app/chunks/singletons-d1fb5791.js">
 	<link rel="modulepreload" href="/_app/pages/__layout.svelte-6c6ca375.js">
 	<link rel="modulepreload" href="/_app/chunks/conf-cbd2bb0f.js">
-	<link rel="modulepreload" href="/_app/pages/posts/dao-fp-02.md-cee9d082.js">
+	<link rel="modulepreload" href="/_app/pages/posts/dao-fp-02.md-6e7344ac.js">
 	<link rel="modulepreload" href="/_app/chunks/LayoutDefault-03357c1b.js">
   </head>
   <body>
@@ -74,13 +74,13 @@ a -&gt; c [label=h, constraint=false]</code><!-- HTML_TAG_END --></pre>
 <span class="math math-inline"><!-- HTML_TAG_START --><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>∘</mo><mo>−</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(f \circ -)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∘</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">−</span><span class="mclose">)</span></span></span></span><!-- HTML_TAG_END --></span>를 만들내는데, 이 대응은 <span class="math math-inline"><!-- HTML_TAG_START --><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">a</span></span></span></span><!-- HTML_TAG_END --></span>를 향하는 사상들을 <span class="math math-inline"><!-- HTML_TAG_START --><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal">b</span></span></span></span><!-- HTML_TAG_END --></span>로 향하는 사상들로 변환하는
 역할을 합니다.</p>
 <pre class="language-render-category"><!-- HTML_TAG_START --><code class="language-render-category">rankdir=TD;
-a -&gt; b [label=&quot;f&quot;];
+a -&gt; b [label=&quot;f&quot;, color=&quot;#33FF33&quot;];
 &#123;x1 x2&#125; -&gt; a;
 &#123;y1 y2&#125; -&gt; b;
 
 &#123;rank = same; a; b;&#125;
 &#123;rank = same; x1; x2; y1; y2&#125;
-x2 -&gt; y1 [label=&quot;(f ∘ −)&quot;; style=&quot;dashed&quot;];</code><!-- HTML_TAG_END --></pre>
+x2 -&gt; y1 [label=&quot;(f ∘ −)&quot;; style=&quot;dashed&quot;, color=&quot;#33FF33&quot;];</code><!-- HTML_TAG_END --></pre>
 <p>즉, 무언가로부터 <span class="math math-inline"><!-- HTML_TAG_START --><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">a</span></span></span></span><!-- HTML_TAG_END --></span>를 만들어내는 사상들(<span class="math math-inline"><!-- HTML_TAG_START --><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>x</mi><mn>2</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">x_1, x_2, ...</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span></span></span></span><!-- HTML_TAG_END --></span>)을, 무언가로부터 <span class="math math-inline"><!-- HTML_TAG_START --><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal">b</span></span></span></span><!-- HTML_TAG_END --></span>를 만들어내는
 사상들(<span class="math math-inline"><!-- HTML_TAG_START --><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>y</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>y</mi><mn>2</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">y_1, y_2, ...</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span></span></span></span><!-- HTML_TAG_END --></span>)로 바꿔줍니다.</p>
 <p>해스캘 코드로 최대한 명시적으로 표현해보면 이렇습니다.</p>
@@ -103,11 +103,11 @@ x2 -&gt; y1 [label=&quot;(f ∘ −)&quot;; style=&quot;dashed&quot;];</code><!-
 <pre class="language-render-category"><!-- HTML_TAG_START --><code class="language-render-category">rankdir=TD;
 overlap = false;
 
-a -&gt; b [label=&quot;f&quot;];
+a -&gt; b [label=&quot;f&quot;, color=&quot;#33FF33&quot;];
 a -&gt; &#123;x1 x2&#125;;
 b -&gt; &#123;y1 y2&#125;;
 
-x2 -&gt; y1 [label=&quot;(- ∘ f)&quot;; style=&quot;dashed&quot;; dir=back];
+x2 -&gt; y1 [label=&quot;(- ∘ f)&quot;; style=&quot;dashed&quot;; dir=back, color=&quot;#33FF33&quot;];
 
 &#123;rank = same; a; b;&#125;
 &#123;rank = same; x1; x2; y1; y2&#125;</code><!-- HTML_TAG_END --></pre>
@@ -140,8 +140,8 @@ a -&gt; b [label=f];
 <div class="math math-display"><!-- HTML_TAG_START --><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>i</mi><msub><mi>d</mi><mi>b</mi></msub><mo>∘</mo><mi>f</mi><mo>=</mo><mi>f</mi><mo>=</mo><mi>f</mi><mo>∘</mo><mi>i</mi><msub><mi>d</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">id_b \circ f = f = f \circ id_a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord mathnormal">i</span><span class="mord"><span class="mord mathnormal">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∘</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∘</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord mathnormal">i</span><span class="mord"><span class="mord mathnormal">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">a</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><!-- HTML_TAG_END --></div>
 <p>그림으로는 이렇게 표현합니다.</p>
 <pre class="language-render-category"><!-- HTML_TAG_START --><code class="language-render-category">a -&gt; b [label=&quot;f&quot;];
-a -&gt; a [label=&quot;id_a&quot;];
-b -&gt; b [label=&quot;id_b&quot;];</code><!-- HTML_TAG_END --></pre>
+a -&gt; a [label=&quot;id_a&quot;, color=&quot;#33FF33&quot;];
+b -&gt; b [label=&quot;id_b&quot;, color=&quot;#33FF33&quot;];</code><!-- HTML_TAG_END --></pre>
 <p>해스켈에서는 <code>id</code> 함수가 항등을 나타냅니다.</p>
 <pre class="language-haskell"><!-- HTML_TAG_START --><code class="language-haskell"><span class="token builtin">id</span> <span class="token hvariable">x</span> <span class="token operator">=</span> <span class="token hvariable">x</span></code><!-- HTML_TAG_END --></pre>
 <p>논리학에서는 <strong>항등명제tautology</strong>라고 부릅니다. “a가 참이라면 a는 참이다”라는 의미입니다.</p>
@@ -155,10 +155,10 @@ b -&gt; b [label=&quot;id_b&quot;];</code><!-- HTML_TAG_END --></pre>
 </footer>
 
 
-		<script type="module" data-hydrate="kdzfj7">
-		import { start } from "/_app/start-f70b2807.js";
+		<script type="module" data-hydrate="6qji03">
+		import { start } from "/_app/start-edb8fa14.js";
 		start({
-			target: document.querySelector('[data-hydrate="kdzfj7"]').parentNode,
+			target: document.querySelector('[data-hydrate="6qji03"]').parentNode,
 			paths: {"base":"","assets":""},
 			session: {},
 			route: true,
@@ -169,7 +169,7 @@ b -&gt; b [label=&quot;id_b&quot;];</code><!-- HTML_TAG_END --></pre>
 				error: null,
 				nodes: [
 					import("/_app/pages/__layout.svelte-6c6ca375.js"),
-						import("/_app/pages/posts/dao-fp-02.md-cee9d082.js")
+						import("/_app/pages/posts/dao-fp-02.md-6e7344ac.js")
 				],
 				params: {},
 				routeId: "posts/dao-fp-02"
