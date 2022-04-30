@@ -74,13 +74,13 @@ $(f \circ -)$를 만들내는데, 이 대응은 $a$를 향하는 사상들을 $b
 
 ```render-category
 rankdir=TD;
-a -> b [label="f"];
+a -> b [label="f", color="#33FF33"];
 {x1 x2} -> a;
 {y1 y2} -> b;
 
 {rank = same; a; b;}
 {rank = same; x1; x2; y1; y2}
-x2 -> y1 [label="(f ∘ −)"; style="dashed"];
+x2 -> y1 [label="(f ∘ −)"; style="dashed", color="#33FF33"];
 ```
 
 즉, 무언가로부터 $a$를 만들어내는 사상들($x_1, x_2, ...$)을, 무언가로부터 $b$를 만들어내는
@@ -113,11 +113,11 @@ g = f . h
 rankdir=TD;
 overlap = false;
 
-a -> b [label="f"];
+a -> b [label="f", color="#33FF33"];
 a -> {x1 x2};
 b -> {y1 y2};
 
-x2 -> y1 [label="(- ∘ f)"; style="dashed"; dir=back];
+x2 -> y1 [label="(- ∘ f)"; style="dashed"; dir=back, color="#33FF33"];
 
 {rank = same; a; b;}
 {rank = same; x1; x2; y1; y2}
@@ -180,8 +180,8 @@ $$
 
 ```render-category
 a -> b [label="f"];
-a -> a [label="id_a"];
-b -> b [label="id_b"];
+a -> a [label="id_a", color="#33FF33"];
+b -> b [label="id_b", color="#33FF33"];
 ```
 
 해스켈에서는 `id` 함수가 항등을 나타냅니다.
