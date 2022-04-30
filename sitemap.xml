@@ -2,63 +2,73 @@
     <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     
     <sitemap>
+      <loc>https://gbg.pages.dev/posts/dao-fp-02</loc>
+      <lastmod>2022-04-30T08:25:02.391Z</lastmod>
+    </sitemap>
+  
+    <sitemap>
       <loc>https://gbg.pages.dev/posts/graphviz</loc>
-      <lastmod>2022-04-24T02:32:13.908Z</lastmod>
+      <lastmod>2022-04-30T08:25:02.391Z</lastmod>
     </sitemap>
   
     <sitemap>
       <loc>https://gbg.pages.dev/posts/dao-fp-01</loc>
-      <lastmod>2022-04-24T02:32:13.908Z</lastmod>
+      <lastmod>2022-04-30T08:25:02.391Z</lastmod>
+    </sitemap>
+  
+    <sitemap>
+      <loc>https://gbg.pages.dev/posts/dao-fp</loc>
+      <lastmod>2022-04-30T08:25:02.391Z</lastmod>
     </sitemap>
   
     <sitemap>
       <loc>https://gbg.pages.dev/posts/dark-mode</loc>
-      <lastmod>2022-04-24T02:32:13.908Z</lastmod>
+      <lastmod>2022-04-30T08:25:02.391Z</lastmod>
     </sitemap>
   
     <sitemap>
       <loc>https://gbg.pages.dev/posts/svelte-cubed</loc>
-      <lastmod>2022-04-24T02:32:13.908Z</lastmod>
+      <lastmod>2022-04-30T08:25:02.391Z</lastmod>
     </sitemap>
   
     <sitemap>
       <loc>https://gbg.pages.dev/posts/dynamic-color-palette</loc>
-      <lastmod>2022-04-24T02:32:13.908Z</lastmod>
+      <lastmod>2022-04-30T08:25:02.391Z</lastmod>
     </sitemap>
   
     <sitemap>
       <loc>https://gbg.pages.dev/posts/chrome-extension</loc>
-      <lastmod>2022-04-24T02:32:13.908Z</lastmod>
+      <lastmod>2022-04-30T08:25:02.391Z</lastmod>
     </sitemap>
   
     <sitemap>
       <loc>https://gbg.pages.dev/posts/sveltekit-wasm</loc>
-      <lastmod>2022-04-24T02:32:13.908Z</lastmod>
+      <lastmod>2022-04-30T08:25:02.391Z</lastmod>
     </sitemap>
   
     <sitemap>
       <loc>https://gbg.pages.dev/posts/mdsvex-unit-testing</loc>
-      <lastmod>2022-04-24T02:32:13.908Z</lastmod>
+      <lastmod>2022-04-30T08:25:02.391Z</lastmod>
     </sitemap>
   
     <sitemap>
       <loc>https://gbg.pages.dev/posts/sveltekit-rss</loc>
-      <lastmod>2022-04-24T02:32:13.908Z</lastmod>
+      <lastmod>2022-04-30T08:25:02.391Z</lastmod>
     </sitemap>
   
     <sitemap>
       <loc>https://gbg.pages.dev/posts/mdsvex-prefetch</loc>
-      <lastmod>2022-04-24T02:32:13.908Z</lastmod>
+      <lastmod>2022-04-30T08:25:02.391Z</lastmod>
     </sitemap>
   
     <sitemap>
       <loc>https://gbg.pages.dev/posts/sveltekit-blog</loc>
-      <lastmod>2022-04-24T02:32:13.908Z</lastmod>
+      <lastmod>2022-04-30T08:25:02.391Z</lastmod>
     </sitemap>
   
     <sitemap>
       <loc>https://gbg.pages.dev/posts/about</loc>
-      <lastmod>2022-04-24T02:32:13.908Z</lastmod>
+      <lastmod>2022-04-30T08:25:02.391Z</lastmod>
     </sitemap>
   
     </sitemapindex>

@@ -4,11 +4,18 @@
         <title>공부왕 김공부</title>
         <link>undefined</link>
         <description>공부하고 정리하는 블로그입니다. 주로 프로그래밍 이야기를 합니다.</description>
-        <lastBuildDate>Sun, 24 Apr 2022 02:32:43 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 30 Apr 2022 08:25:35 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>ko</language>
         <copyright>Copyright ©2022</copyright>
+        <item>
+            <title><![CDATA[함수형 프로그래밍의 도 2장 - 합성]]></title>
+            <link>https://gbg.pages.dev/posts/dao-fp-02</link>
+            <guid>dao-fp-02</guid>
+            <pubDate>Sun, 24 Apr 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[함수형 프로그래밍의 도 2장을 읽고 요약했습니다]]></description>
+        </item>
         <item>
             <title><![CDATA[GraphViz로 그래프 그리기]]></title>
             <link>https://gbg.pages.dev/posts/graphviz</link>
@@ -22,6 +29,13 @@
             <guid>dao-fp-01</guid>
             <pubDate>Sat, 23 Apr 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[함수형 프로그래밍의 도 1장을 읽고 요약했습니다]]></description>
+        </item>
+        <item>
+            <title><![CDATA[함수형 프로그래밍의 도]]></title>
+            <link>https://gbg.pages.dev/posts/dao-fp</link>
+            <guid>dao-fp</guid>
+            <pubDate>Thu, 21 Apr 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[함수형 프로그래밍의 도]]></description>
         </item>
         <item>
             <title><![CDATA[다크모드 지원하기]]></title>

@@ -1,6 +1,6 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "start-7d728a26.js",
+    "file": "start-f70b2807.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -16,6 +16,8 @@
       "src/routes/posts/about.md",
       "src/routes/posts/chrome-extension.md",
       "src/routes/posts/dao-fp-01.md",
+      "src/routes/posts/dao-fp-02.md",
+      "src/routes/posts/dao-fp.md",
       "src/routes/posts/dark-mode.md",
       "src/routes/posts/dynamic-color-palette.md",
       "src/routes/posts/graphviz.md",
@@ -38,7 +40,7 @@
       "_conf-cbd2bb0f.js"
     ],
     "css": [
-      "assets/pages/__layout.svelte-7c964a2d.css"
+      "assets/pages/__layout.svelte-a310949f.css"
     ]
   },
   ".svelte-kit/runtime/components/error.svelte": {
@@ -76,62 +78,86 @@
     ]
   },
   "src/routes/posts/about.md": {
-    "file": "pages/posts/about.md-a3e3933d.js",
+    "file": "pages/posts/about.md-774c2efb.js",
     "src": "src/routes/posts/about.md",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-1c92eaba.js",
-      "_LayoutDefault-fe085398.js",
+      "_LayoutDefault-03357c1b.js",
       "_conf-cbd2bb0f.js",
       "_Asciinema-3c2a3e19.js",
       "_preload-helper-e4860ae8.js"
     ]
   },
   "src/routes/posts/chrome-extension.md": {
-    "file": "pages/posts/chrome-extension.md-d4f44593.js",
+    "file": "pages/posts/chrome-extension.md-95a80292.js",
     "src": "src/routes/posts/chrome-extension.md",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-1c92eaba.js",
-      "_LayoutDefault-fe085398.js",
+      "_LayoutDefault-03357c1b.js",
       "_conf-cbd2bb0f.js",
       "_preload-helper-e4860ae8.js"
     ]
   },
   "src/routes/posts/dao-fp-01.md": {
-    "file": "pages/posts/dao-fp-01.md-37c0cfe7.js",
+    "file": "pages/posts/dao-fp-01.md-5842a03d.js",
     "src": "src/routes/posts/dao-fp-01.md",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-1c92eaba.js",
-      "_LayoutDefault-fe085398.js",
+      "_LayoutDefault-03357c1b.js",
+      "_conf-cbd2bb0f.js",
+      "_preload-helper-e4860ae8.js"
+    ]
+  },
+  "src/routes/posts/dao-fp-02.md": {
+    "file": "pages/posts/dao-fp-02.md-cee9d082.js",
+    "src": "src/routes/posts/dao-fp-02.md",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-1c92eaba.js",
+      "_LayoutDefault-03357c1b.js",
+      "_conf-cbd2bb0f.js",
+      "_preload-helper-e4860ae8.js"
+    ]
+  },
+  "src/routes/posts/dao-fp.md": {
+    "file": "pages/posts/dao-fp.md-cf335593.js",
+    "src": "src/routes/posts/dao-fp.md",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-1c92eaba.js",
+      "_LayoutDefault-03357c1b.js",
       "_conf-cbd2bb0f.js",
       "_preload-helper-e4860ae8.js"
     ]
   },
   "src/routes/posts/dark-mode.md": {
-    "file": "pages/posts/dark-mode.md-eec43f99.js",
+    "file": "pages/posts/dark-mode.md-8d831514.js",
     "src": "src/routes/posts/dark-mode.md",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-1c92eaba.js",
-      "_LayoutDefault-fe085398.js",
+      "_LayoutDefault-03357c1b.js",
       "_conf-cbd2bb0f.js",
       "_preload-helper-e4860ae8.js"
     ]
   },
   "src/routes/posts/dynamic-color-palette.md": {
-    "file": "pages/posts/dynamic-color-palette.md-ef0662d3.js",
+    "file": "pages/posts/dynamic-color-palette.md-b77d96e5.js",
     "src": "src/routes/posts/dynamic-color-palette.md",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-1c92eaba.js",
-      "_LayoutDefault-fe085398.js",
+      "_LayoutDefault-03357c1b.js",
       "_conf-cbd2bb0f.js",
       "_preload-helper-e4860ae8.js"
     ],
@@ -140,49 +166,49 @@
     ]
   },
   "src/routes/posts/graphviz.md": {
-    "file": "pages/posts/graphviz.md-758c113b.js",
+    "file": "pages/posts/graphviz.md-8dda870a.js",
     "src": "src/routes/posts/graphviz.md",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-1c92eaba.js",
-      "_LayoutDefault-fe085398.js",
+      "_LayoutDefault-03357c1b.js",
       "_conf-cbd2bb0f.js",
       "_preload-helper-e4860ae8.js"
     ]
   },
   "src/routes/posts/mdsvex-prefetch.md": {
-    "file": "pages/posts/mdsvex-prefetch.md-6007ff5f.js",
+    "file": "pages/posts/mdsvex-prefetch.md-4078885f.js",
     "src": "src/routes/posts/mdsvex-prefetch.md",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-1c92eaba.js",
-      "_LayoutDefault-fe085398.js",
+      "_LayoutDefault-03357c1b.js",
       "_conf-cbd2bb0f.js",
       "_preload-helper-e4860ae8.js"
     ]
   },
   "src/routes/posts/mdsvex-unit-testing.md": {
-    "file": "pages/posts/mdsvex-unit-testing.md-ffbcad28.js",
+    "file": "pages/posts/mdsvex-unit-testing.md-aa391dd5.js",
     "src": "src/routes/posts/mdsvex-unit-testing.md",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-1c92eaba.js",
-      "_LayoutDefault-fe085398.js",
+      "_LayoutDefault-03357c1b.js",
       "_conf-cbd2bb0f.js",
       "_preload-helper-e4860ae8.js"
     ]
   },
   "src/routes/posts/svelte-cubed.md": {
-    "file": "pages/posts/svelte-cubed.md-4eb4df3f.js",
+    "file": "pages/posts/svelte-cubed.md-0f23d073.js",
     "src": "src/routes/posts/svelte-cubed.md",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-1c92eaba.js",
-      "_LayoutDefault-fe085398.js",
+      "_LayoutDefault-03357c1b.js",
       "_conf-cbd2bb0f.js",
       "_preload-helper-e4860ae8.js"
     ],
@@ -191,38 +217,38 @@
     ]
   },
   "src/routes/posts/sveltekit-blog.md": {
-    "file": "pages/posts/sveltekit-blog.md-769c6214.js",
+    "file": "pages/posts/sveltekit-blog.md-80cf4d7e.js",
     "src": "src/routes/posts/sveltekit-blog.md",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-1c92eaba.js",
-      "_LayoutDefault-fe085398.js",
+      "_LayoutDefault-03357c1b.js",
       "_Asciinema-3c2a3e19.js",
       "_conf-cbd2bb0f.js",
       "_preload-helper-e4860ae8.js"
     ]
   },
   "src/routes/posts/sveltekit-rss.md": {
-    "file": "pages/posts/sveltekit-rss.md-7c34af7e.js",
+    "file": "pages/posts/sveltekit-rss.md-12539f8d.js",
     "src": "src/routes/posts/sveltekit-rss.md",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-1c92eaba.js",
-      "_LayoutDefault-fe085398.js",
+      "_LayoutDefault-03357c1b.js",
       "_conf-cbd2bb0f.js",
       "_preload-helper-e4860ae8.js"
     ]
   },
   "src/routes/posts/sveltekit-wasm.md": {
-    "file": "pages/posts/sveltekit-wasm.md-c9397f08.js",
+    "file": "pages/posts/sveltekit-wasm.md-52d78f74.js",
     "src": "src/routes/posts/sveltekit-wasm.md",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-1c92eaba.js",
-      "_LayoutDefault-fe085398.js",
+      "_LayoutDefault-03357c1b.js",
       "_conf-cbd2bb0f.js",
       "_preload-helper-e4860ae8.js"
     ]
@@ -239,8 +265,8 @@
   "_conf-cbd2bb0f.js": {
     "file": "chunks/conf-cbd2bb0f.js"
   },
-  "_LayoutDefault-fe085398.js": {
-    "file": "chunks/LayoutDefault-fe085398.js",
+  "_LayoutDefault-03357c1b.js": {
+    "file": "chunks/LayoutDefault-03357c1b.js",
     "imports": [
       "_index-1c92eaba.js",
       "_conf-cbd2bb0f.js",
