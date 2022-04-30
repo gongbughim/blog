@@ -120,7 +120,12 @@ article.post {
   }
 
   hr {
-    margin: 2em 0;
+    overflow: visible;
+    height: 1px;
+    border: none;
+    border-top: 1px dashed var(--c-fg);
+    margin: 4em 2em;
+    text-align: center;
   }
 
   blockquote {

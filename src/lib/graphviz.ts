@@ -7,8 +7,8 @@ const GLOBAL_OVERRIDES: Record<string, string> = {
   category: `
     bgcolor="transparent";
     rankdir=LR;
-    node [color="#888888", fontcolor="#888888", shape=none, width=0, height=0, margin=0.05, fontsize=14];
-    edge [color="#888888", fontcolor="#888888", arrowsize=0.5, fontsize=11];
+    node [color="#888888", fontcolor="#888888", shape=none, width=0, height=0, margin=0.05, fontsize=14; fontname="KaTeX_Math"];
+    edge [color="#888888", fontcolor="#888888", arrowsize=0.5, fontsize=14; fontname="KaTeX_Math"];
   `,
 }
 
