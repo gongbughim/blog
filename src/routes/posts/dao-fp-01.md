@@ -8,6 +8,8 @@ Bartosz Milewski의 [함수형 프로그래밍의 도 The Dao of Functional
 Programming](https://github.com/BartoszMilewski/Publications/tree/master/TheDaoOfFP)
 1장 "빈 서판Clean Slate"을 읽고 요약했습니다.
 
+전체 목차를 보려면 [함수형 프로그래밍의 도](/posts/dao-fp)를 읽어주세요.
+
 ## 도입
 
 프로그래밍은 타입과 함수에서 시작합니다. 타입이나 함수에 대한 기존 지식은 모두 잊으세요. 오히려
@@ -153,3 +155,7 @@ $$
 $B^A$가 이 명제에 대응합니다. 이 명제는 참일 수도 있고, 거짓일 수도 있습니다. 이 명제가
 참이라는 근거들이 $B^A$의 원소들입니다. $B^A$의 원소를 찾았다면 이 명제가 참이라는 점이 증명된
 것입니다.
+
+---
+
+전체 목차를 보려면 [함수형 프로그래밍의 도](/posts/dao-fp)를 읽어주세요.
