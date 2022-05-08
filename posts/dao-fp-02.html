@@ -16,13 +16,13 @@
   </script><meta name="description" content="함수형 프로그래밍의 도 2장을 읽고 요약했습니다" data-svelte="svelte-1etj527">
 	<link rel="stylesheet" href="/_app/assets/pages/__layout.svelte-a310949f.css">
 	<link rel="stylesheet" href="/_app/assets/LayoutDefault-f057f759.css">
-	<link rel="modulepreload" href="/_app/start-edb8fa14.js">
+	<link rel="modulepreload" href="/_app/start-a48dce48.js">
 	<link rel="modulepreload" href="/_app/chunks/index-1c92eaba.js">
 	<link rel="modulepreload" href="/_app/chunks/preload-helper-e4860ae8.js">
 	<link rel="modulepreload" href="/_app/chunks/singletons-d1fb5791.js">
 	<link rel="modulepreload" href="/_app/pages/__layout.svelte-6c6ca375.js">
 	<link rel="modulepreload" href="/_app/chunks/conf-cbd2bb0f.js">
-	<link rel="modulepreload" href="/_app/pages/posts/dao-fp-02.md-6e7344ac.js">
+	<link rel="modulepreload" href="/_app/pages/posts/dao-fp-02.md-87a1d024.js">
 	<link rel="modulepreload" href="/_app/chunks/LayoutDefault-03357c1b.js">
   </head>
   <body>
@@ -131,9 +131,9 @@ a -&gt; b [label=f];
 <p>일반적인 프로그래밍 언어, 예를 들어 자바스크립트에서는 이렇게 표현합니다.</p>
 <pre class="language-javascript"><!-- HTML_TAG_START --><code class="language-javascript"><span class="token keyword">const</span> y <span class="token operator">=</span> <span class="token function">f</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span></code><!-- HTML_TAG_END --></pre>
 <h2 id="23-항등identity"><a href="#23-항등identity">2.3. 항등Identity</a></h2>
-<p>사상은 변화를 나타낸다고 볼 수도 있습니다. 대상 <span class="math math-inline"><!-- HTML_TAG_START --><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">a</span></span></span></span><!-- HTML_TAG_END --></span>가 대상 <span class="math math-inline"><!-- HTML_TAG_START --><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal">b</span></span></span></span><!-- HTML_TAG_END --></span>로 바뀌니까요. <span class="math math-inline"><!-- HTML_TAG_START --><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">a</span></span></span></span><!-- HTML_TAG_END --></span>에서 <span class="math math-inline"><!-- HTML_TAG_START --><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">a</span></span></span></span><!-- HTML_TAG_END --></span>로
-향하는 사상은 대상 그 자체의 변화를 나타냅니다. 하지만 변화에도 쌍대dual가 존재합니다. 변화가
-없는 것, 즉 <strong>항등identity</strong>입니다.</p>
+<p>사상은 변화를 나타낸다고 볼 수도 있습니다. 대상 <span class="math math-inline"><!-- HTML_TAG_START --><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">a</span></span></span></span><!-- HTML_TAG_END --></span>가 대상 <span class="math math-inline"><!-- HTML_TAG_START --><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal">b</span></span></span></span><!-- HTML_TAG_END --></span>로 바뀌니까요. 심지어는 <span class="math math-inline"><!-- HTML_TAG_START --><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">a</span></span></span></span><!-- HTML_TAG_END --></span>에서
+<span class="math math-inline"><!-- HTML_TAG_START --><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">a</span></span></span></span><!-- HTML_TAG_END --></span>로 향하는 사상도 일반적으로는 대상 그 자체의 변화를 나타냅니다. 하지만 변화에도 쌍대dual가
+존재합니다. 변화가 없는 것, 즉 <strong>항등identity</strong>입니다.</p>
 <p><strong>범주category</strong>의 모든 대상은 특별한 사상으로 항등을 가집니다. 대상 <span class="math math-inline"><!-- HTML_TAG_START --><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">a</span></span></span></span><!-- HTML_TAG_END --></span>에 대한 항등 사상을
 <span class="math math-inline"><!-- HTML_TAG_START --><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><msub><mi>d</mi><mi>a</mi></msub></mrow><annotation encoding="application/x-tex">id_a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord mathnormal">i</span><span class="mord"><span class="mord mathnormal">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">a</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!-- HTML_TAG_END --></span>로 표시합니다.</p>
 <p>사상 <span class="math math-inline"><!-- HTML_TAG_START --><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo>:</mo><mi>a</mi><mo>→</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">f: a \rightarrow b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal">b</span></span></span></span><!-- HTML_TAG_END --></span>가 있을 때 다음이 성립합니다.</p>
@@ -155,10 +155,10 @@ b -&gt; b [label=&quot;id_b&quot;, color=&quot;#33FF33&quot;];</code><!-- HTML_T
 </footer>
 
 
-		<script type="module" data-hydrate="6qji03">
-		import { start } from "/_app/start-edb8fa14.js";
+		<script type="module" data-hydrate="5ig3wa">
+		import { start } from "/_app/start-a48dce48.js";
 		start({
-			target: document.querySelector('[data-hydrate="6qji03"]').parentNode,
+			target: document.querySelector('[data-hydrate="5ig3wa"]').parentNode,
 			paths: {"base":"","assets":""},
 			session: {},
 			route: true,
@@ -169,7 +169,7 @@ b -&gt; b [label=&quot;id_b&quot;, color=&quot;#33FF33&quot;];</code><!-- HTML_T
 				error: null,
 				nodes: [
 					import("/_app/pages/__layout.svelte-6c6ca375.js"),
-						import("/_app/pages/posts/dao-fp-02.md-6e7344ac.js")
+						import("/_app/pages/posts/dao-fp-02.md-87a1d024.js")
 				],
 				params: {},
 				routeId: "posts/dao-fp-02"
