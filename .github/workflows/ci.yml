@@ -15,6 +15,9 @@ jobs:
           node-version: 16.x
       - run: npm ci && npm run build
       - run: npm run check
+        env:
+          # https://github.com/parcel-bundler/parcel/issues/8005
+          NODE_OPTIONS: --no-experimental-fetch
   lint:
     runs-on: ubuntu-latest
     steps:
