@@ -61,7 +61,7 @@
     "stylelint-config-standard": "^25.0.0",
     "stylelint-order": "^5.0.0",
     "svelte": "^3.48.0",
-    "svelte-check": "^2.7.0",
+    "svelte-check": "^2.7.1",
     "svelte-cubed": "^0.2.1",
     "svelte-preprocess": "^4.10.6",
     "three": "^0.140.2",
