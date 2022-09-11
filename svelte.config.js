@@ -11,8 +11,6 @@ const __dirname = path.dirname(__filename)
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-  // Consult https://github.com/sveltejs/svelte-preprocess
-  // for more information about preprocessors
   extensions: ['.svelte', '.md'],
   preprocess: [
     preprocess({
@@ -25,20 +23,6 @@ const config = {
 
   kit: {
     adapter: adapter(),
-    prerender: {
-      default: true,
-    },
-    vite: {
-      resolve: {
-        alias: {
-          $components: path.resolve('./src/components'),
-        },
-      },
-      test: {
-        globals: true,
-        environment: 'jsdom',
-      },
-    },
     trailingSlash: 'ignore',
   },
 }

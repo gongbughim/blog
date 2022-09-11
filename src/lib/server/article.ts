@@ -1,3 +1,4 @@
+import fss from 'fs'
 import fs from 'fs/promises'
 import yaml from 'js-yaml'
 
@@ -24,8 +25,7 @@ export type ArticleMeta = {
  */
 export async function getArticleMetas(dir: string): Promise<ArticleMeta[]> {
   const promises = (await fs.readdir(dir))
-    .filter(f => f.endsWith('.md'))
-    .map(f => f.replace(/\.md$/, ''))
+    .filter(f => fss.existsSync(`${dir}/${f}/+page.md`))
     .map(id => getArticleMeta(dir, id))
   return (await Promise.all(promises)).sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1))
 }
@@ -37,7 +37,7 @@ export async function getArticleMetas(dir: string): Promise<ArticleMeta[]> {
  * @returns Metadata of article
  */
 export async function getArticleMeta(dir: string, id: string): Promise<ArticleMeta> {
-  const filepath = `${dir}/${id}.md`
+  const filepath = `${dir}/${id}/+page.md`
   const f = await fs.readFile(filepath)
   const mtime = (await fs.stat(filepath)).mtime
 

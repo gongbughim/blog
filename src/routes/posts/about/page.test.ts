@@ -4,7 +4,7 @@ import { beforeEach, expect, test } from 'vitest'
 import { getQueryAPI } from '$lib/utils'
 
 // @ts-ignore: *.md is not supported by typescript
-import About from './about.md'
+import About from './+page.md'
 
 beforeEach(cleanup)
 

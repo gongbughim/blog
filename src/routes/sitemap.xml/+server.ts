@@ -1,9 +1,11 @@
-import type { RequestHandler } from '@sveltejs/kit'
-
 import conf from '$lib/conf'
 import { getArticleMetas } from '$lib/server/article'
 
-export const get: RequestHandler = async () => {
+import type { RequestHandler } from './$types'
+
+export const prerender = true
+
+export const GET: RequestHandler = async () => {
   const posts = await getArticleMetas('src/routes/posts')
   const links = posts.map(
     p => `
@@ -19,8 +21,5 @@ export const get: RequestHandler = async () => {
     ${links.join('')}
     </sitemapindex>
   `.trim()
-  return {
-    body: xml,
-    headers: { 'Content-Type': 'text/xml; charset=utf-8' },
-  }
+  return new Response(xml, { headers: { 'Content-Type': 'text/xml; charset=utf-8' } })
 }

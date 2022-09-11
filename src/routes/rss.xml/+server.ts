@@ -1,10 +1,13 @@
-import type { RequestHandler } from '@sveltejs/kit'
 import { Feed } from 'feed'
 
 import conf from '$lib/conf'
 import { getArticleMetas } from '$lib/server/article'
 
-export const get: RequestHandler = async () => {
+import type { RequestHandler } from './$types'
+
+export const prerender = true
+
+export const GET: RequestHandler = async () => {
   const posts = await getArticleMetas('src/routes/posts')
   const feed = new Feed({
     title: conf.title,
@@ -28,8 +31,5 @@ export const get: RequestHandler = async () => {
     })
   })
 
-  return {
-    body: feed.rss2(),
-    headers: { 'Content-Type': 'text/xml; charset=utf-8' },
-  }
+  return new Response(feed.rss2(), { headers: { 'Content-Type': 'text/xml; charset=utf-8' } })
 }
