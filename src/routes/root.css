@@ -1,5 +1,3 @@
-@import 'prism-themes/themes/prism-vsc-dark-plus.css';
-
 @font-face {
   font-display: swap;
   font-family: 'Noto Sans KR';
@@ -91,40 +89,40 @@ a:focus {
 }
 
 article.post {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  & h1,
+  & h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
     margin: 2em 0 1em;
     line-height: 1.4;
   }
 
-  h1 {
+  & h1 {
     margin: 0;
     font-size: 3em;
   }
 
-  h2 {
+  & h2 {
     font-size: 1.8em;
   }
 
-  p,
-  ul,
-  ol,
-  blockquote,
-  pre {
+  & p,
+  & ul,
+  & ol,
+  & blockquote,
+  & pre {
     margin: 1.5em 0;
   }
 
-  ol,
-  ul,
-  blockquote {
+  & ol,
+  & ul,
+  & blockquote {
     padding-left: 0;
   }
 
-  hr {
+  & hr {
     overflow: visible;
     height: 1px;
     border: none;
@@ -133,64 +131,64 @@ article.post {
     text-align: center;
   }
 
-  blockquote {
+  & blockquote {
     padding: 1.2rem 1.1rem;
     margin: 1.5rem 0;
     background-color: #00000012;
     border-radius: 0.25rem;
   }
 
-  pre[class*='language-'] {
+  & pre[class*='language-'] {
     padding: 1.2rem 1.1rem;
     margin: 1.5rem 0;
     border-radius: 0.25rem;
     font-size: 0.8em;
 
     /* 기본값은 배경과의 차이가 지나치게 적음 */
-    .token.comment {
+    & .token.comment {
       color: #7b7;
     }
   }
 
-  pre[class*='language-render-'] {
+  & pre[class*='language-render-'] {
     display: none;
   }
 
-  .rendered-image {
+  & .rendered-image {
     overflow: auto;
     padding: 1.2rem 1.1rem;
     background-color: #1e1e1e;
     text-align: center;
   }
 
-  blockquote > :first-child {
+  & blockquote > :first-child {
     margin-top: 0;
   }
 
-  blockquote > :last-child {
+  & blockquote > :last-child {
     margin-bottom: 0;
   }
 
-  ul,
-  ol {
+  & ul,
+  & ol {
     padding-left: 1em;
   }
 
-  li {
+  & li {
     margin: 0.5em 0;
   }
 
-  strong {
+  & strong {
     border-bottom: 1px solid var(--c-accent-bg1);
     box-shadow: inset 0 -0.6em 0 var(--c-accent-bg0);
     font-family: 'Noto Serif', serif;
   }
 
-  img {
+  & img {
     max-width: 100%;
   }
 
-  code:not([class*='language-']) {
+  & code:not([class*='language-']) {
     padding: 0.1em 0.25em;
     background-color: #8884;
     border-radius: 0.2em;

@@ -42,6 +42,7 @@
     "mdsvex": "^0.10.5",
     "postcss": "^8.4.13",
     "postcss-html": "^1.4.1",
+    "postcss-import": "^15.0.0",
     "postcss-load-config": "^4.0.1",
     "postcss-preset-env": "^7.8.1",
     "prettier": "^2.7.1",

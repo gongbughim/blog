@@ -1,5 +1,6 @@
 import adapter from '@sveltejs/adapter-static'
 import { mdsvex } from 'mdsvex'
+import postcssImport from 'postcss-import'
 import postcssPresetEnv from 'postcss-preset-env'
 import preprocess from 'svelte-preprocess'
 
@@ -19,6 +20,7 @@ const config = {
               'media-query-ranges': true,
             },
           }),
+          postcssImport(),
         ],
       },
     }),

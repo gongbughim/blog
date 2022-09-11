@@ -1,6 +1,4 @@
 <script lang="ts">
-  import '$lib/css/root.css'
-
   import { afterNavigate } from '$app/navigation'
   import conf from '$lib/conf'
 
@@ -52,7 +50,10 @@
   <a href="https://github.com/{conf.authorGithub}" class="external">Github</a>
 </footer>
 
-<style lang="postcss">
+<style lang="postcss" global>
+  @import './root.css';
+  @import 'prism-themes/themes/prism-vsc-dark-plus.css';
+
   .gnb {
     & ul {
       display: flex;
