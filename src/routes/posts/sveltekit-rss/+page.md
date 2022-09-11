@@ -1,7 +1,20 @@
 ---
 title: 스벨트킷 블로그에 RSS와 사이트맵 추가하기
 publishedAt: '2022-04-02'
+modifiedAt: '2022-09-11'
 summary: 스벨트킷 블로그에 RSS 및 사이트맵을 추가하는 방법
+---
+
+아래 내용은
+[1.0.0-next.406](https://github.com/sveltejs/kit/releases/tag/%40sveltejs%2Fkit%401.0.0-next.406)
+이후 버전을 반영하여 수정되었습니다.
+
+`1.0.0-next-405` 또는 그 이전 버전에서 만든 프로젝트를 마이그레이션하려면 아래 링크를
+참고해주세요.
+
+- [스벨트킷의 공식 마이그레이션 가이드](https://github.com/sveltejs/kit/discussions/5774)
+- [이 블로그의 기존 소스코드를 위 가이드에 따라 수정한 커밋 내역](https://github.com/gongbughim/blog/commit/9505163543bf2d813eac57e620e8a16fd9f0196f)
+
 ---
 
 스벨트킷으로 만든 블로그에 RSS 및 사이트맵을 추가하는 방법을 설명합니다.
@@ -20,17 +33,21 @@ RSS 형식에 맞는 XML 문자열을 생성해주는 라이브러리를 설치�
 npm i -D feed
 ```
 
-이제 RSS 문서를 서빙하는 엔드포인트를 추가해야 합니다. 저는 `src/routes/rss.xml.ts` 파일을
-추가하여 `/rss.xml` 엔드포인트를 만들었습니다.
+이제 RSS 문서를 서빙하는 엔드포인트를 추가해야 합니다. 저는
+`src/routes/rss.xml` 디렉터리를 만들고 그 안에 `/+server.ts` 파일을 추가하여 `/rss.xml`
+엔드포인트를 만들었습니다.
 
 ```typescript
-import type { RequestHandler } from '@sveltejs/kit'
 import { Feed } from 'feed'
 
 import conf from '$lib/conf'
 import { getArticleMetas } from '$lib/server/article'
 
-export const get: RequestHandler = async () => {
+import type { RequestHandler } from './$types'
+
+export const prerender = true
+
+export const GET: RequestHandler = async () => {
   const posts = await getArticleMetas('src/routes/posts')
   const feed = new Feed({
     title: conf.title,
@@ -41,7 +58,7 @@ export const get: RequestHandler = async () => {
     author: {
       name: conf.authorName,
       email: conf.authorEmail,
-      link: conf.authroTwitter,
+      link: conf.authorTwitter,
     },
   })
   posts.forEach(p => {
@@ -54,10 +71,7 @@ export const get: RequestHandler = async () => {
     })
   })
 
-  return {
-    body: feed.rss2(),
-    headers: { 'Content-Type': 'text/xml; charset=utf-8' },
-  }
+  return new Response(feed.rss2(), { headers: { 'Content-Type': 'text/xml; charset=utf-8' } })
 }
 ```
 
@@ -108,15 +122,17 @@ MIME 타입은 `application/rss+xml`입니다. 아지만 무슨 이유에서인�
 기왕 RSS를 만들었으니 [사이트맵 프로토콜](https://www.sitemaps.org/)을 따르는 사이트맵
 파일도 만들어주면 좋겠습니다. 사이트맵을 만들면 검색엔진최적화에 도움이 됩니다.
 
-`src/sitemap.xml.ts`를 생성하고 아래 내용을 적습니다.
+`src/sitemap.xml/+server.ts`를 생성하고 아래 내용을 적습니다.
 
 ```typescript
-import type { RequestHandler } from '@sveltejs/kit'
-
 import conf from '$lib/conf'
 import { getArticleMetas } from '$lib/server/article'
 
-export const get: RequestHandler = async () => {
+import type { RequestHandler } from './$types'
+
+export const prerender = true
+
+export const GET: RequestHandler = async () => {
   const posts = await getArticleMetas('src/routes/posts')
   const links = posts.map(
     p => `
@@ -132,10 +148,7 @@ export const get: RequestHandler = async () => {
     ${links.join('')}
     </sitemapindex>
   `.trim()
-  return {
-    body: xml,
-    headers: { 'Content-Type': 'text/xml; charset=utf-8' },
-  }
+  return new Response(xml, { headers: { 'Content-Type': 'text/xml; charset=utf-8' } })
 }
 ```
 
