@@ -195,7 +195,7 @@ article.post {
     font-family: monospace;
     font-size: 0.9em;
     hyphens: auto;
-    word-break: break-all;
+    word-break: normal;
   }
 }
 
