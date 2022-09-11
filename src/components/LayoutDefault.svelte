@@ -7,6 +7,7 @@
   export let title = ''
   export let summary = ''
   export let publishedAt = ''
+  export let modifiedAt = ''
 
   import { onMount } from 'svelte'
 
@@ -27,7 +28,9 @@
 <article class="post">
   <h1>{title}</h1>
   <p class="info">
-    <time>{publishedAt}</time>
+    <time datetime={modifiedAt ?? publishedAt}>
+      {modifiedAt ? `발행 ${publishedAt}, 수정 ${modifiedAt}` : publishedAt}
+    </time>
   </p>
   <slot />
 </article>
