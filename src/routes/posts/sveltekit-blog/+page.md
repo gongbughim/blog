@@ -87,6 +87,29 @@ npm run dev -- --open
 
 <Asciinema id="YWBf6amaVVbWTeLgt7nwm7iFG" speed={1.5} />
 
+## 경로 별칭 설정하기
+
+`vite.config.js`를 수정하여 자주 쓰는 경로의 별칭을 만들어주면 `import`를 편리하게 할 수
+있습니다.
+
+```js
+import { sveltekit } from '@sveltejs/kit/vite'
+import path from 'path'
+
+/** @type {import('vite').UserConfig} */
+const config = {
+  plugins: [sveltekit()],
+  resolve: {
+    alias: {
+      $components: path.resolve('./src/components'),
+      $assets: path.resolve('./src/assets'),
+    },
+  },
+}
+
+export default config
+```
+
 ## 정적 사이트 생성하기
 
 스벨트킷은 서버측 랜더링server-side rendering, 클라이언트측 렌더링client-side rendeing,
