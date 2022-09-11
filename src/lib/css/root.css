@@ -35,7 +35,7 @@
   accent-color: var(--c-accent);
   background-color: var(--c-bg);
   color: var(--c-fg);
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   font-variation-settings: 'wght' 300;
   line-height: 1.8;
   word-break: keep-all;
