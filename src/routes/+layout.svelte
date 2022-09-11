@@ -54,7 +54,7 @@
 
 <style lang="postcss">
   .gnb {
-    ul {
+    & ul {
       display: flex;
       padding: 0;
       margin: 1em 0;

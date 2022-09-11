@@ -18,6 +18,7 @@
     "/.vscode/",
     "/node_modules/",
     "/build/",
-    "/src/app.html"
+    "/src/app.html",
+    "/src/assets/**/*"
   ]
 }

@@ -1,13 +1,9 @@
 import adapter from '@sveltejs/adapter-static'
 import { mdsvex } from 'mdsvex'
-import path from 'path'
+import postcssPresetEnv from 'postcss-preset-env'
 import preprocess from 'svelte-preprocess'
-import { fileURLToPath } from 'url'
 
 import mdsvexConfig from './mdsvex.config.js'
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -15,7 +11,15 @@ const config = {
   preprocess: [
     preprocess({
       postcss: {
-        configFilePath: path.join(__dirname, 'postcss.config.js'),
+        plugins: [
+          postcssPresetEnv({
+            browsers: '> 1% and last 3 versions',
+            features: {
+              'nesting-rules': true,
+              'media-query-ranges': true,
+            },
+          }),
+        ],
       },
     }),
     mdsvex(mdsvexConfig),

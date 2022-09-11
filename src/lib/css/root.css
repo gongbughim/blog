@@ -84,15 +84,9 @@ a:focus {
   color: var(--c-bg);
 }
 
-@media (min-width: 60em) {
+@media (width >= 960px) {
   :root {
-    font-size: 18px;
-  }
-}
-
-@media (max-width: 50em) {
-  h1 {
-    font-size: 2.5em;
+    font-size: 1.125rem;
   }
 }
 

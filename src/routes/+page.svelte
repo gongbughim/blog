@@ -53,12 +53,12 @@
     margin: 0;
     list-style-type: none;
 
-    li {
+    & li {
       margin: 1em 0 3.5em;
     }
 
-    article {
-      .title {
+    & article {
+      & .title {
         font-size: 1.5em;
       }
     }
