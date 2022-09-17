@@ -1,16 +1,5 @@
 <script lang="ts">
-  import { afterNavigate } from '$app/navigation'
   import conf from '$lib/conf'
-
-  let hueDegree = 0
-  let el: HTMLElement | null = null
-
-  afterNavigate(() => (hueDegree = Math.random() * 360))
-
-  $: if (el) {
-    const html = el.ownerDocument!.firstElementChild as HTMLElement
-    html.style.setProperty('--c-primary-hue', `${hueDegree | 0}`)
-  }
 </script>
 
 <svelte:head>
@@ -40,7 +29,7 @@
   </ul>
 </nav>
 
-<main bind:this={el}>
+<main>
   <slot />
 </main>
 
