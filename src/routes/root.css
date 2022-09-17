@@ -6,8 +6,8 @@
 
 @font-face {
   font-display: swap;
-  font-family: 'Noto Serif KR';
-  src: url('$assets/fonts/NotoSerifKR-VF-distilled.woff2') format('woff2');
+  font-family: Hahmlet;
+  src: url('$assets/fonts/Hahmlet-VF-distilled.woff2') format('woff2');
 }
 
 * {
@@ -45,8 +45,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Noto Serif KR', serif;
-  font-variation-settings: 'wght' 400;
+  font-family: Hahmlet, serif;
+  font-variation-settings: 'wght' 600;
 }
 
 a {
@@ -102,6 +102,12 @@ article.post {
   & h1 {
     margin: 0;
     font-size: 3em;
+  }
+
+  @media (width <= 600px) {
+    & h1 {
+      font-size: 2rem;
+    }
   }
 
   & h2 {
