@@ -29,7 +29,6 @@ const config = {
 
   kit: {
     adapter: adapter(),
-    trailingSlash: 'ignore',
   },
 }
 

@@ -9,9 +9,7 @@ summary: 스벨트킷으로 블로그 만드는 과정을 기록했습니다.
   import Asciinema from '$components/Asciinema.svelte'
 </script>
 
-아래 내용은
-[1.0.0-next.406](https://github.com/sveltejs/kit/releases/tag/%40sveltejs%2Fkit%401.0.0-next.406)
-이후 버전을 반영하여 수정되었습니다. (2022-09-11 기준 최신 버전인 1.0.0-next.480 에서 잘 작동하는걸 확인했습니다)
+아래 내용은 스벨트킷 1.0 버전을 반영하여 수정되었습니다.
 
 `1.0.0-next-405` 또는 그 이전 버전에서 만든 프로젝트를 마이그레이션하려면 아래 링크를
 참고해주세요.
@@ -299,7 +297,6 @@ const config = {
 
   kit: {
     adapter: adapter(),
-    trailingSlash: 'ignore',
   },
 }
 

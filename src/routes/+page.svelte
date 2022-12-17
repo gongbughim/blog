@@ -21,7 +21,7 @@
   {#each publishedPosts as post}
     <li>
       <article>
-        <h2 class="title"><a sveltekit:prefetch href={`/posts/${post.id}`}>{post.title}</a></h2>
+        <h2 class="title"><a href={`/posts/${post.id}`}>{post.title}</a></h2>
         <time class="published-at">{post.publishedAt}</time>
         <p class="summary">{post.summary}</p>
       </article>

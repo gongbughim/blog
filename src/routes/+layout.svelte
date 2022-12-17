@@ -24,8 +24,8 @@
 
 <nav class="gnb">
   <ul>
-    <li><a sveltekit:prefetch href="/">블로그 홈</a></li>
-    <li><a sveltekit:prefetch href="/posts/about">소개</a></li>
+    <li><a href="/">블로그 홈</a></li>
+    <li><a href="/posts/about">소개</a></li>
   </ul>
 </nav>
 
@@ -40,8 +40,8 @@
 </footer>
 
 <style lang="postcss" global>
-  @import './root.css';
-  @import 'prism-themes/themes/prism-vsc-dark-plus.css';
+  @import url('./root.css');
+  @import url('prism-themes/themes/prism-vsc-dark-plus.css');
 
   .gnb {
     & ul {
