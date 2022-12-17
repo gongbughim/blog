@@ -1,14 +1,14 @@
 ---
 title: 스벨트킷 mdsvex 프리페치 설정하기
 publishedAt: '2022-04-02'
-modifiedAt: '2022-09-11'
+modifiedAt: '2022-12-17'
 summary: 스벨트킷과 mdsvex 조합에서 프리페치(sveltekit:prefetch) 설정하는 방법
 ---
 
 아래 내용은
 [1.0.0-next.454](https://github.com/sveltejs/kit/releases/tag/%40sveltejs%2Fkit%401.0.0-next.454)
 이전 버전에 해당합니다. `1.0.0-next.454` 이후 버전에서 프리페치를 적용하려면 아래 내용을
-모두 무시하고 `body` 태그에 `data-svelte-prefetch` 속성을 넣어주기만 하면 됩니다.
+모두 무시하고 `body` 태그에 `data-sveltekit-preload-data="hover"` 속성을 넣어주기만 하면 됩니다.
 
 ---
 

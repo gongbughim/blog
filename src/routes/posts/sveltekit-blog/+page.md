@@ -1,7 +1,7 @@
 ---
 title: 스벨트킷으로 블로그 만들기
 publishedAt: '2022-04-01'
-modifiedAt: '2022-09-11'
+modifiedAt: '2022-12-17'
 summary: 스벨트킷으로 블로그 만드는 과정을 기록했습니다.
 ---
 
