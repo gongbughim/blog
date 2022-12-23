@@ -62,7 +62,7 @@
     "stylelint-config-standard": "^29.0.0",
     "stylelint-order": "^5.0.0",
     "svelte": "^3.55.0",
-    "svelte-check": "^2.10.2",
+    "svelte-check": "^3.0.1",
     "svelte-cubed": "^0.2.1",
     "svelte-preprocess": "^5.0.0",
     "t": "file:typescript-eslint/parser@latest",
