@@ -5,6 +5,6 @@
     "esbenp.prettier-vscode",
     "editorconfig.editorconfig",
     "stylelint.vscode-stylelint",
-    "silvenon.mdx"
+    "unifiedjs.vscode-mdx"
   ]
 }
