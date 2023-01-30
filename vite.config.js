@@ -10,6 +10,9 @@ const config = {
       $assets: path.resolve('./src/assets'),
     },
   },
+  build: {
+    chunkSizeWarningLimit: '600KB',
+  },
   test: {
     globals: true,
     environment: 'jsdom',
